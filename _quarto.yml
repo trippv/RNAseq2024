@@ -1,0 +1,49 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "RNAseq2024"
+  navbar:
+    logo: img/logo.png
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: about.qmd
+        text: About
+      - href: apoyo.qmd
+        text: Recursos de apoyo
+      - text: "Lecciones"
+        menu:
+          - 1_control_calidad.qmd
+
+        
+    right:
+      - icon: github
+        href: https://github.com
+  sidebar:
+    style: "docked"
+    border: true
+    search: true
+    background: light
+    contents:
+      - 1_control_calidad.qmd
+  page-navigation: true
+
+
+format:
+  html:
+    grid: 
+      body-width: 950px
+      margin-width: 250px
+    theme: flatly
+    css: styles.css
+    toc: true
+    toc-title: Contenido
+    number-sections: false
+    number-depth: 3
+    toc-expand: true
+    page-layout: full
+
+
+editor: visual
