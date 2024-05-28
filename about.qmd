@@ -3,3 +3,5 @@ title: "About"
 ---
 
 Página del curso de posgrado **Análisis de datos de RNAseq** del Centro de Investigaciones Biológicas del Noroeste, S.C.
+
+texto de prueba
