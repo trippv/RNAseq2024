@@ -1,0 +1,831 @@
+---
+title: "Introduccion Bash"
+format: html
+editor: visual
+execute:
+  warning: false
+  message: false
+  eval: false
+---
+
+
+# Unidad II. **Introducción a GNU-LINUX: uso de la línea de comandos**
+
+![](https://i.imgur.com/To7p9Ix.png)
+
+
+---
+# 1.- Breve historia de GNU-LINUX, conociendo la terminal.
+## 1.1 Sistema operativo GNU-Linux
+* GNU-Linux no es UNIX.
+* UNIX No es gratuito y fue desarrollado en los laboratorios Bell de AT&T por Dennis Ritchie, Ken Thompson y Douglas Mclroy.
+* GNU es gratuito.
+* GNU es de código abierto.
+* Fue inicialmente desarrollado por Richard Stallman y con el kernel-nucleo de Linus Torvalds, de ahí el nombre.
+
+Linus Torvalds
+![](https://i.imgur.com/kFqvmNv.png)
+
+Algunas distribuciones GNU/Linux: 
+![](https://i.imgur.com/z2WoMBn.png)
+
+Nosotros tenemos Ubuntu (generalmente) en nuestras computadoras y el escritorio luce en su versión más simple más o menos  así:
+
+![](https://i.imgur.com/I79Xv8O.png)
+
+¿Cómo luce la terminal?, la cuál es más poderosa y es la que estaremos usando (En el modo por defecto, el fondo es negro) 
+![](https://i.imgur.com/rKHLsNt.png)
+
+## 1.2. ¿Que es la Shell? –Bash- ##
+* Línea de comandos = shell.
+* El nombre «bash» viene del acrónimo «Bourne Again Shell» (llamado así por su inventor Steven Bourne).
+* Este fue creado para ser usado en GNU, sustituyendo a su antecesor Bourne shell de UNIX, este último es conocido en el sistema como sh.
+* Sh, csh, ksh y bash -> Bourne, C, Korn y Bash.
+* La –shell- es un programa que toma comandos ingresados y los procesa para que el sistema operativo sea capaz de realizar las instrucciones.
+
+![](https://i.imgur.com/6aYX9LS.png)
+
+* bash es amigable.
+* Las teclas ![](https://i.imgur.com/oVS9UBA.png) nos permiten accesar al historial de comandos.
+* La tecla "tabulador" [TAB] nos permite autocomplementar los nombres de los archivos y/o comandos.
+* Las flechas nos permiten desplazarnos a lo largo de la línea de comandos. 
+
+Llaves de control más últiles:
+* Ctrl + c para deterner el comando en curso.
+* Ctrl + d para cerrar la terminal en turno.
+* Ctrl + f como alternativa para desplazarnos a la derecha de la línea.
+* Ctrl + b para desplazarnos a la izquierda de la línea. 
+* Ctrl + r para buscar a través del historial de comandos.
+* Ctrl + shiff + t para abrir nueva pestaña de terminal.
+
+El ícono para abrir la Terminal debe estar en la barra izquierda de sus escritorios. Están buscando algo que se ve así: 
+
+![](https://i.imgur.com/DsCDnHN.png)
+
+
+¿Qué vemos cuando abrimos la terminal?
+
+![](https://i.imgur.com/LRhVIPV.png) <---- en mi caso
+
+Normalmente:
+
+![](https://i.imgur.com/MtoETY2.png)
+
+* **laulogan**: Indica el usuario conectado a la terminal.
+* **@**: significa “en”.
+* **laulogan-Inspiron-5558**: Indica el nombre de la computadora a la cual estamos conectados (hostName).
+* **~**: Indica la ruta/directorio en la cual nos encontramos, en este caso mi ruta de inicio predeterminada. Alias para user/home/
+* **$**: Indicador para comenzar a escribir nuevas órdenes o comandos. Éste último también indica nuestro estatus dentro del sistema, es decir, si somos usuarios(\$) o superusuarios(#).
+
+Super usuario (No teclear)
+![](https://i.imgur.com/6VZ0XfD.png)
+
+## 1.3. Estructura de directorios en GNU/LINUX  
+Lo primero que debemos saber es cómo están estructurados los archivos en GNU-Linux.
+
+![](https://i.imgur.com/ZULIu8i.png)
+
+* La base de todo es el directorio raiz, que se representa sencillamente con **/**. Todos los demás directorios o carpetas tienen que estar ligados a la raiz.
+
+* Una computadora con GNU-Linux puede tener muchos usuarios, los cuales tienen carpetas personales dentro de su carpeta home.
+ 
+* Por lo general los usuarios pueden hacer cualquier cosa dentro de su home, pero no pueden borrar o modificar cosas que esten afuera.
+ 
+
+
+
+Ahora vamos a darle ordenes a la terminal:
+Primero, ¿Cómo saber que shell estoy usando?
+¡Recuerden no teclear el **$**!
+
+```
+$ echo $SHELL o echo $0
+/bin/bash
+```
+¿Cómo seleccionamos una shell en particular?
+```
+$ bash
+```
+
+# 2.- Comandos básicos  
+Los comandos se ejecutan de la siguiente manera:
+
+
+![](https://i.imgur.com/ouLdU5D.png) 
+
+* Las **opciones/flags** son un tipo especial de argumento que le indica al comando que tipo de acción realizar, es decir, cambia el funcionamiento original del comando.
+En general, las opciones se definen después de:
+* el carácter: ”-” (opción corta)
+* el doble carácter: ”- -” (opción larga)
+* por ejemplo : −h, −−human-readable
+
+
+**Tipos de archivos:**
+* **Archivos regulares:** También llamados archivos de texto,  estos contienen caracteres que pueden ser leídos.
+* **Archivos ejecutables:** Programas, estos invocan comandos. Algunos no pueden ser leídos por humanos.
+* **Directorios:** Carpetas que contiene otros archivos, probablemente otros directorios (subdirectorios).
+
+## 2.1 Comandos que dan información del sistema:
+
+**arch:** Muestra la arquitectura de la máquina.
+
+```
+$ arch
+x86_64
+```
+**uname:** Muestra la información del nucleo.
+```
+$ uname
+Linux
+```
+
+**top:** Muestra los procesos que están siendo ejecutados. Para salir teclear q.
+```
+$ top
+Tareas: 291 total,   1 ejecutar,  290 hibernar,    0 detener,    0 zombie
+%Cpu(s):  1.2 usuario,  0.5 sist,  0.0 adecuado, 97.8 inact,  0.4 en espera,  0.0 hardw int,  0.0 softw int,  0.0 robar tiempo
+KiB Mem : 16320116 total,  7871832 free,  5008656 used,  3439628 buff/cache
+KiB Swap:  4081660 total,  4081660 free,        0 used. 10551424 avail Mem 
+
+  PID USUARIO   PR  NI    VIRT    RES    SHR S  %CPU %MEM     HORA+ ORDEN                                                                      
+ 3063 pavel     20   0  796284  57556  35788 S   1.7  0.4   2:37.23 python                                                                     
+ 8599 pavel     20   0  796284  57592  35828 S   1.3  0.4   0:20.73 python                                                                     
+ 3016 pavel     20   0 3793164 558636 213724 S   1.0  3.4  10:41.32 firefox-bin                                                                
+ 4323 pavel     20   0 3528284 641308 132312 S   0.7  3.9   3:17.20 Web Content                                                                
+ 9685 pavel     20   0   44540   3816   3088 R   0.7  0.0   0:00.04 top   
+```
+**history:** Con el podemos ver el historial de los comandos ingresados. 
+
+```
+$ history
+1955  ls
+ 1956  wc -l Glandula_oviducalPOSvsLO_GO.all_genes_gene_level.txt_down_upgenes.txt_add_annotation.txt Glandula_oviducalPOSvsLO_GO.down_genes_gene_level.txt
+ 1957  cd ..
+ 1958  ls
+ 1959  cd ..
+ 1960  ls
+ 1961  cd lobulo_optico/
+ 1962  ls
+ 1963  cd pre-desove/
+ 1964  ls
+ 1965  ./2.get_gene_names.pl Lobulo_OpticoPREvsGO_GOV.all_genes_gene_level.txt_just_upgenes.txt
+```
+**man:** Muestra el manual de uso de un comando. Para salir teclear q.
+```
+$ man cat
+CAT(1)                                                         User Commands                                                         CAT(1)
+
+NAME
+       cat - concatenate files and print on the standard output
+
+SYNOPSIS
+       cat [OPTION]... [FILE]...
+
+DESCRIPTION
+       Concatenate FILE(s) to standard output.
+
+       With no FILE, or when FILE is -, read standard input.
+
+       -A, --show-all
+              equivalent to -vET
+
+       -b, --number-nonblank
+              number nonempty output lines, overrides -n
+```
+
+¿Cómo podemos búscar comandos relacionados con cierta función pero que desconocemos su nombre?. Por ejemplo si quisieramos encontrar el comando que nos da la fecha, ¿Cómo le hacemos?
+
+```
+$ man -k "palabra clave"
+$ man -k "date"
+../..
+
+date (1)             - print or set the system date and time
+
+../..
+```
+```
+$ apropos "palabra clave"
+$ apropos date
+../..
+date (1)             - print or set the system date and time
+../..
+
+```
+**exit:** Cierra la terminal en uso.
+```
+$ exit
+```
+
+Ahora, ¿Cómo podemos acceder a todas las opciones que te da un comando?
+```
+uname --help
+Modo de empleo: uname [OPCIÓN]...
+Muestra cierta información del sistema. Sin ninguna OPCIÓN, igual que -s.
+
+  -a, --all            muestra toda la información, en el siguiente orden,
+                         excepto que se omite -p y -i si son desconocidos:
+  -s, --kernel-name    muestra el nombre del núcleo
+  -n, --nodename       muestra el nombre de `host' del nodo de red
+  -r, --kernel-release muestra la versión del núcleo
+  -v, --kernel-version     print the kernel version
+  -m, --machine            print the machine hardware name
+  -p, --processor          print the processor type (non-portable)
+  -i, --hardware-platform  print the hardware platform (non-portable)
+  -o, --operating-system   print the operating system
+      --help     muestra esta ayuda y finaliza
+      --version  informa de la versión y finaliza
+
+ayuda en línea sobre GNU coreutils: <http://www.gnu.org/software/coreutils/>
+Informe de errores de traducción en uname a <http://translationproject.org/team/es.html>
+Full documentation at: <http://www.gnu.org/software/coreutils/uname>
+or available locally via: info '(coreutils) uname invocation'
+```
+En otros comandos se puede obtener lo mismo usando la bandera: **-h**, como mencioné anteriormente.
+
+## 2.2 Comandos para manipular archivos y directorios. 
+
+Para saber en qué lugar-path se encuentran al abrir la terminal:
+
+**pwd:** de print work directory, te da la ruta actúal donde te encuentras.
+
+```
+$pwd
+/home/pavel
+```
+**cd:** de change directory, te permite cambiar de directorios. **/** accedemos a la raíz del sistema; **~** accedemos al directorio por defecto home/usuario; **\.\./** accedemos al directorio padre, es decir, retrocedemos de nivel. **cd -** regresamos a donde estabamos. 
+
+Para prácticar vamos a crear dos directorios con el siguiente comando:
+
+**mkdir:** Permite crear directorios.
+
+```
+$ cd #para posicionarnos en /home/user; donde user es su nombre de usuario, en mi caso "pavel"
+$ mkdir proyecto #creamos el directorio.
+```
+Ahora con el comando **cd** nos movemos a ese directorio:
+
+```
+$ cd proyecto
+```
+Si ingresan el comando **pwd** podrán ver que ahora su posición ha cambiado. 
+Ahora creen en "proyecto" un directorio llamado **genoma**, y se regresan a su home/usuario
+
+
+![](https://i.imgur.com/qhI3fEn.png)
+
+Usando {} como expasión de llaves:
+
+```
+$ mkdir -p proyecto/{secuencias/rnaseq,blast}
+```
+
+**ls:** Muestra el contenido de un directorio. **-la** lista el directorio en formato lista y además muestra todos los archivos ocultos; **-h** muestra los tamaños del fichero en formato legible; **-t** acomoda la lista por fecha.
+```
+$ ls -ls
+$ ls -la
+$ ls -lth
+```
+
+![](https://i.imgur.com/GJHJtig.jpg)
+
+Permisos:
+
+![](https://i.imgur.com/52YVAIH.png)
+
+**chmod:** Comando para cambiar permisos.
+
+```
+$ chmod u+x file
+$ chmod uga+x file
+$ chmod uga-x file
+```
+**touch [filename]**: crea archivos vacíos con el nombre especificado.
+
+vayamonos a **cd ~** o solo **cd**
+
+```
+$ touch seq.fq
+```
+
+Usando las llaves podemos generar una seríe de archivos como:
+
+```
+$ touch seq.fq{1..10}
+seq.fq1  seq.fq10  seq.fq2  seq.fq3  seq.fq4  seq.fq5  seq.fq6  seq.fq7  seq.fq8  seq.fq9
+```
+**cp [origen] [destino]:** copia archivos de un directorio a otro. También podemos hacer una copia de un archivo y renombrarlo.
+
+```
+$ cp seq.fq1 copia_seq.fq1
+$ cp seq.* /proyecto/genoma
+$ rm seq.*
+```
+¿Cómo copiar de un directorio a nuestra posición actúal?
+
+```
+$ cp /proyecto/genoma/seq.* .
+```
+
+¿Qué pasó?
+
+-Comodines **\*** (wildcards)
+
+**mv [origen] [destino]:** sirve para mover archivos o para renombrar archivos y directorios.
+
+para renombrar archivos:
+```
+$ mv seq.fq1 seq.fq300
+```
+para mover:
+
+```
+$ mv seq.fq10 proyecto/genoma/
+```
+
+**rm [file]:** Sirve para borrar archivos. **-rf** borra los archivos de forma recursiva sin preguntar y no vuelven núnca más. **rmdir** elimina directorios.
+
+```
+$ rm seq.fq3
+$ rm seq.* #borra todo lo que inicia con seq. seguido de cualquier cosa, usar con cuidado.
+$ mkdir prueba 
+$ rm -rf prueba
+```
+## 2.3 Comandos para descargar, comprimir y descomprimir archivos.
+
+**wget:** Se usa para descargar archivos del internet via TTP, HTTPS, FTP, o FTPS.
+**wget [OPTIONS]... [ URLS ]**
+
+vamos a descargar el genoma del virus de la influenza:
+
+```
+$ wget  ftp://ftp.ncbi.nlm.nih.gov/genomes/INFLUENZA/influenza.faa.gz
+```
+Otro comando similar es **curl:** Este es más poderoso que wget y acepta más protocolos. 
+
+Para descargar el mismo archivo usariamos el siguiente comando:
+
+```
+curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/INFLUENZA/influenza.faa.gz
+```
+**gzip:** por GNU zip, esta es una herramienta para comprimir archivos usando la línea de comandos de GNU. Los archivos que son comprimidos usando esta herramienta usualmente contienen la extensión .gz. Para descomprimir usamos **gunzip**.
+
+Vamos a descomprimir el archivo que recien descargamos.
+
+```
+$ cd proyecto # nos vamos a la carpeta proyecto
+$ gunzip influenza.faa.gz # descomprir en la carpta proyecto el archivo
+```
+**bzip2:** Es similar a **gzip**, pero están construidos bajo diferentes algoritmos. 
+
+
+```
+bzip2 influenza.faa
+bunzip2 influenza.faa.gz
+```
+Los que quieran saber más sobre el rendiemiento de ambas:
+https://www.rootusers.com/gzip-vs-bzip2-vs-xz-performance-comparison/
+
+**tar:** tar es un programa usado para crear y manipular archivos. tar une varios archivos en uno solo, preservando sus nombres y demás permisos. Resulta muy adecuado cuando se desea almacenar muchos archivos relacionados para que sean transferidos por la red, asi como cuando se hacen respaldos de discos completos y resulta muy práctico para su transporte en diferentes sistemas. 
+
+Para generar un archivo tar de varios usamos el siguiente comando:
+
+```
+$ touch adn.txt arn.txt
+$ tar -cvf prueba.tar adn.txt arn.txt
+$ tar -xf prueba.tar
+$ tar -cvzf prueba.tar.gz adn.txt arn.txt #empaquetar y comprimir
+$ tar -xzf prueba.tar.gz #desempaquetar y descomprimir
+$ tar -cjvf prueba_2.tar.bz2 adn.txt arn.txt
+$ tar -xjf prueba_2.tar.bz2
+ ```
+**-c:** crea un nuevo archivo.
+**-v:** verbose, muestra una salida.
+**-z:** compresión con gzip.
+**-j:** compresión con bzip2.
+**-f:** selecciona el archivo que queremos comprimir y siempre debe de ir al final de las opciones.
+**-x:** extrae documentos de un archivo tar.
+
+## 2.4 Comandos para visualizar archivos.
+
+**more:** Permite visualizar archivos desde el inicio. Muestra texto en una terminal. Para avanzar presionar **ENTER**. Para salir de la visualización presionar **q**. Para visulizar archivos gzip, usamos **zmore**.
+
+```
+$ zmore influenza.faa.gz
+```
+
+**less:** Permite de igual forma que more visualizar archivos. A diferencia de more se puede retroceder y avanzar con las flechas. Para salir, presionar **q**.
+
+```
+$ zless influenza.faa.gz
+```
+
+Ahora vamos a bajarnos el siguiente archivo file.txt en: https://drive.google.com/drive/u/1/folders/14Z7wmv4suhC-DLvDo9tUTNkF8WtVPRSD
+
+**head:** Muestra en la terminal las primeras líneas de un archivo. Para especificar el número de lineas a mostras usar la opción -n.
+
+```
+$ head -n 20 file.txt
+```
+
+**tail:** igual que head pero muestras las líneas al final del documento.
+
+```
+$ tail -n20 file.txt
+```
+
+**wc:** Muestra el número de líneas, caracteres o palabras que contiene un archivo. Opciones **-l** para líneas, **-m** para caracteres y **-w** para palabras.
+
+```
+$ wc -lmw file.txt
+50  1838 82964 file.txt
+```
+
+Antes de continuar con los demás comandos vamos a introducir el concepto de entrada y salida estandar. 
+
+![](https://i.imgur.com/G7XQRkO.png)
+
+
+**cat:** El comando cat en bash significa "concatenar". Este comando es usado para mostrar, crear, y agregar archivos.
+
+```
+$ cat file.txt  #toma la entrada estandar y muestra la salida estandar en pantalla.
+```
+usando el **>** y **>>** podemos redirigir la salida estandar, es decir, en lugar que nos mande la salida a la pantalla que la mande a un archivo. Esto para cualquier comando.
+
+```
+$ cat file.txt > replica_file.txt
+```
+Con este comando, siempre se sobreescribe el archivo. Si quisieramos agregar nueva información al final del archivo usamos el doble mayor **>>**
+
+```
+$ cat file.txt >> replica_file.txt
+```
+
+Para concatenar archivos: 
+```
+$ cat file.txt replica_file.txt > conca_ejem.txt
+```
+**cut:** Extrae información de un archivo. Siempre se debe especificar una opción. -f (campo) más común y el tipo de delimitador -d (por defecto tabulador)
+
+```
+$ cut -f1 file.txt > first_col.txt
+#gene_id
+TRINITY_DN10676_c0_g1
+TRINITY_DN20389_c0_g1
+TRINITY_DN20515_c0_g1
+```
+
+**sort:** Organiza las líneas en un archivo de texto para que se ordenen de forma numérica o alfabéticamente.
+
+```
+$ sort first_col.txt > first_col_sort.txt
+```
+**uniq:** Elimina líneas repetidas dentro de un archivo. Sólo funciona con líneas repetidas adyacentes. Primero se deben ordenar las líneas dentro del archivo usando **sort**.
+
+```
+$ uniq first_col_sort.txt > first_col_sort_uniq.txt
+```
+¿Cómo podemos hacer todo esto en una sola línea de comando?, aqui es donde entender la entrada y salida estandar se vuelven útiles.
+
+**|** Este operador conocido como **pipe** te permite usar la salida estandar de un comando como entrada estandar de otro.
+
+```
+$ cut -f1 file.txt | sort | uniq > first_col_sort_uniq_pipe.txt
+```
+
+**Nota:**
+Podemos extraer múltiples columnas haciendo **cut** -f 1,4,8 archivo
+
+**grep:** Este comando nos permite buscar una palabra o un patrón que definamos dentro de un archivo de texto.
+Por ejemplo, si quisieramos buscar este identificador TRINITY_DN32673_c0_g1 en nuestro archivo de anotación.
+
+```
+$ grep -i "TRINITY_DN32673_c0_g1" file.txt #nos muestra toda la linea de la coincidencia.
+
+$ grep -io "TRINITY_DN32673_c0_g1" file.txt #nos muestra solo la concidencia exacta.
+
+$ grep -ic "^>" influenza.faa #contar número de secuencias. 
+```
+
+La opción **-i** es para que **i**gnore las minusculas y mayusculas, **-o** para una coincidencia exacta, y la **-c** cuenta las líneas que tuvieron coincidencia.
+
+La variante de grep que te permite buscar patrones es **egrep**. En este curso no entraremos a detalle. A los que les interese primero deben buscar sobre expresiones regulares. Les recomiendo este libro ---> https://doc.lagout.org/operating%20system%20/linux/grep%20-%20Pocket%20Reference.pdf
+
+
+**sed:** Este comando nos permite buscar con texto y/o patrones y reemplazar las coincidencias. 
+
+**sed** 's/buscar/reemplazar/g' # La **g** aqui es por **global** y significa que haga el cambio en todas las coincidencias, no solo en la primera. Si quieren modificar en el  mismo archivo usar la opción **-i**.
+```
+$ sed 's/TRINITY/trinity/g' file.txt > file_sed.txt
+```
+
+## 2.5 Enlace simbólico.
+
+Un enlace simbólico es un archivo que apunta a  otro archivo (o a un directorio), estos son como los “accesos directos” en Windows.  Su finalidad es la de no duplicar archivos para no usar más memoria, en especial aquellos que son de gran tamaño. 
+
+**ln -s [Origen] [Destino] :** Link (enlace) simbólico indica un acceso directo a una carpeta o archivo que se encuentra en un lugar distinto dentro de la estructura de directorios. Si el archivo ligado es renombrado, movido o borrado se rompe el acceso.
+
+```
+$ ln -s proyecto/genoma/ . #en este caso hicimos un link al directorio genoma.
+$ rm o unlink genoma #para eliminar el enlace simbolico.
+```
+
+## 2.6 Comando para conexión remota
+**ssh:** Es un programa para iniciar sesión y ejecutar comandos en una maquina remota. Proporciona comunicaciones cifradas seguras a través de una red insegura.  
+
+```
+$ ssh [user@]hostname
+```
+
+### 2.6.1 Conexión a la red local de cicese
+
+Para conectarse a la red de CICESE a través de VPN deben seguir las instrucciones siguientes:
+
+Contar con:
+
+*    Usuario de cuenta de correo CICESE
+*    Contraseña original
+
+**Paso 1:** Instalar vpn
+```
+$ sudo apt-get install vpnc
+```
+
+**Paso 2:** Acceder a VPN de CICESE
+```
+$ sudo vpnc
+```
+**Paso 3:** Colocar la información requerida.
+
+    IPSeq gateway adress: 158.97.255.193
+    IPSeq ID: VPNCICESE
+    IPSeq secret: c1c3s3VPN
+    Username: <usuario>
+    Password: <contraseña_original>
+
+**Tip:** para no estár ingresando estos datos cada vez que queremos conectarnos a la red del cicese.
+
+1. Ir a /etc/vpnc.conf
+2. Agregar la información anterior.
+3. Listo
+
+Ahora para conectarse solo escribirán:
+
+```
+$ sudo vpnc #les pedirá su contraseña de sesión por usar sudo
+```
+Si la conexión fue exitosa, verán en su pantalla algo como:
+
+```
+Connect Banner:
+| Conexion VPN establecida - Bienvenido a la Red CICESE
+| 
+| Por favor lea las politicas de uso del servicio de VPN disponibles en:
+| 
+| http://telematica.cicese.mx
+| 
+| Haga click en "Continuar" (o en "OK") para empezar a hacer uso del servicio de VPN.
+| 
+| Haga click en "Desconectar" para cancelar esta sesion.
+| 
+| Mensaje escrito sin acentos.
+| 
+
+VPNC started in background (pid: 1362)...
+```
+
+Para desconectarse:
+
+```
+$ sudo vpnc-disconnect # recuerden pueden usar TAB para autocoplementar
+$ ps -aux | grep "vpnc" # en algunos casos
+$ kill IDjob # kill nos permite matar un proceso.
+```
+
+### 2.6.2 Acceso a la supercomputadora/Cluster OMICA
+
+Cada estudiante deberá acceder al cluster OMICA con una cuenta del curso.
+
+![](https://i.imgur.com/cXK9FHs.png)
+
+Directorio base de trabajo:
+/LUSTRE/bioinformatica_data/curso2022
+
+
+  Recordando que deben trabajar en la zona de lustre y no en sus directorios personales para lo cual deben utilizar:
+cd curso2022
+Esta instrucción posicionará a cada estudiante en la trayectoria de su respectivo subdirectorio:
+/LUSTRE/bioinformatica_data/curso2022/accounts/cursoNN
+
+Substituir el doble hash (##) por el número de cuenta asignado (ver tabla arriba).
+```
+$ ssh curso##@omica
+```
+**Tip:** Para hacer el acceso menos laborioso seguir los siguientes pasos:
+
+1. Ir a /home/pavel/.ssh #sustituir pavel por su nombre de usuario.
+2. Abrir el archivo oculto .ssh.
+3. pegar:
+
+Host cicese
+        HostName omica
+        User pgalindo #poner el suyo.
+        
+Ahora para conectarse solo bastará:
+```
+$ssh cicese #Les pedirá su contraseña de usuario.
+```
+#### 2.6.2.1 Copiar archivos de manera remota, servidor(omica)-pc. Bidireccional.
+
+Si quisieramos enviar un archivo a  nuestro home en omica:
+```
+$ scp file_sed.txt curso01@omica:/home/curso01/
+```
+Ahora, copiar de omica a nuestro pc:
+
+```
+$ rm file_sed.txt #primero borramos el archivo file_sed.txt en nuestro ordenador
+$ scp curso01@omica:/home/curso01/file_sed.txt .
+```
+
+## 2.7 Resumen de comandos.
+
+
+![](https://i.imgur.com/urh6Yjf.png)
+![](https://i.imgur.com/LDs4mtA.png)
+![](https://i.imgur.com/wdlnC9y.png)
+
+## 2.8 Hacer nuestros propios comandos
+Esta herramienta resulta muy útil para acortar la escritura de instrucciones largas, por ejemplo:
+
+```
+$ alias l='wc -l' # contar líneas de archivo
+$ alias pulpo='cd /media/pavel/Pavel/librerias_ml/proyecto_omaya_embriones'
+$ alias sec='cd /home/pavel/proyecto/secuencias/; ls'
+```
+Para remover el alias teclear **unalias**. Para hacerlo permanente ir a home/user, abrir el archivo .bashrc y agregar la instrucción en la sección de alias. Al abrir una nueva terminal, este alias será permanente.
+
+## 2.9 Editor de texto en la terminal
+
+**nano:** Es un editor de texto que es fácil de usar. Incluye todas las funcionalidades básicas que podrías esperar de un editor de textos regular.
+
+```
+$ nano prueba.txt
+```
+Una vez abierto pueden ingresar el texto que deseen. Para guardar Ctrl + O y pasa salir Ctrl + x.
+
+![](https://i.imgur.com/4HGqvMh.png)
+
+Acá les dejo otros editores más amigables:
+**Sublime Text**:
+
+Link: https://www.sublimetext.com/
+![](https://i.imgur.com/OLAr31n.jpg)
+
+**Visual Studio Code**:
+Link: https://code.visualstudio.com/
+
+![](https://i.imgur.com/6SOCj4V.png)
+
+
+# 3. Comandos de SLURM (Administrador de tareas)
+
+**sbatch [Filename]:** Sirve para enviar una tarea a ejecución a través de SLURM.
+**squeue:** Sirve para revisar los trabajos que están siendo procesados o que se encuentran en la cola de tareas.
+**scancel [jobID]:** Sirve para cancelar una tarea.
+**top:** Sirve para visualizar los procesos que se están ejecutando.
+**sinfo:** Muestra información sobre nodos de cómputo y particiones.
+
+# 4. Gestionadores de paquetes.
+## 4.1 GNU/Linux 
+Dependiento de la distribución de GNU-Linux que estemos usando vamos a emplear un comando para poder descargar, instalar y borrar software con sus respectivas dependencias. Generalmente el comando más común es: **apt-get**
+
+```
+$ sudo apt-get update #este codigo actualiza los paquetes ya intalados. Se necesitan privilegios de super usuario.
+```
+
+```
+sudo apt-get install [Nombre del paquete] #Para instalar paquete
+sudo apt remove [Nombre del paquete] # borrar paquete o paquetes.
+```
+## 4.2 MacOS
+**Homebrew:** Homebrew instala todo aquello que necesitas pero que no viene por defecto instalado (más detalle en: https://brew.sh/index_es)
+![](https://i.imgur.com/svAAqLD.png)
+
+Una vez instalado pueden por ejemplo correr el siguiente comando para instalar wget:
+```
+$ brew install wget
+```
+## 4.3 Ambientes virtuales
+
+#### 4.3.1 Conda: 
+![](https://i.imgur.com/xe7qf0U.png)
+
+**Conda** es un manejador de paquetes, dependencias y ambientes para cualquier lenguaje, Python, R, Ruby, Lua, etc.  Conda puede correr en windows, macOS y GNU-Linux.
+
+![](https://i.imgur.com/XZK2F4j.png)
+
+Visiten el siguiente link para entrar más a detalle sobre los comandos para gestionar paquetes y ambientes --> https://docs.conda.io/projects/conda/en/latest/index.html
+
+# 5.- Flujos de control básicos (en bash)
+
+* **if/else:** Ejecuta una serie de instrucciones si cierta condición es o no es verdadera.
+* **for:** Ejecuta una serie de instrucciones por un número de veces determinado.
+* **while:** Ejecuta una serie de repetidas instrucciones **mientras(while)** cierta condición se mantenga como verdadera. 
+
+## 5.1 Sintaxis
+### if/else:
+
+```
+if [[ CONDICION ]]; then
+    echo "la condición se cumplió"
+else
+    echo "la condición no se cumplió"
+fi
+```
+Más de una condición:
+
+```
+if [[ CONDICION ]]; then
+    echo "la condición se cumplió"
+elif [[ CONDICION 2 ]]; then
+    echo "la condición 1 no se cumplió pero la 2 si"
+else
+    echo "ninguna condición se cumplió"
+fi
+```
+### for:
+```
+for var in list
+do
+  command1
+done
+```
+Otra variante:
+```
+for((i=1;i<=10;i+=2)); do 
+echo "Welcome $i times"; 
+done
+```
+
+### while:
+```
+while [condition]
+do
+   command-1
+   command-2
+     ...
+     ...
+   command-n
+done
+```
+# 6.- Variable de ambiente de importancia
+Las variables del ambiente mantienen información de la sesión. Ellas se almacenan en el sistema del "shell" para ser usadas cuando se ejecutan los comandos.
+
+Para identificar las variables de ambiente en nuestro sistema, teclear lo siguiente:
+```
+$ printenv 
+```
+dentro de estas variables, vamos a identificar una llamada $PATH, podemos ver que hay en ella simplemente tecleando:
+
+```
+$ echo $PATH
+```
+Esta variable es importante porque almacena las rutas donde la shell busca archivos ejecutables, como los scripts que vamos a estar usando. Una de las rutas por defecto, dentro de la arqutectura de GNU/Linux es en /usr/local/bin.
+
+Para designar una nueva ruta como ejecutable tecleamos:
+
+```
+$ export PATH=$PATH:path
+```
+Para hacerlo permanente agregar la instrucción en el archivo **.bashrc** que se encuentra oculpo en su home.
+
+## Finalmente...
+![](https://i.imgur.com/u679NGk.png)
+
+
+# 7.- Ejercicio final
+
+Bajar el archivo: https://drive.google.com/file/d/1xu--05ZUITC5xAGBuUBwkB2LRgOs5wEW/view?usp=sharing
+
+1. Usando una sola instrucción:
+* Obtengan la lista de genes que codifican para una hypothetical protein.
+* Extraigan específicamente las columnas correspondientes a la longitud y producto, ordenen estos resultados, sustituyan hypothetical protein por NA, reporten únicamente longitudes únicas y guarden este resultado en un nuevo archivo.
+(reportar la línea de comando usada)
+2. ¿Cuál es la longitud de la proteína hipotética más corta? y la más larga?
+3. ¿Cuantos productos fueron anotados como hypothetical protein? Reportar todos antes de ser filtrados por longitud única. 
+
+Bajar el archivo:
+
+https://drive.google.com/file/d/13txVpoC9OWxUHxzLV6VnU6tBTD_fUqYk/view?usp=sharing
+
+1.- Descomprima el archivo, genere un **alias** con el nombre: **contar_fasta** que les permita contar el número de secuencias en el archivo.
+* Reportar línea con asignación de alias y comando empleado.
+* ¿Cuantas secuencias se encontraban en el archivo fasta?
+
+2.- Sin descomprimir el archivo y en una sola instrucción, ingrese línea de comando que les permita contar el número "A" en todo el transcriptoma, no considerar las "A" que se encuentran en los encabezados.
+
+* Reportar línea de comando empleada.
+* ¿Cuantas "A" contenia el transcriptoma?.
+
