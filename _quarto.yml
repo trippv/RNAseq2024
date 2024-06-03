@@ -16,6 +16,7 @@ website:
       - text: "Lecciones"
         menu:
           - 1_control_calidad.qmd
+          - ensamble.html
 
         
     right:

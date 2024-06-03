@@ -1,0 +1,56 @@
+---
+title: "Recursos de apoyo"
+---
+
+A continuación encontrarás diversos manuales y materiales disponibles en la red con la que puedes ampliar lo visto en clase
+
+-   Manuales
+
+    -   [Trinity RNAseq wiki](https://github.com/trinityrnaseq/trinityrnaseq/wiki) - Sitio de Trinity
+
+    -   [Trinotate](https://rnabio.org/module-07-trinotate/0007/02/01/Trinotate/) - Sitio de Trinotate
+
+    -   [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) - Sitio de Fastqc
+
+    -   [Trimmomatic](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf) - Manual de Trimmomatic
+
+
+
+-   Libros en línea
+
+    -   [R para Ciencia de Datos](https://es.r4ds.hadley.nz/) - Versión en español de conocido libro R fo Data Science de Wickham y Grolemund
+
+    -   [The Big Book of R](https://www.bigbookofr.com/) - Extensa colección de libros y materiales en línea 
+
+
+- Recursos adicionales
+
+    -   [Introduction to bioinformatics for RNA sequence analysis](https://rnabio.org/) - Tutorial en línea del Laboratorio Grifftih
+
+- Bibliografia
+
+1.	Akalin, A. 2020. Computational Genomics with R. 
+
+
+2.	Altschul, S.F., Gish, W., Miller, W., Myres, E.W., Lipman, D.J., 1990. Basic local alignment search tool. J. Mol. Biol. 215, 403–410.
+
+3.	Bray, N. L., Pimentel, H., Melsted, P., Pachter, L., 2016. Near-optimal probabilistic RNA-seq quantification. Nat. Biotechnol. 34, 525–527 
+
+4.	Bryant, D. M., Johnson, K., DiTommaso, T., Tickle, T., Couger, M. B., Payzin-Dogru, D., Lee, T.J., Leigh, N. D., Kuo, T. H., Davis, F. G., Bateman, J., Bryant, S., Guzikowski, A. R., Tsai, S. L., Coyne, S., Ye, W. W., Freeman, R. M., Jr, Peshkin, L., Tabin, C. J., Regev, A., Haas, B. J., Whited, J. L. 2017. A tissue-mapped Axolotl de novo transcriptome enables identification of limb regeneration factors. Cell Rep. 18, 762–776.
+
+
+5.	Chen, Y., McCarthy, D., Baldoni, P., et al. 2023 (last revised). edgeR: differential analysis of sequence read count data. 
+
+
+6.	Grabherr, M. G., Haas, B. J., Yassour, M., Levin, J. Z., Thompson, D. A., Amit, I., Adiconis, X., Fan, L., Raychowdhury, R., Zeng, Q., Chen, Z., Mauceli, E., Hacohen, N., Gnirke, A., Rhind, N., Di-Palma, F., Birren, B.W., Nusbaum, C., Lindblad-Toh, K., Friedman, N., Regev, A. 2011. Full-length transcriptome assembly from RNA-Seq data without a reference genome. Nat. Biotechnol. 29, 644–652.
+
+7.	Korpelainen, E., Tuimala, J., Somervuo, P., Huss, M., & Wong, G. (2014). RNA-seq data analysis: a practical approach. CRC press.
+
+8.	Newham, C., Rosenblatt, B. 2009. Learning the bash shell. 3rd edition. O’REILLY.
+
+
+9.	Simão, F.A., Waterhouse, R.M., Loannidis, P., Kriventseva, E.V., Zdobnov, E.M. 2015. BUSCO: assessing genome assembly and annotation completeness with single copy orthologs. Bioinformatics. 31, 3210–3212.
+
+10.	Smith-Unna, R., Boursnell, C., Patro, R., Hibberd, J., Kelly, S. 2016. TransRate: reference free quality assessment of de novo transcriptome assemblies. Genome Res. 26(8), 1134–1144.
+
+11.	Young, M. D., Wakefield, M. J., Smyth, G. K., Oshlack, A. 2010. Gene ontology analysis for RNA-seq: accounting for selection bias. Genome Biol. 11, R14.
