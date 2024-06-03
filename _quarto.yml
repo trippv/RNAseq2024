@@ -16,7 +16,7 @@ website:
       - text: "Lecciones"
         menu:
           - 1_control_calidad.qmd
-          - ensamble.html
+          - apoyo.qmd
 
         
     right:
@@ -29,6 +29,7 @@ website:
     background: light
     contents:
       - 1_control_calidad.qmd
+      - apoyo.qmd
   page-navigation: true
 
 
