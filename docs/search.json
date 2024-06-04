@@ -201,5 +201,26 @@
     "title": "Introduccion Bash",
     "section": "Finalmente…",
     "text": "Finalmente…"
+  },
+  {
+    "objectID": "2_unix.html",
+    "href": "2_unix.html",
+    "title": "Introduccion Bash",
+    "section": "",
+    "text": "code"
+  },
+  {
+    "objectID": "1_Rbasico.html",
+    "href": "1_Rbasico.html",
+    "title": "Comandos Basicos",
+    "section": "",
+    "text": "Este curso es mi pequeña aportación para un mundo mejor donde no hay que pagar grandes sumas de dinero para hacer una ANOVA y donde los investigadores muestran sus resultados en otra cosa que no sea un gráfico de barras. Así que toma tu toalla favorita y empecemos."
+  },
+  {
+    "objectID": "1_Rbasico.html#trabajando-con-vectores",
+    "href": "1_Rbasico.html#trabajando-con-vectores",
+    "title": "Comandos Basicos",
+    "section": "Trabajando con vectores",
+    "text": "Trabajando con vectores\nEjercicio:\nSupon que tienes un cultivo de abulones y tienes que revisarlo todos los dias y contar los organismos muertos. Despues de una semana tienes el siguiente resultado:\n\nlunes: 4\nmartes: 6\nmiercoles: 0\njueves: 10\nviernes: 12\nsabado: 8\ndomingo: 4\n\n1: crea un vector con los valores diarios 2: nombre cada valor con el dia de la semana usando la funcion names()\n\nmortalidad <- c(4,6,0,10,12,8,4)\nmortalidad\n\n[1]  4  6  0 10 12  8  4\n\nnames(mortalidad) <-  c(\"Lunes\", \"Martes\", \"Miercoles\", \"Jueves\", \"Viernes\", \"Sabado\", \"Domingo\")\n\nmortalidad\n\n    Lunes    Martes Miercoles    Jueves   Viernes    Sabado   Domingo \n        4         6         0        10        12         8         4 \n\n#nombrar la mortalidad con la funcion names\n\nOperaciones basicas con vectores\n\n\n\nFunción\nsignificado\n\n\n\n\nmin()\nMinimo\n\n\nmax()\nMáximo\n\n\nlength()\nlongitud\n\n\nrange()\nintervalo de valores\n\n\nsort()\nOrdena de menor a mayor\n\n\nunique()\nValores unicos\n\n\nmean()\nPromedio\n\n\nsum()\nsuma\n\n\nwhich()\nproporciona los indices TRUE\n\n\n\nEjercicio: Contesta lo siguiente:\n\n¿cual fue el valor minimo y el maximo?\n¿cuantos abulones murieron esa semana?"
   }
 ]

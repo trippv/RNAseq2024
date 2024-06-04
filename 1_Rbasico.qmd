@@ -1,0 +1,410 @@
+---
+title: "R y Rstudio: Comandos Basicos"
+author: "Miguel Tripp"
+
+---
+
+# Introducción 
+
+
+```{r, echo=FALSE, out.width = '45%'}
+knitr::include_graphics("https://www.askideas.com/media/31/Dont-Panic-And-Carry-A-Towel-Picture.jpg")
+```
+
+
+
+Este curso es mi pequeña aportación para un mundo mejor donde no hay que pagar grandes sumas de dinero para hacer una ANOVA y donde los investigadores muestran sus resultados en otra cosa que no sea un gráfico de barras. Así que toma tu toalla favorita y empecemos.
+
+
+# Generalidades
+
+En este primer capítulo vamos a revisar algunas funcionalidades básicas de R tales como crear objetos y vectores asi como revisar los diferentes tipos de estructuras de datos.
+
+Antes de empezar, es importante mencionar algunas aspectos:
+
+  * R es sensible a las mayúsculas y minúsculas, de manera que `A` es diferente que `a` de la misma forma que la función `anova()` es diferente a la función `Anova()`
+  
+  * El símbolo `#` sirve para insertar un comentario en la línea de comando, de manera que todo lo que siga después de `#` no se ejecutara. Es importante incluir comentarios como parte de las buenas practicas en el uso de R ya que le facilitará el trabajo a tus colaboradores y revisores saber que estas haciendo en casa paso y te salvará la vida cuando intentes correr tu script cinco años después de haberlo escrito
+  
+  * En la consola usualmente veremos el símbolo `>` lo que la indica que la consola esta lista para recibir nuevas instrucciones. Si por el contrario vemos el símbolo `+` entonces nos esta indicando que no hemos terminado de completar correctamente una línea de código.
+  
+  * Si despúes de ejecutar un comando la consola nos arroja un mensaje de advertencia `WARNING` significa que el comando se ejecutó pero hay algo inesperad que debe revisarse. Por el contrario si nos arroja un mensaje de error `ERROR` entonces hay algo mal en la línea de codigo y por lo tanto no se pudo ejecutar.   
+  
+
+
+# Uso de la línea de comando como calculadora
+
+
+Podemos utilizar R para realizar operaciones básicas:
+
+```{r basicas, echo=TRUE, include=TRUE}
+1 + 2 #suma
+
+4 - 3 #resta
+
+5 * 5 #multiplicación
+
+4 / 2 #división
+
+4 ^ 2 #Exponente
+
+4 ** 2 #Exponente
+```
+
+**!! ¿por qué hay un [1] en cada resultado?** 
+
+El resultado es un vector, aunque solo consista en un elemento. Por lo tanto, R indica que este el primer [1] elemento de un vector
+
+
+Operadores en R:
+
+|Operador  	| significado 	|
+|:---:|:---:|
+| *  	| Multiplicación 	|
+|  -	| Resta  	|
+| +  	|  Suma	|
+| ^   | Elevar a potencia |
+| /   | División |
+| <   | Menor que |
+| >   | Mayor que |
+| <=  | Menor o igual que |
+| >=  | Mayor o igual que |
+| ==  | Exactamente igual |
+| !=  | Distinto|
+
+
+
+
+# Uso de objetos
+
+Para crear un nuevo objeto se puede usar "=" o "<-". Este nuevo objeto, se almacenará en la memoria y se puede usar para otras operaciones.
+
+
+```{r variable, echo=TRUE,warning=FALSE, results=FALSE}
+
+x <- 2 #asignar a la variable x el valor de 2
+x
+
+y = 3 #asignar a la variable y el valor de 3
+y
+
+#resultado de la suma x + y
+x + y
+
+z <- x + y#asiganr el resultado de x + y  a la variable z
+z
+
+#uso de c() para incluir mas de un elemento
+
+numeros <- c(1,2,3,4,5)
+numeros
+
+variables <- c(x,y,z)
+variables
+
+variables_mas <- variables + 1
+variables_mas
+
+variables_expo <- variables ^2
+
+2 ^ variables -> expo_variables 
+
+variables_numero <- variables * numeros
+
+#¿que pasara aqui?
+```
+
+Las variables no solo puede contener números, sino caracteres, listas o incluso graficas
+
+```{r more variables, echo=TRUE}
+caracter <- "siete"
+caracter
+
+mix <- c(1,2,"tres")
+mix
+
+```
+
+
+***
+ + ¿cual serial el resultado de multiplicar la variable *mix* x 3?
+
+ + ¿Cuales de estas formas de definir una variables es incorrecta?
+ 
+  + `mi.variable <-` 
+  + `mi_variable <-` 
+  + `mi variable <-` 
+  + `mi-variable <-`
+
+
+***
+
+# Tipos y estructura de datos (Classes)
+
+R tiene los siguientes tipos de datos basicos:
+
+ * `logical:` valores lógicos, pueden ser *TRUE* o *FALSE*
+ * `numeric:` números reales *(1.0,2,3.1416, 3E-10)*
+ * `character:`caracteres (letras y/o números). Delimitados por "" *("uno", "Miguel", "FALSO")*
+ * `interger:`valores enteros *(1,2,3)*
+ * `NA:` dato no disponible
+ * `NaN:`no es un número (not a number)
+
+Por otro lado, las estructuras de datos pueden ser de tipo vector, data.frame, matriz, arreglo o lista:
+
+<img src="http://venus.ifca.unican.es/Rintro/_images/dataStructuresNew.png">
+
+fuente: <http://venus.ifca.unican.es/Rintro/_images/dataStructuresNew.png>
+
+Es importante resaltar que solamente los data.frame pueden contener distintos tipos de datos (números, caracteres, etc) mientras que el resto solo puede contener un tipo de dato (solo carácteres, solo números, etc).
+
+***
+
+Si no sabes que tipo de dato contiene una variable, se puede sar la funcions `class()`
+```{r uso class, echo=TRUE, include=TRUE}
+
+class(numeros)      
+
+class(caracter)     
+
+class(numeros)
+
+class(mix)
+
+
+```
+
+
+R utiliza **funciones** para realizar operaciones, por ejemplo `class()`. Para utilizar una función deben especificarse determiandos argumentos, los cuales se escriben dentro del parentesis. 
+
+Por ejemplo, en la función `round()`, la ayuda nos dice que debemos especificar `round(x, digits = 0)` donde x es el objecto (número o vector) y digits es el número de decimales.
+
+
+
+## Trabajando con vectores 
+
+ **Ejercicio:**
+
+Supon que tienes un cultivo de abulones y tienes que revisarlo todos los dias y contar los organismos muertos. Despues de una semana tienes el siguiente resultado:
+
+- lunes: 4
+- martes: 6
+- miercoles: 0
+- jueves: 10
+- viernes: 12
+- sabado: 8
+- domingo: 4
+
+1: crea un vector con los valores diarios
+2: nombre cada valor con el dia de la semana usando la funcion `names()`
+
+```{r ejercicio 1, echo= TRUE}
+
+mortalidad <- c(4,6,0,10,12,8,4)
+mortalidad
+
+
+names(mortalidad) <-  c("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo")
+
+mortalidad
+#nombrar la mortalidad con la funcion names
+
+
+```
+
+
+Operaciones basicas con vectores
+
+|Función  	| significado 	|
+|---	|---	|
+| min()  	| Minimo 	|
+|  max()	| Máximo  	|
+| length()  	|  longitud	|
+| range()  | intervalo de valores |
+| sort()  | Ordena de menor a mayor |
+| unique()   | Valores unicos |
+| mean()   | Promedio |
+| sum()  | suma |
+| which() | proporciona los indices TRUE|
+
+
+**Ejercicio:**
+Contesta lo siguiente:
+
+  + ¿cual fue el valor minimo y el maximo?
+  + ¿cuantos abulones murieron esa semana?
+  
+
+# Indices
+
+Una tarea común al trabajar con vectores de datos es el de aislar uno o varios valores que cumplen con algún criterio.
+
+
+Mostrar el primer valor del vector
+```{r indices, echo = TRUE}
+mortalidad[1]
+
+```
+
+Mostrar todos los valores _excepto_ el segundo
+```{r all but, echo=TRUE}
+
+mortalidad[-2]
+
+```
+
+Se puede obtener multiples series de elementos al mismo tiempo usando `c()`
+```{r}
+mortalidad[c(1,2:4)]
+```
+
+o si por el contrario queremos eliminar estos elementos se usa `c(-)`
+```{r}
+mortalidad[-c(1,2:4)]
+```
+
+
+Obtener los dias en donde la mortalidad fue mayor a 5
+
+```{r indices 2, echo=TRUE}
+mortalidad > 5
+
+#Mostrar solo los dias donde la mortalidad fue > 5
+mortalidad[mortalidad > 5]
+
+#Mediante una variable
+mor_5 <- mortalidad > 5 
+mortalidad[mor_5]
+
+```
+
+**Ejercicio**
+
+Identificar:
+
+  + ¿En que dia se observó la menor mortalidad?
+  + ¿Que dias tuvieron una mortalidad igual a 12?
+  + ¿Que dias tuvieron una mortalidad menor al promedio?
+  
+  
+# Enlistar y borrar objectos
+
+Las funciones `ls()`y `objects()`hacen lo mismo: enlistan los objetos que hemos definido en la sesión.
+
+```{r}
+ls()
+```
+
+Y si queremos borrar objectos, se usa la funcion `rm()`
+Si queremos borrrar todos los objectos del ambiente, se ejecuta `rm(list=ls())`.
+
+
+# Trabajando con tablas
+
+
+Ahora supongamos que tienes que revisar tus estanques por otra semana. Sin embargo, el jueves de la tercera semana no pudiste ir, por lo que no tienes valores para ese dia. Estos son los resultados. 
+
+- lunes: 16
+- martes: 12
+- miércoles: 8
+- jueves: no hay dato
+- viernes: 14
+- sábado: 4
+- domingo: 10
+
+
+**Ejercicio:** Construye un vector para la semana 2 con el nombre `semana2`. 
+
+De que forma podríamos nombrar cada día de la semana en `semana2`?
+
+```{r tabla ejercicio, echo=FALSE}
+#para nombrar los dias de la semana:
+
+semana2 <- c(16, 12, 8, NA, 14, 4, 10)
+
+names(semana2) <- names(mortalidad)
+
+
+
+```
+
+# Crear una tabla con `data.frame`
+
+```{r data frame, echo=TRUE}
+
+
+dia_sem <- c("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo")
+
+
+# Indicamos row.names= NULL para que no se incluyan los nombres del vector como row.names
+
+tabla <- data.frame(dia = dia_sem, semana1 = mortalidad, semana2 = semana2, row.names = NULL)
+tabla 
+
+
+# Alternativamente, ejecutamos row.names = dia_sem para indicar los días de la semana como row.names
+tabla <- data.frame(row.names = dia_sem, semana1 = mortalidad, semana2 = semana2)
+
+tabla
+
+
+```
+
+**¿Que tipo de dato es el objecto `tabla`?**
+
+>**Ejercicio:** Para cada semana, busca el valor mínimo, máximo y promedio. Con estos valores crea un vector para cada semana y nombralos `Semana1_sum` y `Semana2_sum`.
+
+Para esto es posible seguir dos aproximaciones: 
+
++ usando indices: `tabla[filas , columnas]`
++ con el operado `$`: `tabla$columna`
+
+por ejemplo:
+```{r operaciones con tablas, echo=TRUE}
+max(tabla$semana1)
+
+min(tabla[,1])
+
+mean(tabla$semana2, na.rm = TRUE)
+
+```
+
+# Estructura de una tabla
+```{r table estructure, echo=TRUE}
+#muestra las primeras n filas de la tabla
+head(tabla)
+
+#muestra el numero de filas
+nrow(tabla)
+
+#muestra el numero de columnas
+ncol(tabla)
+
+#muestra el nombre de las columnas
+colnames(tabla)
+
+#muestra el nombre de las filsa
+rownames(tabla)
+```
+
+otras operaciones utiles para data.frames:
+
+`colSums ()`
+
+`rowSums ()`
+
+`colMeans()`
+
+`rowMeans()`
+
+
+**Ejercicio:** En el objetvo `tabla`, crea una columan con el promedio de organismos muertos por dia
+
+
+**Ejercicio:** Te diste cuenta que esta nueva columna no te sirve. ¿como la eliminas?
+
+_pista_: Puedes usar indices o `NULL`
+
+
+
+![](https://i.pinimg.com/564x/c8/9a/21/c89a214708211c988c0cca2bb46798b3.jpg)

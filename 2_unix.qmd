@@ -14,6 +14,7 @@ execute:
 ![](https://i.imgur.com/To7p9Ix.png)
 
 
+
 ---
 # 1.- Breve historia de GNU-LINUX, conociendo la terminal.
 ## 1.1 Sistema operativo GNU-Linux
@@ -98,12 +99,14 @@ Ahora vamos a darle ordenes a la terminal:
 Primero, ¿Cómo saber que shell estoy usando?
 ¡Recuerden no teclear el **$**!
 
-```
+```default
 $ echo $SHELL o echo $0
 /bin/bash
 ```
+
 ¿Cómo seleccionamos una shell en particular?
-```
+
+```default
 $ bash
 ```
 
@@ -639,9 +642,11 @@ $ssh cicese #Les pedirá su contraseña de usuario.
 #### 2.6.2.1 Copiar archivos de manera remota, servidor(omica)-pc. Bidireccional.
 
 Si quisieramos enviar un archivo a  nuestro home en omica:
-```
+
+```defualt
 $ scp file_sed.txt curso01@omica:/home/curso01/
 ```
+
 Ahora, copiar de omica a nuestro pc:
 
 ```
