@@ -1,0 +1,413 @@
+---
+title: "Data Frames, Matrices y Arreglos"
+author: "Miguel Tripp"
+output: 
+  workflowr::wflow_html:
+    toc: true
+    number_section: true
+    theme: cerulean 
+editor_options:
+  chunk_output_type: console
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data.frames
+
+Los data frames son estructuras de datos de dos dimensiones que pueden contener datos de diferentes tipos, por lo tanto, son heterogeneas. En términos generales, los renglones de una data.frame representan casos, individuos u observaciones, mientras que las columnas contiene datos de un solo tipo.
+
+## Creación de data frames
+
+Genera un data.frame con los siguientes elementos:
+
+```{r echo=TRUE}
+Nombre <- c("Alex", "Lilly", "Mark", "Oliver", "Martha", "Lucas", "Caroline")
+Edad <- c(25, 31, 23, 52, 76, 49, 26)
+Altura <- c(177, 163, 190, 179, 163, 183, 164)
+Peso <- c(57, 69, 83, 75, 70, 83, 53)
+Sexo <- as.factor(c("M", "M", "H", "H", "M", "H", "M"))
+
+df <- data.frame (row.names = Nombre, Edad, Altura, Peso, Sexo)
+```
+
+Esto nos produce la tabla
+```{r}
+df
+```
+
+Acceder a las variables del data.frame:
+
+  * Utilizando el symbolo `$`.
+  
+  * Utilizando indices `[F, C]`.
+
+
+para obtener los pesos:
+```{r, echo=TRUE}
+df$Peso
+```
+
+Para obtener las edades
+```{r}
+df[,2]
+```
+
+Otra opción:
+```{r}
+df[, "Edad"]
+```
+
+
+
+>**_Ejercicio:_** ¿como puedo acceder a toda la información de Mark?
+
+```{r}
+df["Mark",]
+```
+*Para que esto funcione, nuestra tabla tiene que tener colnames y rownames
+
+
+Ahora, deseamos agregar una columna `trabajo` con la siguiente información
+
+|Nombre | Trabaja |
+|---| --- |
+|Alex | si |
+|Lilly | no |
+| Mark | no | 
+|Oliver | si |
+|Martha | si |
+| Lucas | no |
+|Caroline | si| 
+
+
+
+En la clase anterior, vimos que se puede agregar una columna nueva usando el operador `$`.
+
+Otra forma de agregar elementos nuevos a una tabla es mediante el uso de `cbind` y `rbind`. 
+
+```{r, echo=TRUE, results=FALSE}
+Trabajo <- c("si","no","no","si","si","no","si")
+
+df2 <- data.frame(row.names  = Nombre,Trabajo) 
+
+df2
+```
+
+Ahora añade esta nueva columna a df.
+
+a) ¿Cuantas filas y columnas tiene la tiene tabla?
+b) ¿Que tipod de dato (clase) esta en cada columna
+
+```{r, echo=TRUE, results=TRUE}
+df_bind <- cbind(df, df2)
+```
+
+Verificar las dimensiones de la tabla con `dim()`
+```{r}
+dim(df)
+dim(df2)
+dim(df_bind)
+```
+
+
+#  Matrices y arreglos
+
+Las matrices y arrays pueden ser definidos como vectores multidimencionales. Especificamente las matrices poseen dos dimensiones y unicamente pueden contener datos de un solo tipo.
+
+## Creación de matrices
+
+Para crear una matriz se usa la función `matrix()`, la cual usa los argumentos `nrow` y `ncol`. Con ellos se especifica el número de renglones y columnas que tendrá nuestra matriz. 
+
+```{r matriz, echo = TRUE}
+#matriz sin especificar renglones ni columnas
+matrix(1:12)
+```
+
+
+Ahora usamos la misma serie de números pero definiendo 3 filas y 4 columnas
+
+```{r}
+matrix(1:12, nrow = 3, ncol = 4)
+```
+
+Ahora usando la misma serie de números pero con 4 filas y 3 columnas
+
+```{r}
+matrix(1:12, nrow = 4, ncol = 3)
+```
+
+a) ¿Que pasa si definimos un menor número de filas y columnas que el número de elementos?
+b) ¿Que pasa si usamos un número mayor de filas y columnas que el número total de elementos
+
+Al igual que como lo vimos con las data frame, es posible unir vectores con las funciones:
+
++ `cbind()`
++ `rbind()`
+
+De este modo podemos generar una matriz a partir de varios vectores
+
+```{r}
+vec1 <- 1:4
+vec2 <- 5:8
+vec3 <- 9:12
+vec4 <- 13:16
+```
+
+Ahora une los vectores usando `rbind` y `cbind`. ¿cual es la diferencia?
+
+Genera los siguientes vectores:
+```{r}
+vec1 <- 1:2
+vec2 <- 1:3
+vec3 <- 1:5
+```
+
+Trata de unir los vectores como en el ejercicio anterior. ¿cual es la diferencia?
+
+## Convertir matrices a data frames y viceversa
+
+Para convertir una matriz a data frame, se usa la función `as.data.frame()` mientras que para el caso contrario se usa `as.matrix()`. 
+Es importante tomar en cuenta la naturaleza de cada estructura: las matrices solo aceptan un solo tipo de dato
+
+Por ejeplo, tenemos la matriz:
+```{r, include =TRUE, echo=TRUE}
+matriz <- matrix(1:12, 3,4)
+matriz
+```
+
+se convierte a data.frame
+
+```{r, include=TRUE, echo=TRUE}
+matriz_df <- as.data.frame(matriz)
+matriz_df
+```
+
+Ahora trataremos de convertir la tabla df_bind a una matriz.
+
+```{r}
+df_matriz <- as.matrix(df_bind)
+df_matriz
+```
+
++ ¿que tipo de dato contiene la matriz?
+
++ ¿como podemos generar una matriz solamente con datos númericos?
+
+
+## Arreglos
+son similares a las matrices pero pueden contener 2 o mas dimensiones
+
+```{r}
+arreglo <- array(1:24, dim = c(2,3,4))
+arreglo
+```
+
+# Factores
+
+Regresando a nuestra tabla df_bind, despliega la columna de "Sexo:
+
+```{r}
+df_bind$Sexo
+```
+
+Observa que nos muestra un vector en los valores de cada individuo pero también nos muestra los niveles (categorías), es decir, puede ser H o M. Esto se debe a que estos datos son de tipo **factor**
+
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+Los factores, son vectores que contienen información categórica la cual es de utilidad para agrupar los valores de la data frame. 
+
+</div>
+
+
+Para convertir una variable de tipo caracter a factor podemos ejecutar la función `as.factor()`
+
+***
+**Nota** 
+Para hacer cambios puntuales a una tabla se puede usar la función `fix()`.
+
+***
+
+# Flujo de trabajo: rutas relativas y absolutas
+
+R posee el poderoso concepto de directorio de trabajo (working directory en inglés). Aquí es donde R busca los archivos que le pides que lea y donde colocará todos los archivos que le pidas que guarde. RStudio muestra tu directorio de trabajo actual en la parte superior de la consola.
+
+Puedes imprimir esto en código de R ejecutando el comando `getwd()` (en inglés get working directory, que significa obtener directorio de trabajo):
+```{r, results= FALSE, eval= FALSE}
+getwd()
+```
+
+Pero también es posible definir el directorio de trabajo desde R:
+
+```{r}
+setwd("data/")
+```
+
+Ahora, nuuestro directorio de trabajo es `~/data`, por lo que cualquier cosa que guardemos, se hara en este directorio.
+
+Ahora regresemos a nuestro directorio principal y lo definimos nuevamente como nuestro directorio de trabajo; esto tambien se puede realizar directamente desde la ventana de Rstudio en `more: Set as working directory`.
+
+```{r, echo= FALSE}
+setwd("../")
+```
+
+
+# Uso de proyecto en Rstudio
+
+Usar proyectos dentro de Rstudio soluciona el problema de rutas "frágiles". Cuando estas trabajando dentro de un proeycto (.Rproj), el directorio de trabajo corresponde al directorio raíz.  
+
+Además, el uso de proyectos dentro de Rstudio ofrece otras ventajas como la de hacer mas simple compartir el código con colaboradores o revisores, ya que puedes guardar todo lo contenido en un proyecto como un archivo .zip y compartirlo, de manera que la otra persona tendra acceso a todos los scripts y datos sin necesidad de modificar rutas absolutas.
+
+Una guía mas detallada de como generar un proyecto dentro de Rstudio esta disponible [aquí](https://swcarpentry.github.io/r-novice-gapminder-es/02-project-intro/).
+
+Un aspecto importante de trabajar en proyectos es la forma de organizar nuestra información. Se recomienda ampliamente crear una carpeta (en este caso llamada "Data") donde se guarden todas las bases de datos crudas y en una carpeta diferente toas las modificaciones realizadas a dichas bases de datos, de manera que los datos crudos se mantengan siempre intactos.
+
+<img src="https://i0.wp.com/raw.githubusercontent.com/martinctc/blog/master/images/RPROJECT_2000dpi.png?w=456&ssl=1">
+
+
+
+
+
+# Importar un archivo de texto
+
+La forma mas sencilla de transferir datos hacia R es mediante un archivo sin formato (_plain text_). Estos puede ser:
+
+* Archivos separados por comma (.csv)
+* Archivos separados por tabulación (.txt)
+* Data iterchange format (.dif)
+
+Estos tipos de archivos son de gran utilidad ya que pueden ser leidos por na gran variedad de bases y paquetes estadisticos.
+
+Para importar una base de datos a R se pueden utilizar la funcion `read.table()`.
+
+
+
+A continuación vamos a abrir un archivo de texto que esta dentro de la carpeta `data`
+
+```{r}
+tabla <- read.table("data/Tabla1_Muestreo.txt", sep = "\t", header = TRUE)
+```
+
+**Exploracdión general de los datos**
+
+usar la funcion `head()` o `tail` para tener una visualización de los datos
+
+```{r}
+head(tabla)
+```
+
+```{r}
+tail(tabla)
+```
+
+
+Podemos ver la estructura de la tabla con la función `str()`
+```{r}
+str(tabla)
+```
+
+Ademas podemos ver el resumen general de los datos con `summary()`
+```{r}
+summary(tabla)
+```
+
+
+>**_Ejercicio:_** Usando lo que vimos en la lección pasada:
+(1) calcula la longitud promedio de todas las estaciones.
+(2) crea un nuevo vector que contenga solamente las longitudes con el nombre de cada individuo.
+
+
+
+
+Tambien es posible usar `read.table` o `read.csv` para abrir datos remotos usando la URL
+
+```{r}
+url <- "https://raw.githubusercontent.com/trippv/Miguel_Tripp/master/Datos_metabolitos.csv"
+
+metabolitos <- read.csv(url)
+
+head(metabolitos)
+```
+
+
+# Filtrar o rearreglar variables
+
+## Función `subset()`
+
+Cuando se tiene un set de datos bastante grande, resulta conveniente remover o filtrar aquellas variables innecesarias y arreglar el restos de las variables de manera práctica. 
+
+La función `subset()` permite seleccionar un subset de datos que cumplen determinadas condiciones, mientras que `select` permite definir cuales variables mantener.
+
+De nuetra tabla, vamos a generar una nueva tabla que contenga solamente los individuos, sitios y longitudes.
+```{r}
+tabla1 <- subset(tabla, select=c(Individuo, Sitio, Longitud_mm))
+
+```
+
+Ahora vamos a generar una nueva tabla que contenga **solamente** los individuos de *verano*
+
+```{r}
+tabla_verano <- subset(tabla, Estacion == "Verano")
+head(tabla_verano)
+```
+
+>**_Ejercicio:_** Crea una nueva tabla que contenga (1) **solamente** los organismos de superfice, (2) los individuos que tengan una longitud mayor al promedio total. ¿Cuantos individuos tienen una longitud mayor al promedio total? 
+
+Es posible seleccionar varios parametros simultaneamente usando el simbolor `&`.
+
+Por ejemplo: seleccionar a los individuos de superficie y verano
+
+```{r}
+tabla_sup_ver <- subset(tabla, Estacion == "Verano" & Profundidad == "Superficie")
+head(tabla_sup_ver)
+```
+
+>**_Ejercicio:_** Crea una nueva tabla que contenga los individuos que NO sean de Bahia de La Paz y que tengan una longitud mayor o igual a 20 mm.
+
+
+## Indices
+
+Tambien es posible generar subsets de datos usando indicies `[]`. Recuerda que se aplica es mismo principio [filas, columnas].
+
+Ahora queremos recrear la tabla _tabla_verano_. Primero verificamos cuales individuos tienen la etiqueta "Verano":
+
+```{r}
+tabla$Estacion == "Verano"
+```
+
+Esto nos genera un vector con las filas que contienen la etiqueta (TRUE), con lo que podemos usar `[]` para filtrar las filas TRUE con todas las columnas
+
+```{r}
+tabla_verano2 <- tabla[tabla$Estacion=="Verano", ]
+head(tabla_verano2)
+```
+
+>**_Ejercicio_** Utilizando indices, genera un vector solamente con los valores de longitud de los indivuos de verano. Agrega las etiquetas de individuos
+
+>**_Ejercicio_** (1) ¿Cual individuo tiene la mayor longitud?. (2)¿Cuantos individuos tienen una longitud igual o menor al promedio total?. (3) ¿Cual es el la longitud promedio de los Individuos de Verano? 
+
+# Exportar una base de datos
+
+Pära exportar un tabla, por ejemplo nuestro objeto **tabla_verano2** se usa la funcion  `write.table()`
+
+```{r, eval= FALSE}
+write.table(tabla_verano2, "Tabla_subset-verano.txt", sep = "\t", row.names = FALSE)
+```
+
+
+# Ejercicio
+
+Descarga las bases de datos de Data_enzimas_experimento(n).txt y guardalos dentro de tu carpeta local. Estos cuatro archivos contienen los resultados de la actividad enzimática de la lactado deshidrogenasa (_LDH_), citrato sintasa (_CS_) y tauropina deshidrogenasa (_TDH_) analizadas en cuatro experimentos diferentes (Experimento1, Experimento2, Experimento3 y Experimento4).
+
+Usando lo que hemos visto hasta ahora, realiza lo siguiente
+
+1. Importa cada archivo como data.frame
+2. Une todas los data frames en uno solo,
+3. Filtra todas las mediciones con _Meas_Temp_ (Measured Temperature) igual a 18°C
+4. Para cada enzima, genera un subconjunto preservando solamente las columnas `ExpNum` `TreatTemp`, y la actividad correspondiente a cada enzima `Activityxxx`
+5. Dentro de la carpeta de`output`Crea un nuevo directorio de trabajo llamado `datos_enzimas` y guarda cada subconjunto como archivo separado por comas `csv`.

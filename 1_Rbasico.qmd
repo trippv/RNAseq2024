@@ -1,39 +1,37 @@
 ---
 title: "R y Rstudio: Comandos Basicos"
 author: "Miguel Tripp"
-
 ---
 
-# Introducción 
+## Introducción
 
+![](https://www.askideas.com/media/31/Dont-Panic-And-Carry-A-Towel-Picture.jpg)
 
-```{r, echo=FALSE, out.width = '45%'}
-knitr::include_graphics("https://www.askideas.com/media/31/Dont-Panic-And-Carry-A-Towel-Picture.jpg")
-```
+R es un lenguaje de programación y un entorno de software libre dedicado principalmente al análisis estadístico y la visualización de datos. Desarrollado inicialmente por los laboratorios de AT&T a pártir de otro lenguaje de programación.
 
+Entre las caracteristicas que han hecho de R un lenguaje muy popular entre la comunidad científica y academica (ademas de que es gratuito 😉 ) es su capacidad para manejar y analizar grandes conjuntos de datos, junto con una vasta colección de paquetes desarrollados por la comunidad, lo hace altamente versátil y poderoso.
 
+Además, R se destaca por su capacidad para crear gráficos de alta calidad y visualizaciones interactivas, lo que facilita la interpretación y comunicación de resultados complejos. La facilidad de integración con otros lenguajes y sistemas, así como su fuerte enfoque en la reproducibilidad de la investigación, han cimentado su lugar como una herramienta indispensable para científicos, estadísticos y analistas de datos en todo el mundo.
 
-Este curso es mi pequeña aportación para un mundo mejor donde no hay que pagar grandes sumas de dinero para hacer una ANOVA y donde los investigadores muestran sus resultados en otra cosa que no sea un gráfico de barras. Así que toma tu toalla favorita y empecemos.
+¿Mencioné que R es gratuito?
 
+------------------------------------------------------------------------
 
-# Generalidades
+## Generalidades
 
 En este primer capítulo vamos a revisar algunas funcionalidades básicas de R tales como crear objetos y vectores asi como revisar los diferentes tipos de estructuras de datos.
 
 Antes de empezar, es importante mencionar algunas aspectos:
 
-  * R es sensible a las mayúsculas y minúsculas, de manera que `A` es diferente que `a` de la misma forma que la función `anova()` es diferente a la función `Anova()`
-  
-  * El símbolo `#` sirve para insertar un comentario en la línea de comando, de manera que todo lo que siga después de `#` no se ejecutara. Es importante incluir comentarios como parte de las buenas practicas en el uso de R ya que le facilitará el trabajo a tus colaboradores y revisores saber que estas haciendo en casa paso y te salvará la vida cuando intentes correr tu script cinco años después de haberlo escrito
-  
-  * En la consola usualmente veremos el símbolo `>` lo que la indica que la consola esta lista para recibir nuevas instrucciones. Si por el contrario vemos el símbolo `+` entonces nos esta indicando que no hemos terminado de completar correctamente una línea de código.
-  
-  * Si despúes de ejecutar un comando la consola nos arroja un mensaje de advertencia `WARNING` significa que el comando se ejecutó pero hay algo inesperad que debe revisarse. Por el contrario si nos arroja un mensaje de error `ERROR` entonces hay algo mal en la línea de codigo y por lo tanto no se pudo ejecutar.   
-  
+-   R es sensible a las mayúsculas y minúsculas, de manera que `A` es diferente que `a` de la misma forma que la función `anova()` es diferente a la función `Anova()`
 
+-   El símbolo `#` sirve para insertar un comentario en la línea de comando, de manera que todo lo que siga después de `#` no se ejecutara. Es importante incluir comentarios como parte de las buenas practicas en el uso de R ya que le facilitará el trabajo a tus colaboradores y revisores saber que estas haciendo en casa paso y te salvará la vida cuando intentes correr tu script cinco años después de haberlo escrito
 
-# Uso de la línea de comando como calculadora
+-   En la consola usualmente veremos el símbolo `>` lo que la indica que la consola esta lista para recibir nuevas instrucciones. Si por el contrario vemos el símbolo `+` entonces nos esta indicando que no hemos terminado de completar correctamente una línea de código.
 
+-   Si despúes de ejecutar un comando la consola nos arroja un mensaje de advertencia `WARNING` significa que el comando se ejecutó pero hay algo inesperado que debe revisarse. Por el contrario si nos arroja un mensaje de error `ERROR` entonces hay algo mal en la línea de codigo y por lo tanto no se pudo ejecutar.
+
+## Uso de la línea de comando como calculadora
 
 Podemos utilizar R para realizar operaciones básicas:
 
@@ -51,34 +49,31 @@ Podemos utilizar R para realizar operaciones básicas:
 4 ** 2 #Exponente
 ```
 
-**!! ¿por qué hay un [1] en cada resultado?** 
+::: callout-warning
+# **!! ¿por qué hay un \[1\] en cada resultado?**
 
-El resultado es un vector, aunque solo consista en un elemento. Por lo tanto, R indica que este el primer [1] elemento de un vector
-
+El resultado es un vector, aunque solo consista en un elemento. Por lo tanto, R indica que este el primer \[1\] elemento de un vector
+:::
 
 Operadores en R:
 
-|Operador  	| significado 	|
-|:---:|:---:|
-| *  	| Multiplicación 	|
-|  -	| Resta  	|
-| +  	|  Suma	|
-| ^   | Elevar a potencia |
-| /   | División |
-| <   | Menor que |
-| >   | Mayor que |
-| <=  | Menor o igual que |
-| >=  | Mayor o igual que |
-| ==  | Exactamente igual |
-| !=  | Distinto|
+| Operador |    significado    |
+|:--------:|:-----------------:|
+|    \*    |  Multiplicación   |
+|    \-    |       Resta       |
+|    \+    |       Suma        |
+|    \^    | Elevar a potencia |
+|    /     |     División      |
+|    \<    |     Menor que     |
+|    \>    |     Mayor que     |
+|   \<=    | Menor o igual que |
+|   \>=    | Mayor o igual que |
+|    ==    | Exactamente igual |
+|    !=    |     Distinto      |
 
+## Uso de objetos
 
-
-
-# Uso de objetos
-
-Para crear un nuevo objeto se puede usar "=" o "<-". Este nuevo objeto, se almacenará en la memoria y se puede usar para otras operaciones.
-
+Para crear un nuevo objeto se puede usar "=" o "\<-". Este nuevo objeto, se almacenará en la memoria y se puede usar para otras operaciones.
 
 ```{r variable, echo=TRUE,warning=FALSE, results=FALSE}
 
@@ -125,42 +120,45 @@ mix
 
 ```
 
+::: callout-tip
+# Ejercicio:
 
-***
- + ¿cual serial el resultado de multiplicar la variable *mix* x 3?
+1.  ¿cual serial el resultado de multiplicar la variable *mix* \* 3?
 
- + ¿Cuales de estas formas de definir una variables es incorrecta?
- 
-  + `mi.variable <-` 
-  + `mi_variable <-` 
-  + `mi variable <-` 
-  + `mi-variable <-`
+2.  ¿Cuales de estas formas de definir una variables es incorrecta?
 
+-   `mi.variable <-`
 
-***
+-   `mi_variable <-`
 
-# Tipos y estructura de datos (Classes)
+-   `mi variable <-`
+
+-   `mi-variable <-`
+:::
+
+## Tipos y estructura de datos (Classes)
 
 R tiene los siguientes tipos de datos basicos:
 
- * `logical:` valores lógicos, pueden ser *TRUE* o *FALSE*
- * `numeric:` números reales *(1.0,2,3.1416, 3E-10)*
- * `character:`caracteres (letras y/o números). Delimitados por "" *("uno", "Miguel", "FALSO")*
- * `interger:`valores enteros *(1,2,3)*
- * `NA:` dato no disponible
- * `NaN:`no es un número (not a number)
+-   `logical:` valores lógicos, pueden ser *TRUE* o *FALSE*
+-   `numeric:` números reales *(1.0,2,3.1416, 3E-10)*
+-   `character:`caracteres (letras y/o números). Delimitados por "" *("uno", "Miguel", "FALSO")*
+-   `interger:`valores enteros *(1,2,3)*
+-   `NA:` dato no disponible
+-   `NaN:`no es un número (not a number)
 
 Por otro lado, las estructuras de datos pueden ser de tipo vector, data.frame, matriz, arreglo o lista:
 
-<img src="http://venus.ifca.unican.es/Rintro/_images/dataStructuresNew.png">
+<img src="http://venus.ifca.unican.es/Rintro/_images/dataStructuresNew.png"/>
 
 fuente: <http://venus.ifca.unican.es/Rintro/_images/dataStructuresNew.png>
 
 Es importante resaltar que solamente los data.frame pueden contener distintos tipos de datos (números, caracteres, etc) mientras que el resto solo puede contener un tipo de dato (solo carácteres, solo números, etc).
 
-***
+------------------------------------------------------------------------
 
-Si no sabes que tipo de dato contiene una variable, se puede sar la funcions `class()`
+Si no sabes que tipo de dato contiene una variable, se puede sar la función `class()`
+
 ```{r uso class, echo=TRUE, include=TRUE}
 
 class(numeros)      
@@ -174,29 +172,35 @@ class(mix)
 
 ```
 
-
-R utiliza **funciones** para realizar operaciones, por ejemplo `class()`. Para utilizar una función deben especificarse determiandos argumentos, los cuales se escriben dentro del parentesis. 
-
-Por ejemplo, en la función `round()`, la ayuda nos dice que debemos especificar `round(x, digits = 0)` donde x es el objecto (número o vector) y digits es el número de decimales.
+::: callout-note
+# ¿Funciones? 🤔
 
 
+R utiliza **funciones** para realizar operaciones, por ejemplo `class()`. Para utilizar una función deben especificarse determiandos *argumentos*, los cuales se escriben dentro del parentesis.
 
-## Trabajando con vectores 
 
- **Ejercicio:**
+Una ventaja de utilizar Rstudio, es que al abrir una función, automaticamente te desplegará las opciones de argumentos. Por ejemplo, escribe en la terminal `round()`. Tras completarse la función, te desplegara la información `round(x, digits = 0)` donde x es el objecto (número o vector) y digits es el número de decimales.
+
+
+:::
+
+
+
+## Trabajando con vectores
+
+**Ejercicio:**
 
 Supon que tienes un cultivo de abulones y tienes que revisarlo todos los dias y contar los organismos muertos. Despues de una semana tienes el siguiente resultado:
 
-- lunes: 4
-- martes: 6
-- miercoles: 0
-- jueves: 10
-- viernes: 12
-- sabado: 8
-- domingo: 4
+-   lunes: 4
+-   martes: 6
+-   miercoles: 0
+-   jueves: 10
+-   viernes: 12
+-   sabado: 8
+-   domingo: 4
 
-1: crea un vector con los valores diarios
-2: nombre cada valor con el dia de la semana usando la funcion `names()`
+1: crea un vector con los valores diarios 2: nombre cada valor con el dia de la semana usando la funcion `names()`
 
 ```{r ejercicio 1, echo= TRUE}
 
@@ -212,41 +216,38 @@ mortalidad
 
 ```
 
-
 Operaciones basicas con vectores
 
-|Función  	| significado 	|
-|---	|---	|
-| min()  	| Minimo 	|
-|  max()	| Máximo  	|
-| length()  	|  longitud	|
-| range()  | intervalo de valores |
-| sort()  | Ordena de menor a mayor |
-| unique()   | Valores unicos |
-| mean()   | Promedio |
-| sum()  | suma |
-| which() | proporciona los indices TRUE|
+| Función  | significado                  |
+|----------|------------------------------|
+| min()    | Minimo                       |
+| max()    | Máximo                       |
+| length() | longitud                     |
+| range()  | intervalo de valores         |
+| sort()   | Ordena de menor a mayor      |
+| unique() | Valores unicos               |
+| mean()   | Promedio                     |
+| sum()    | suma                         |
+| which()  | proporciona los indices TRUE |
 
+**Ejercicio:** Contesta lo siguiente:
 
-**Ejercicio:**
-Contesta lo siguiente:
-
-  + ¿cual fue el valor minimo y el maximo?
-  + ¿cuantos abulones murieron esa semana?
-  
+-   ¿cual fue el valor minimo y el maximo?
+-   ¿cuantos abulones murieron esa semana?
 
 # Indices
 
 Una tarea común al trabajar con vectores de datos es el de aislar uno o varios valores que cumplen con algún criterio.
 
-
 Mostrar el primer valor del vector
+
 ```{r indices, echo = TRUE}
 mortalidad[1]
 
 ```
 
-Mostrar todos los valores _excepto_ el segundo
+Mostrar todos los valores *excepto* el segundo
+
 ```{r all but, echo=TRUE}
 
 mortalidad[-2]
@@ -254,15 +255,16 @@ mortalidad[-2]
 ```
 
 Se puede obtener multiples series de elementos al mismo tiempo usando `c()`
+
 ```{r}
 mortalidad[c(1,2:4)]
 ```
 
 o si por el contrario queremos eliminar estos elementos se usa `c(-)`
+
 ```{r}
 mortalidad[-c(1,2:4)]
 ```
-
 
 Obtener los dias en donde la mortalidad fue mayor a 5
 
@@ -282,11 +284,10 @@ mortalidad[mor_5]
 
 Identificar:
 
-  + ¿En que dia se observó la menor mortalidad?
-  + ¿Que dias tuvieron una mortalidad igual a 12?
-  + ¿Que dias tuvieron una mortalidad menor al promedio?
-  
-  
+-   ¿En que dia se observó la menor mortalidad?
+-   ¿Que dias tuvieron una mortalidad igual a 12?
+-   ¿Que dias tuvieron una mortalidad menor al promedio?
+
 # Enlistar y borrar objectos
 
 Las funciones `ls()`y `objects()`hacen lo mismo: enlistan los objetos que hemos definido en la sesión.
@@ -295,25 +296,21 @@ Las funciones `ls()`y `objects()`hacen lo mismo: enlistan los objetos que hemos 
 ls()
 ```
 
-Y si queremos borrar objectos, se usa la funcion `rm()`
-Si queremos borrrar todos los objectos del ambiente, se ejecuta `rm(list=ls())`.
-
+Y si queremos borrar objectos, se usa la funcion `rm()` Si queremos borrrar todos los objectos del ambiente, se ejecuta `rm(list=ls())`.
 
 # Trabajando con tablas
 
+Ahora supongamos que tienes que revisar tus estanques por otra semana. Sin embargo, el jueves de la tercera semana no pudiste ir, por lo que no tienes valores para ese dia. Estos son los resultados.
 
-Ahora supongamos que tienes que revisar tus estanques por otra semana. Sin embargo, el jueves de la tercera semana no pudiste ir, por lo que no tienes valores para ese dia. Estos son los resultados. 
+-   lunes: 16
+-   martes: 12
+-   miércoles: 8
+-   jueves: no hay dato
+-   viernes: 14
+-   sábado: 4
+-   domingo: 10
 
-- lunes: 16
-- martes: 12
-- miércoles: 8
-- jueves: no hay dato
-- viernes: 14
-- sábado: 4
-- domingo: 10
-
-
-**Ejercicio:** Construye un vector para la semana 2 con el nombre `semana2`. 
+**Ejercicio:** Construye un vector para la semana 2 con el nombre `semana2`.
 
 De que forma podríamos nombrar cada día de la semana en `semana2`?
 
@@ -352,14 +349,15 @@ tabla
 
 **¿Que tipo de dato es el objecto `tabla`?**
 
->**Ejercicio:** Para cada semana, busca el valor mínimo, máximo y promedio. Con estos valores crea un vector para cada semana y nombralos `Semana1_sum` y `Semana2_sum`.
+> **Ejercicio:** Para cada semana, busca el valor mínimo, máximo y promedio. Con estos valores crea un vector para cada semana y nombralos `Semana1_sum` y `Semana2_sum`.
 
-Para esto es posible seguir dos aproximaciones: 
+Para esto es posible seguir dos aproximaciones:
 
-+ usando indices: `tabla[filas , columnas]`
-+ con el operado `$`: `tabla$columna`
+-   usando indices: `tabla[filas , columnas]`
+-   con el operado `$`: `tabla$columna`
 
 por ejemplo:
+
 ```{r operaciones con tablas, echo=TRUE}
 max(tabla$semana1)
 
@@ -370,6 +368,7 @@ mean(tabla$semana2, na.rm = TRUE)
 ```
 
 # Estructura de una tabla
+
 ```{r table estructure, echo=TRUE}
 #muestra las primeras n filas de la tabla
 head(tabla)
@@ -397,14 +396,10 @@ otras operaciones utiles para data.frames:
 
 `rowMeans()`
 
-
 **Ejercicio:** En el objetvo `tabla`, crea una columan con el promedio de organismos muertos por dia
-
 
 **Ejercicio:** Te diste cuenta que esta nueva columna no te sirve. ¿como la eliminas?
 
-_pista_: Puedes usar indices o `NULL`
-
-
+*pista*: Puedes usar indices o `NULL`
 
 ![](https://i.pinimg.com/564x/c8/9a/21/c89a214708211c988c0cca2bb46798b3.jpg)
