@@ -211,12 +211,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#uso-de-la-línea-de-comando-como-calculadora" id="toc-uso-de-la-línea-de-comando-como-calculadora" class="nav-link" data-scroll-target="#uso-de-la-línea-de-comando-como-calculadora">Uso de la línea de comando como calculadora</a></li>
   <li><a href="#uso-de-objetos" id="toc-uso-de-objetos" class="nav-link" data-scroll-target="#uso-de-objetos">Uso de objetos</a></li>
   <li><a href="#tipos-y-estructura-de-datos-classes" id="toc-tipos-y-estructura-de-datos-classes" class="nav-link" data-scroll-target="#tipos-y-estructura-de-datos-classes">Tipos y estructura de datos (Classes)</a></li>
-  <li><a href="#trabajando-con-vectores" id="toc-trabajando-con-vectores" class="nav-link" data-scroll-target="#trabajando-con-vectores">Trabajando con vectores</a></li>
+  <li><a href="#trabajando-con-vectores" id="toc-trabajando-con-vectores" class="nav-link" data-scroll-target="#trabajando-con-vectores">Trabajando con vectores</a>
+  <ul class="collapse">
+  <li><a href="#vectorización-de-operaciones" id="toc-vectorización-de-operaciones" class="nav-link" data-scroll-target="#vectorización-de-operaciones">Vectorización de operaciones</a></li>
+  </ul></li>
   <li><a href="#indices" id="toc-indices" class="nav-link" data-scroll-target="#indices">Indices</a></li>
-  <li><a href="#enlistar-y-borrar-objectos" id="toc-enlistar-y-borrar-objectos" class="nav-link" data-scroll-target="#enlistar-y-borrar-objectos">Enlistar y borrar objectos</a></li>
-  <li><a href="#trabajando-con-tablas" id="toc-trabajando-con-tablas" class="nav-link" data-scroll-target="#trabajando-con-tablas">Trabajando con tablas</a></li>
-  <li><a href="#crear-una-tabla-con-data.frame" id="toc-crear-una-tabla-con-data.frame" class="nav-link" data-scroll-target="#crear-una-tabla-con-data.frame">Crear una tabla con <code>data.frame</code></a></li>
-  <li><a href="#estructura-de-una-tabla" id="toc-estructura-de-una-tabla" class="nav-link" data-scroll-target="#estructura-de-una-tabla">Estructura de una tabla</a></li>
+  <li><a href="#data.frames" id="toc-data.frames" class="nav-link" data-scroll-target="#data.frames">Data.Frames</a>
+  <ul class="collapse">
+  <li><a href="#acceder-a-elementos-de-un-data.frame" id="toc-acceder-a-elementos-de-un-data.frame" class="nav-link" data-scroll-target="#acceder-a-elementos-de-un-data.frame">Acceder a elementos de un data.frame</a></li>
+  </ul></li>
+  <li><a href="#matrices-y-arreglos" id="toc-matrices-y-arreglos" class="nav-link" data-scroll-target="#matrices-y-arreglos">Matrices y arreglos</a>
+  <ul class="collapse">
+  <li><a href="#creación-de-matrices" id="toc-creación-de-matrices" class="nav-link" data-scroll-target="#creación-de-matrices">Creación de matrices</a></li>
+  <li><a href="#convertir-matrices-a-data-frames-y-viceversa" id="toc-convertir-matrices-a-data-frames-y-viceversa" class="nav-link" data-scroll-target="#convertir-matrices-a-data-frames-y-viceversa">Convertir matrices a data frames y viceversa</a></li>
+  <li><a href="#arreglos" id="toc-arreglos" class="nav-link" data-scroll-target="#arreglos">Arreglos</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -377,27 +386,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#resultado de la suma x + y</span></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> y</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y<span class="co">#asiganr el resultado de x + y  a la variable z</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>z</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#uso de c() para incluir mas de un elemento</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>numeros <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>numeros</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">c</span>(x,y,z)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>variables</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>variables_mas <span class="ot">&lt;-</span> variables <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>variables_mas</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>variables_expo <span class="ot">&lt;-</span> variables <span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> variables <span class="ot">-&gt;</span> expo_variables </span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>variables_numero <span class="ot">&lt;-</span> variables <span class="sc">*</span> numeros</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="co">#¿que pasara aqui?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y <span class="co">#asiganr el resultado de x + y  a la variable z</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Las variables no solo puede contener números, sino caracteres, listas o incluso graficas</p>
 <div class="cell">
@@ -405,11 +395,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>caracter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "siete"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mix <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="st">"tres"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>mix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "1"    "2"    "tres"</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -453,19 +438,11 @@ Ejercicio:
 <hr>
 <p>Si no sabes que tipo de dato contiene una variable, se puede sar la función <code>class()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(numeros)      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(caracter)     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "character"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(numeros)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "numeric"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(caracter)     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
@@ -487,6 +464,86 @@ Ejercicio:
 </section>
 <section id="trabajando-con-vectores" class="level2">
 <h2 class="anchored" data-anchor-id="trabajando-con-vectores">Trabajando con vectores</h2>
+<p>Un vector es la estructura de datos más sencilla en R. Un vector es una colección de uno o más datos del <strong>mismo tipo</strong>.</p>
+<p>Para crear un <strong>vector</strong> utilizamos el comando <code>c()</code>, de combinar</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>numeros <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>numeros</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+</div>
+<p>También podemos crear un nuevo vector a partir de otros objetos en el ambiente</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y, z)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>variables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3 5</code></pre>
+</div>
+</div>
+<p>Los vectores tambien puende contener elementos de otros tipos como <strong>caracteres</strong>, los cuales tienen que ir dentro de comillas <code>" "</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>nombres <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Juan"</span>, <span class="st">"Pepe"</span>, <span class="st">"Sofia"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Que pasa si intentamos unir el vector de caracteres (<code>nombres</code>) con numeros (<code>variables</code>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>nombre_variable <span class="ot">&lt;-</span> <span class="fu">c</span>(nombres, variables)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>nombre_variable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Juan"  "Pepe"  "Sofia" "2"     "3"     "5"    </code></pre>
+</div>
+</div>
+<p>Como las cadenas de texto son el tipo de dato más flexible, siempre que creamos un vector que incluye un dato de este tipo, el resultado será un vector de texto.</p>
+</div>
+</div>
+<p>Podemos crear vectores de secuencias numéricas usando <code>:</code>. De un lado de los dos puntos escribimos el número de inicio de la secuencia y del otro el final.</p>
+<p>Por ejemplo, creamos una secuencia del 1 al 10</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+<section id="vectorización-de-operaciones" class="level3">
+<h3 class="anchored" data-anchor-id="vectorización-de-operaciones">Vectorización de operaciones</h3>
+<p>Las operaciones aritméticas y relacionales pueden vectorizarse. Si las aplicamos a un vector, la operación se realizará para cada uno de los elementos que contiene.</p>
+<p>Por ejemplo, podemos sumar 2 a cada uno de los elementos del vector <code>numeros</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>numeros <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 4 5</code></pre>
+</div>
+</div>
+<p>También podemos realizar operaciones relacionales (VERDADERO, FALSO) con nuestro vector. Por ejemplo, evaluar cual de nuestro elementos es mayor a 4</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>numeros <span class="sc">&gt;</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE FALSE FALSE</code></pre>
+</div>
+</div>
 <p><strong>Ejercicio:</strong></p>
 <p>Supon que tienes un cultivo de abulones y tienes que revisarlo todos los dias y contar los organismos muertos. Despues de una semana tienes el siguiente resultado:</p>
 <ul>
@@ -500,19 +557,19 @@ Ejercicio:
 </ul>
 <p>1: crea un vector con los valores diarios 2: nombre cada valor con el dia de la semana usando la funcion <code>names()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mortalidad <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">8</span>,<span class="dv">4</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>mortalidad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mortalidad <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">8</span>,<span class="dv">4</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>mortalidad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  4  6  0 10 12  8  4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mortalidad) <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">"Lunes"</span>, <span class="st">"Martes"</span>, <span class="st">"Miercoles"</span>, <span class="st">"Jueves"</span>, <span class="st">"Viernes"</span>, <span class="st">"Sabado"</span>, <span class="st">"Domingo"</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>mortalidad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mortalidad) <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">"Lunes"</span>, <span class="st">"Martes"</span>, <span class="st">"Miercoles"</span>, <span class="st">"Jueves"</span>, <span class="st">"Viernes"</span>, <span class="st">"Sabado"</span>, <span class="st">"Domingo"</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>mortalidad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Lunes    Martes Miercoles    Jueves   Viernes    Sabado   Domingo 
         4         6         0        10        12         8         4 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#nombrar la mortalidad con la funcion names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#nombrar la mortalidad con la funcion names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Operaciones basicas con vectores</p>
 <table class="table">
@@ -567,12 +624,14 @@ Ejercicio:
 <li>¿cuantos abulones murieron esa semana?</li>
 </ul>
 </section>
-<section id="indices" class="level1">
-<h1>Indices</h1>
-<p>Una tarea común al trabajar con vectores de datos es el de aislar uno o varios valores que cumplen con algún criterio.</p>
-<p>Mostrar el primer valor del vector</p>
+</section>
+<section id="indices" class="level2">
+<h2 class="anchored" data-anchor-id="indices">Indices</h2>
+<p>Usar índices para obtener subconjuntos es el procedimiento más universal en R, pues funciona para todas las estructuras de datos.</p>
+<p>Un índice en R representa una posición. Cuando usamos índices le pedimos a R que extraiga de una estructura los datos que se encuentran en una o varias posiciones específicas dentro de ella.</p>
+<p>Para obtener subconjuntos con índices escribimos corchetes [] después del nombre de un objeto. Dentro de los corchetes escribimos el o los números que corresponden a la posición que nos interesa extraer del objeto.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mortalidad[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>mortalidad[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Lunes 
     4 </code></pre>
@@ -580,7 +639,7 @@ Ejercicio:
 </div>
 <p>Mostrar todos los valores <em>excepto</em> el segundo</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mortalidad[<span class="sc">-</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>mortalidad[<span class="sc">-</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Lunes Miercoles    Jueves   Viernes    Sabado   Domingo 
         4         0        10        12         8         4 </code></pre>
@@ -588,7 +647,7 @@ Ejercicio:
 </div>
 <p>Se puede obtener multiples series de elementos al mismo tiempo usando <code>c()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mortalidad[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>mortalidad[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Lunes    Martes Miercoles    Jueves 
         4         6         0        10 </code></pre>
@@ -596,7 +655,7 @@ Ejercicio:
 </div>
 <p>o si por el contrario queremos eliminar estos elementos se usa <code>c(-)</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mortalidad[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mortalidad[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Viernes  Sabado Domingo 
      12       8       4 </code></pre>
@@ -604,20 +663,13 @@ Ejercicio:
 </div>
 <p>Obtener los dias en donde la mortalidad fue mayor a 5</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mortalidad <span class="sc">&gt;</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>mortalidad <span class="sc">&gt;</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Lunes    Martes Miercoles    Jueves   Viernes    Sabado   Domingo 
     FALSE      TRUE     FALSE      TRUE      TRUE      TRUE     FALSE </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mostrar solo los dias donde la mortalidad fue &gt; 5</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>mortalidad[mortalidad <span class="sc">&gt;</span> <span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Martes  Jueves Viernes  Sabado 
-      6      10      12       8 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mediante una variable</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>mor_5 <span class="ot">&lt;-</span> mortalidad <span class="sc">&gt;</span> <span class="dv">5</span> </span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>mortalidad[mor_5]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mostrar solo los dias donde la mortalidad fue &gt; 5</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>mortalidad[mortalidad <span class="sc">&gt;</span> <span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Martes  Jueves Viernes  Sabado 
       6      10      12       8 </code></pre>
@@ -631,142 +683,218 @@ Ejercicio:
 <li>¿Que dias tuvieron una mortalidad menor al promedio?</li>
 </ul>
 </section>
-<section id="enlistar-y-borrar-objectos" class="level1">
-<h1>Enlistar y borrar objectos</h1>
-<p>Las funciones <code>ls()</code>y <code>objects()</code>hacen lo mismo: enlistan los objetos que hemos definido en la sesión.</p>
+<section id="data.frames" class="level1">
+<h1>Data.Frames</h1>
+<p>Los data frames son estructuras de datos de dos dimensiones (rectangulares) que pueden contener datos <strong>de diferentes tipos</strong>, por lo tanto, son heterogéneas. Esta estructura de datos es la más usada para realizar análisis de datos.</p>
+<p>Podemos entender a los data frames como una versión más flexible de una matriz. Mientras que en una matriz todas las celdas deben contener datos del mismo tipo, los renglones de un data frame admiten datos de distintos tipos, pero sus columnas conservan la restricción de contener datos de un sólo tipo.</p>
+<p>Podemos utilizar los vectores que ya tenemos (<code>numeros</code> y <code>nombres</code>) para hacer un data.frame de estos vectores</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>mi_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">numeros =</span> numeros,</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nombres =</span> nombres)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>mi_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "caracter"         "expo_variables"   "has_annotations"  "mix"             
- [5] "mor_5"            "mortalidad"       "numeros"          "variables"       
- [9] "variables_expo"   "variables_mas"    "variables_numero" "x"               
-[13] "y"                "z"               </code></pre>
+<pre><code>  numeros nombres
+1       1    Juan
+2       2    Pepe
+3       3   Sofia</code></pre>
 </div>
 </div>
-<p>Y si queremos borrar objectos, se usa la funcion <code>rm()</code> Si queremos borrrar todos los objectos del ambiente, se ejecuta <code>rm(list=ls())</code>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ejercicio
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Crea un nuevo data.frame con la siguiente información</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>Nombre <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Alex"</span>, <span class="st">"Lilly"</span>, <span class="st">"Mark"</span>, <span class="st">"Oliver"</span>, <span class="st">"Martha"</span>, <span class="st">"Lucas"</span>, <span class="st">"Caroline"</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>Edad <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">31</span>, <span class="dv">23</span>, <span class="dv">52</span>, <span class="dv">76</span>, <span class="dv">49</span>, <span class="dv">26</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>Altura <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">177</span>, <span class="dv">163</span>, <span class="dv">190</span>, <span class="dv">179</span>, <span class="dv">163</span>, <span class="dv">183</span>, <span class="dv">164</span>)</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>Peso <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">57</span>, <span class="dv">69</span>, <span class="dv">83</span>, <span class="dv">75</span>, <span class="dv">70</span>, <span class="dv">83</span>, <span class="dv">53</span>)</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>Sexo <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"H"</span>, <span class="st">"H"</span>, <span class="st">"M"</span>, <span class="st">"H"</span>, <span class="st">"M"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>mi_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Nombre, Edad, Altura, Peso, Sexo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<section id="acceder-a-elementos-de-un-data.frame" class="level2">
+<h2 class="anchored" data-anchor-id="acceder-a-elementos-de-un-data.frame">Acceder a elementos de un data.frame</h2>
+<p>Para acceder a los elementos de un data.frame podemos utilizar el simbolo <code>$</code> o utilizando indices <code>[F, C]</code> donde el primer elemento antes de la coma, son las filas y el segundo elemento las columnas.</p>
+<p>Por ejemplo, para acceder al vector de los nombres</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>mi_df<span class="sc">$</span>Nombre</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Alex"     "Lilly"    "Mark"     "Oliver"   "Martha"   "Lucas"    "Caroline"</code></pre>
+</div>
+</div>
+<p>o usando los indices</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>mi_df[ , <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Alex"     "Lilly"    "Mark"     "Oliver"   "Martha"   "Lucas"    "Caroline"</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para acceder a todas las filas de una determinada columna, dejamos ese espacio en blanco antes de la coma. Por el contrario si queremos seleccionar la primera fila de todas las columnas utilizariamos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>mi_df[<span class="dv">1</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Nombre Edad Altura Peso Sexo
+1   Alex   25    177   57    M</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>o podemos usar el nombre de la columna dentro del indice</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>mi_df[, <span class="st">"Nombre"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Alex"     "Lilly"    "Mark"     "Oliver"   "Martha"   "Lucas"    "Caroline"</code></pre>
+</div>
+</div>
 </section>
-<section id="trabajando-con-tablas" class="level1">
-<h1>Trabajando con tablas</h1>
-<p>Ahora supongamos que tienes que revisar tus estanques por otra semana. Sin embargo, el jueves de la tercera semana no pudiste ir, por lo que no tienes valores para ese dia. Estos son los resultados.</p>
+</section>
+<section id="matrices-y-arreglos" class="level1">
+<h1>Matrices y arreglos</h1>
+<p>Las matrices y arrays pueden ser descritas como vectores multidimensionales. Al igual que un vector, únicamente pueden contener datos de un sólo tipo, pero además de largo, tienen más dimensiones.</p>
+<p>En un sentido estricto, las matrices son una caso especial de un array, que se distingue por tener específicamente dos dimensiones, un “largo”” y un “alto”. Las matrices son, por lo tanto, una estructura con forma rectangular, con renglones y columnas.</p>
+<section id="creación-de-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="creación-de-matrices">Creación de matrices</h3>
+<p>Para crear una matriz se usa la función <code>matrix()</code>, la cual usa los argumentos <code>nrow</code> y <code>ncol</code>. Con ellos se especifica el número de renglones y columnas que tendrá nuestra matriz.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co">#matriz sin especificar renglones ni columnas</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1]
+ [1,]    1
+ [2,]    2
+ [3,]    3
+ [4,]    4
+ [5,]    5
+ [6,]    6
+ [7,]    7
+ [8,]    8
+ [9,]    9
+[10,]   10
+[11,]   11
+[12,]   12</code></pre>
+</div>
+</div>
+<p>Ahora usamos la misma serie de números pero definiendo 3 filas y 4 columnas</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12</code></pre>
+</div>
+</div>
+<p>Ahora usando la misma serie de números pero con 4 filas y 3 columnas</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    2    6   10
+[3,]    3    7   11
+[4,]    4    8   12</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li>lunes: 16</li>
-<li>martes: 12</li>
-<li>miércoles: 8</li>
-<li>jueves: no hay dato</li>
-<li>viernes: 14</li>
-<li>sábado: 4</li>
-<li>domingo: 10</li>
+<li><p>¿Que pasa si definimos un menor número de filas y columnas que el número de elementos?</p></li>
+<li><p>¿Que pasa si usamos un número mayor de filas y columnas que el número total de elementos</p></li>
 </ul>
-<p><strong>Ejercicio:</strong> Construye un vector para la semana 2 con el nombre <code>semana2</code>.</p>
-<p>De que forma podríamos nombrar cada día de la semana en <code>semana2</code>?</p>
-</section>
-<section id="crear-una-tabla-con-data.frame" class="level1">
-<h1>Crear una tabla con <code>data.frame</code></h1>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>dia_sem <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Lunes"</span>, <span class="st">"Martes"</span>, <span class="st">"Miercoles"</span>, <span class="st">"Jueves"</span>, <span class="st">"Viernes"</span>, <span class="st">"Sabado"</span>, <span class="st">"Domingo"</span>)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Indicamos row.names= NULL para que no se incluyan los nombres del vector como row.names</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">dia =</span> dia_sem, <span class="at">semana1 =</span> mortalidad, <span class="at">semana2 =</span> semana2, <span class="at">row.names =</span> <span class="cn">NULL</span>)</span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>tabla </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        dia semana1 semana2
-1     Lunes       4      16
-2    Martes       6      12
-3 Miercoles       0       8
-4    Jueves      10      NA
-5   Viernes      12      14
-6    Sabado       8       4
-7   Domingo       4      10</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternativamente, ejecutamos row.names = dia_sem para indicar los días de la semana como row.names</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">row.names =</span> dia_sem, <span class="at">semana1 =</span> mortalidad, <span class="at">semana2 =</span> semana2)</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>tabla</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          semana1 semana2
-Lunes           4      16
-Martes          6      12
-Miercoles       0       8
-Jueves         10      NA
-Viernes        12      14
-Sabado          8       4
-Domingo         4      10</code></pre>
-</div>
-</div>
-<p><strong>¿Que tipo de dato es el objecto <code>tabla</code>?</strong></p>
-<blockquote class="blockquote">
-<p><strong>Ejercicio:</strong> Para cada semana, busca el valor mínimo, máximo y promedio. Con estos valores crea un vector para cada semana y nombralos <code>Semana1_sum</code> y <code>Semana2_sum</code>.</p>
-</blockquote>
-<p>Para esto es posible seguir dos aproximaciones:</p>
-<ul>
-<li>usando indices: <code>tabla[filas , columnas]</code></li>
-<li>con el operado <code>$</code>: <code>tabla$columna</code></li>
-</ul>
-<p>por ejemplo:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(tabla<span class="sc">$</span>semana1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(tabla[,<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(tabla<span class="sc">$</span>semana2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.66667</code></pre>
 </div>
 </div>
 </section>
-<section id="estructura-de-una-tabla" class="level1">
-<h1>Estructura de una tabla</h1>
+<section id="convertir-matrices-a-data-frames-y-viceversa" class="level3">
+<h3 class="anchored" data-anchor-id="convertir-matrices-a-data-frames-y-viceversa">Convertir matrices a data frames y viceversa</h3>
+<p>Para convertir una matriz a data frame, se usa la función <code>as.data.frame()</code> mientras que para el caso contrario se usa <code>as.matrix()</code>. Es importante tomar en cuenta la naturaleza de cada estructura: las matrices solo aceptan un solo tipo de dato</p>
+<p>Por ejeplo, tenemos la matriz:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#muestra las primeras n filas de la tabla</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tabla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>matriz <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>matriz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          semana1 semana2
-Lunes           4      16
-Martes          6      12
-Miercoles       0       8
-Jueves         10      NA
-Viernes        12      14
-Sabado          8       4</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co">#muestra el numero de filas</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(tabla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>se convierte a data.frame</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>matriz_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(matriz)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>matriz_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7</code></pre>
+<pre><code>  V1 V2 V3 V4
+1  1  4  7 10
+2  2  5  8 11
+3  3  6  9 12</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co">#muestra el numero de columnas</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(tabla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="arreglos" class="level2">
+<h2 class="anchored" data-anchor-id="arreglos">Arreglos</h2>
+<p>son similares a las matrices pero pueden contener 2 o mas dimensiones</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>arreglo <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>arreglo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>, , 1
+
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+
+, , 2
+
+     [,1] [,2] [,3]
+[1,]    7    9   11
+[2,]    8   10   12
+
+, , 3
+
+     [,1] [,2] [,3]
+[1,]   13   15   17
+[2,]   14   16   18
+
+, , 4
+
+     [,1] [,2] [,3]
+[1,]   19   21   23
+[2,]   20   22   24</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">#muestra el nombre de las columnas</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(tabla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "semana1" "semana2"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co">#muestra el nombre de las filsa</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Lunes"     "Martes"    "Miercoles" "Jueves"    "Viernes"   "Sabado"   
-[7] "Domingo"  </code></pre>
-</div>
-</div>
-<p>otras operaciones utiles para data.frames:</p>
-<p><code>colSums ()</code></p>
-<p><code>rowSums ()</code></p>
-<p><code>colMeans()</code></p>
-<p><code>rowMeans()</code></p>
-<p><strong>Ejercicio:</strong> En el objetvo <code>tabla</code>, crea una columan con el promedio de organismos muertos por dia</p>
-<p><strong>Ejercicio:</strong> Te diste cuenta que esta nueva columna no te sirve. ¿como la eliminas?</p>
-<p><em>pista</em>: Puedes usar indices o <code>NULL</code></p>
 <p><img src="https://i.pinimg.com/564x/c8/9a/21/c89a214708211c988c0cca2bb46798b3.jpg" class="img-fluid"></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
