@@ -92,6 +92,17 @@ z
 
 ```
 
+
+
+:::callout-warning
+# Ejercicio
+
+1. Cambia el valor de la variable `x` a 5. ¿Que pasa con `z`?
+2. Que tengo que hacer para actualizar el objeto `z`
+:::
+
+
+
 Las variables no solo puede contener números, sino caracteres, listas o incluso graficas
 
 ```{r more variables, echo=TRUE}
@@ -100,12 +111,29 @@ caracter
 
 ```
 
-::: callout-tip
+
+:::callout-tip
+# Consejos para nombrar variables
+
+Es posible asignar casi cualquier nombre a un objeto aunque existen algunas reglas y recomendaciones que hay que considerar:
+
+* Evita iniciar con un número (`2x` incorrecto ero `x2` es valido).
+* Evita usar nombres de funciones (`ifelse`, `for`, `c`, etc.).
+* Usa guiones bajos para separar palabras. (snake_case).
+* Evita nombres de una sola letra.
+* Procura usar nombres claros y descriptivos. El nombre debe ser lo suficientemente claro para que alguien más (o tú mismo en el futuro) pueda entender su propósito sin necesidad de comentarios adicionales.
+
+
+:::
+
+
+
+
+
+::: callout-warning
 # Ejercicio:
 
-1.  ¿cual serial el resultado de multiplicar la variable *mix* \* 3?
-
-2.  ¿Cuales de estas formas de definir una variables es incorrecta?
+¿Cuales de estas formas de definir una variables es incorrecta?
 
 -   `mi.variable <-`
 
@@ -115,6 +143,9 @@ caracter
 
 -   `mi-variable <-`
 :::
+
+
+
 
 ## Tipos y estructura de datos (Classes)
 
@@ -161,7 +192,7 @@ Una ventaja de utilizar Rstudio, es que al abrir una función, automaticamente t
 
 
 
-## Trabajando con vectores
+## Vectores
 
 Un vector es la estructura de datos más sencilla en R. Un vector es una colección de uno o más datos del **mismo tipo**.
 
@@ -174,14 +205,9 @@ numeros
 ```
 
 
-También podemos crear un nuevo vector a partir de otros objetos en el ambiente
+También podemos crear un nuevo vector a partir de otros objetos en el ambiente, como por ejemplo, los objetos `x`, `y` y `z` que ya tenemos. 
 
 ```{r}
-x
-
-y
-
-z
 
 variables <- c(x, y, z)
 variables
@@ -234,16 +260,16 @@ numeros + 2
 También podemos realizar operaciones relacionales (VERDADERO, FALSO) con nuestro vector. Por ejemplo, evaluar cual de nuestro elementos es mayor a 4
 
 ```{r}
-numeros > 4
+numeros > 2
 ```
 
 
-
+## Trabajando con vectores
 
 
 **Ejercicio:**
 
-Supon que tienes un cultivo de abulones y tienes que revisarlo todos los dias y contar los organismos muertos. Despues de una semana tienes el siguiente resultado:
+Supón que tienes un cultivo de moluscos y tienes que revisarlo todos los días y contar los organismos muertos. Después de una semana tienes el siguiente resultado:
 
 -   lunes: 4
 -   martes: 6
@@ -260,11 +286,11 @@ Supon que tienes un cultivo de abulones y tienes que revisarlo todos los dias y 
 mortalidad <- c(4,6,0,10,12,8,4)
 mortalidad
 
-
-names(mortalidad) <-  c("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo")
+#nombrar la mortalidad con la funcion names
+names(mortalidad) <-  c("Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom")
 
 mortalidad
-#nombrar la mortalidad con la funcion names
+
 
 
 ```
@@ -283,25 +309,45 @@ Operaciones basicas con vectores
 | sum()    | suma                         |
 | which()  | proporciona los indices TRUE |
 
-**Ejercicio:** Contesta lo siguiente:
 
--   ¿cual fue el valor minimo y el maximo?
--   ¿cuantos abulones murieron esa semana?
+:::callout-warning
+# Ejercicio
 
-## Indices
+1.   ¿Cual fue el valor mínimo ?
+2.  ¿Cuantos organismos murieron esa semana?
+:::
+
+### Indice posicional
 
 Usar índices para obtener subconjuntos es el procedimiento más universal en R, pues funciona para todas las estructuras de datos.
 
 Un índice en R representa una posición. Cuando usamos índices le pedimos a R que extraiga de una estructura los datos que se encuentran en una o varias posiciones específicas dentro de ella.
 
-Para obtener subconjuntos con índices escribimos corchetes [] después del nombre de un objeto. Dentro de los corchetes escribimos el o los números que corresponden a la posición que nos interesa extraer del objeto.
+Para obtener subconjuntos con índices escribimos corchetes `[ ]` después del nombre de un objeto. Dentro de los corchetes escribimos el o los números que corresponden a la posición que nos interesa extraer del objeto.
+
+Por ejemplo, para extraer el primer valor de `mortalidad`
 
 ```{r indices, echo = TRUE}
 mortalidad[1]
 
 ```
 
-Mostrar todos los valores *excepto* el segundo
+
+También podemos extraer mas valores usando la función `c()` dentro de los corchetes. Por ejemplo, para extraer el primer, tercer y cuarto valor de `mortalidad`
+
+```{r}
+mortalidad[c(1,3,4)]
+```
+
+o usar un intervalo de valores con el operador `:`
+
+```{r}
+mortalidad[1:4]
+```
+
+
+
+Podemos usar números negativos para mostrar todos los valores *excepto* el segundo
 
 ```{r all but, echo=TRUE}
 
@@ -309,35 +355,97 @@ mortalidad[-2]
 
 ```
 
-Se puede obtener multiples series de elementos al mismo tiempo usando `c()`
 
-```{r}
-mortalidad[c(1,2:4)]
-```
-
-o si por el contrario queremos eliminar estos elementos se usa `c(-)`
+o si por el contrario queremos eliminar varios elementos usamos`c(-)`
 
 ```{r}
 mortalidad[-c(1,2:4)]
 ```
 
-Obtener los dias en donde la mortalidad fue mayor a 5
+### Indice lógico
+
+Otra forma de extraer datos de un vector es usando expresiones lógicas como indice. Por ejemplo, para extraer los días con una mortalidad mayor a 5 
 
 ```{r indices 2, echo=TRUE}
-mortalidad > 5
-
 #Mostrar solo los dias donde la mortalidad fue > 5
 mortalidad[mortalidad > 5]
 
 ```
 
+De esta forma R extraerá solamente los valores `TRUE` 
+
+De la misma manera podemos utilizar otros operadores para incrementar la complejidad de la expresión. Por ejemplo, podemos pedirle los valores que sean mayor o igual `>=` a una cierta cantidad, que sea exactamente igual `==` o que sea diferente `!=` a una cantidad.
+
+```{r}
+mortalidad[mortalidad == 4] #valores iguales a 4
+```
+
+
+```{r}
+mortalidad[mortalidad != 4] #valores diferentes a 4
+```
+
+
+:::callout-tip
+# ¡Ojo!
+En R, `=`y `==` tienen usos distintos y no son intercambiables. 
+
+`=` se utiliza para asignar un valor a una variable, mientras que `==` se utiliza para comparar dos valores y determinar si son iguales `TRUE` o no `FALSE`
+
+:::
+
+
+:::callout-warning
 **Ejercicio**
 
 Identificar:
 
--   ¿En que dia se observó la menor mortalidad?
--   ¿Que dias tuvieron una mortalidad igual a 12?
--   ¿Que dias tuvieron una mortalidad menor al promedio?
+-   ¿En que día se observó la menor mortalidad?
+-   ¿Que días tuvieron una mortalidad igual a 12?
+-   ¿Que días tuvieron una mortalidad menor al promedio?
+:::
+
+
+### Reemplazar elementos
+
+Para reemplazar un elemento en un vector podemos utiliza los indices, con `[ ]` en combinación con el operador de asignación `<-`. Por ejemplo, si quieres cambiar el valor del día lunes (primer elemento) de `4` a `8`
+
+
+
+```{r}
+mortalidad[1] <- 8
+mortalidad
+```
+
+
+
+:::callout-tip
+### vectores con nombre
+
+Cuando tu vector tiene nombres asignados a cada elemento (`names`) tal como lo hicimos con nuestro vector de mortalidad, puedes extraer o seleccionar un elemento usando su nombre. Por ejemplo, si queremos regresar el valor del lunes a `4`
+
+```{r}
+mortalidad["Lun"] <- 4
+```
+
+:::
+
+## Factores
+
+Los factores son un tipo especial de vector utilizado para almacenar datos **categoricos**. Cada categoría se refiere a un nivel del factor de manera que a cada nivel se le asgina un valor entero (integer).
+
+
+```{r}
+categorias <- c("alto", "medio", "bajo", "alto", "bajo", "alto", "bajo")
+
+categorias <- factor(categorias)
+
+categorias
+```
+
+
+
+
 
 
 
@@ -346,6 +454,15 @@ Identificar:
 Los data frames son estructuras de datos de dos dimensiones (rectangulares) que pueden contener datos **de diferentes tipos**, por lo tanto, son heterogéneas. Esta estructura de datos es la más usada para realizar análisis de datos.
 
 Podemos entender a los data frames como una versión más flexible de una matriz. Mientras que en una matriz todas las celdas deben contener datos del mismo tipo, los renglones de un data frame admiten datos de distintos tipos, pero sus columnas conservan la restricción de contener datos de un sólo tipo.
+
+Un ejemplo de un data.frame
+
+```{r}
+#| echo: false
+head(dplyr::starwars) |> 
+  dplyr::select(-films) |> 
+  kableExtra::kable()
+```
 
 
 
