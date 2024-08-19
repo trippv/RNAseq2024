@@ -2,21 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.37">
+<meta name="generator" content="quarto-1.5.53">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>RNAseq2024 - Control de Calidad</title>
+<title>Control de Calidad – RNAseq2024</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -27,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -41,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -103,7 +79,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -112,8 +94,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -125,52 +109,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="./index.html">
-    <img src="./img/logo.png" alt="">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./img/logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">RNAseq2024</span>
-  </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">Inicio</a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">About</a>
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./apoyo.qmd">Recursos de apoyo</a>
+    <a class="nav-link" href="./apoyo.html"> 
+<span class="menu-text">Recursos de apoyo</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lecciones" role="button" data-bs-toggle="dropdown" aria-expanded="false">Lecciones</a>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lecciones" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lecciones</span>
+    </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-lecciones">    
         <li>
-    <a class="dropdown-item" href="./1_control_calidad.html">
- <span class="dropdown-text">Control de Calidad</span></a>
+    <a class="dropdown-item" href="./1_Rbasico.html">
+ <span class="dropdown-text">R y Rstudio: Comandos Basicos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./1_Rproyectos.html">
+ <span class="dropdown-text">Importar y exportar datos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./2_unix.html">
+ <span class="dropdown-text">Introduccion Bash</span></a>
   </li>  
     </ul>
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com"> <i class="bi bi-github" role="img">
 </i> 
- </a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Control de Calidad</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Control de Calidad</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -178,25 +186,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-      <div class="mt-2 flex-shrink-0 align-items-center">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_control_calidad.html" class="sidebar-item-text sidebar-link active">Control de Calidad</a>
+  <a href="./1_Rbasico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R y Rstudio: Comandos Basicos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1_Rproyectos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Importar y exportar datos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_unix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduccion Bash</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
     <h2 id="toc-title">Contenido</h2>
    
   <ul>
@@ -207,12 +229,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#análisis-de-rnaseq" id="toc-análisis-de-rnaseq" class="nav-link" data-scroll-target="#análisis-de-rnaseq">2. Análisis de RNAseq</a>
   <ul class="collapse">
-  <li><a href="#análisis-de-calidad-de-las-lecturas-con-fastqc-y-multiqc" id="toc-análisis-de-calidad-de-las-lecturas-con-fastqc-y-multiqc" class="nav-link" data-scroll-target="#análisis-de-calidad-de-las-lecturas-con-fastqc-y-multiqc">2.1 Análisis de calidad de las lecturas con <span>FastQC</span> y <span>MultiQC</span></a>
+  <li><a href="#análisis-de-calidad-de-las-lecturas-con-fastqc-y-multiqc" id="toc-análisis-de-calidad-de-las-lecturas-con-fastqc-y-multiqc" class="nav-link" data-scroll-target="#análisis-de-calidad-de-las-lecturas-con-fastqc-y-multiqc">2.1 Análisis de calidad de las lecturas con FastQC y MultiQC</a>
   <ul class="collapse">
   <li><a href="#fastqc" id="toc-fastqc" class="nav-link" data-scroll-target="#fastqc">FASTQC</a></li>
   <li><a href="#multiqc" id="toc-multiqc" class="nav-link" data-scroll-target="#multiqc">MULTIQC</a></li>
   </ul></li>
-  <li><a href="#limpieza-y-eliminación-de-lecturas-de-mala-calidad-con-trimmomatic" id="toc-limpieza-y-eliminación-de-lecturas-de-mala-calidad-con-trimmomatic" class="nav-link" data-scroll-target="#limpieza-y-eliminación-de-lecturas-de-mala-calidad-con-trimmomatic">2.2. Limpieza y eliminación de lecturas de mala calidad con <span>Trimmomatic</span></a></li>
+  <li><a href="#limpieza-y-eliminación-de-lecturas-de-mala-calidad-con-trimmomatic" id="toc-limpieza-y-eliminación-de-lecturas-de-mala-calidad-con-trimmomatic" class="nav-link" data-scroll-target="#limpieza-y-eliminación-de-lecturas-de-mala-calidad-con-trimmomatic">2.2. Limpieza y eliminación de lecturas de mala calidad con Trimmomatic</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -222,23 +244,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Control de Calidad</h1>
+<h1 class="title">Control de Calidad</h1>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
+  
     
   </div>
   
 
+
 </header>
+
 
 <p>Moverse a la carpeta <code>curso2022</code> y crear carpeta de trabajo <code>Transcriptomica</code> y acceder.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cd curso2020</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cd curso2020</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mkdir Transcriptomica </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cd Transcriptomica</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -251,36 +276,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Creamos una carpeta parental llamada <code>FASTQC_TEST</code> y dentro de esta, generamos las carpetas <code>secuencias</code>, <code>FASTQC_PRE</code> y <code>FASTQC_POST</code>.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">-</span>p fastqc_test<span class="sc">/</span>{secuencias,fastqc_pre,fastqc_post}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mkdir -p fastqc_test/{secuencias,fastqc_pre,fastqc_post}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>Dentro de la carpeta <code>secuencias</code>vamos a crear un link simbólico de las secuencias que serán utilizadas.</li>
 </ol>
-<div class="callout-info callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Info
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="callout-info">
 <p>Recuerda la sintaxis <code>ln -s ORIGEN DESTINO</code></p>
 </div>
-</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cd fastqc_test<span class="sc">/</span>secuencias</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cd fastqc_test/secuencias</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> ln <span class="sc">-</span>s <span class="sc">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>Tripp<span class="sc">/</span>Curso_2022<span class="sc">/</span>FASTQC_test<span class="sc">/</span>secuencias<span class="sc">/</span><span class="er">*</span>.fastq .<span class="sc">/</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> ln -s /LUSTRE/bioinformatica_data/genomica_funcional/Tripp/Curso_2022/FASTQC_test/secuencias/*.fastq ./</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -291,7 +306,7 @@ Warning
 <p>Podemos utilizar la función <code>grep</code> para buscar un caracter en común de todas las lecturas y hacer pipe para contar el número de lineas que tienen ese caracter</p>
 <p>Por ejemplo: las lectutas SRR7096024_1.fastq, podemos utilizar el ID <span class="citation" data-cites="SRR7096024_1">@SRR7096024_1</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cat SRR7096024_1.fastq <span class="sc">|</span> grep <span class="st">"^@SRR70"</span> <span class="sc">|</span> wc <span class="sc">-</span>l</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cat SRR7096024_1.fastq | grep "^@SRR70" | wc -l</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -322,41 +337,31 @@ Warning
 <li>Posteriormente ejecutamos FASTQC. Para esto nos vamos a colocar en la carpeta <code>fastqc_pre</code> y generamos el siguiente slrm</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p cicese</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastqc</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=fastqc-%j.log</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=fastqc-%j.err</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -N 1</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 6-00:00:00</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>#SBATCH -p cicese</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>#SBATCH --job-name=fastqc</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>#SBATCH --output=fastqc-%j.log</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>#SBATCH --error=fastqc-%j.err</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>#SBATCH -N 1</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>#SBATCH --ntasks-per-node=8</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>#SBATCH -t 6-00:00:00</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Exportar la ruta de FastQC_v0.11.7</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>FastQC_v0.<span class="fl">11.7</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a># Exportar la ruta de FastQC_v0.11.7</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/FastQC_v0.11.7</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>fastqc ..<span class="sc">/</span>secuencias<span class="sc">/</span><span class="er">*</span>.fastq <span class="sc">-</span>t <span class="dv">8</span> <span class="sc">-</span>o .<span class="sc">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>fastqc ../secuencias/*.fastq -t 8 -o ./</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
 <li>Descargamos los reportes HTML generados a <strong>nuestra computadora</strong> en la carpeta de trabajo para revisarlo. Para esto, abrimos una nueva ventana de la terminal y vamos a generar una carpeta llamada <code>FASTQC_TEST</code></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span>LAPTOP<span class="sc">-</span>NNNNN<span class="sc">:</span><span class="er">$</span>mkdir <span class="sc">-</span>p FASTQC_TEST<span class="sc">/</span>{FASTQC_PRE,FASTQC_POST}</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>$LAPTOP-NNNNN:$mkdir -p FASTQC_TEST/{FASTQC_PRE,FASTQC_POST}</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>cd FASTQC_TEST<span class="sc">/</span>FASTQC_PRE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>cd FASTQC_TEST/FASTQC_PRE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-info callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Info
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="callout-info">
 <p>Recuerda la sintaxis: $scp curso##<span class="citation" data-cites="omica:ruta/de/la/carpeta">@omica:ruta/de/la/carpeta</span>/*.html ./</p>
-</div>
 </div>
 <ol start="5" type="1">
 <li>Revisión individual de archivos .html en navegador firefox o en el navegador que tengan instalado, para verificar la calidad de las lecturas de secuenciación.</li>
@@ -380,7 +385,7 @@ firefox SRR10858532_2_fastqc.html</code></pre>
 </ol>
 <p>Crear la carpeta <code>TRIMMOMATIC</code> en la carpeta <code>Transcriptomica</code> y acceder a ella.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cd ..</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cd ..</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mkdir trimmomatic</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cd trimmomatic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -388,82 +393,83 @@ firefox SRR10858532_2_fastqc.html</code></pre>
 <li>Generar el script al cual llamaremos <code>2.trimmomatic.slrm</code></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>nano <span class="fl">2.</span>trimmomatic.slrm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>nano 2.trimmomatic.slrm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>El slrm debe contener lo siguiente:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">#########################################################</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#TRIMOMMATIC</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Directivas</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=qtrim</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=trimmomatic-%j.log</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=trimmomatic-%j.err</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -N 1</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=20GB</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 6-00:00:00</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p cicese</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>#########################################################</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>#TRIMOMMATIC</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>## Directivas</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>#SBATCH --job-name=qtrim</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>#SBATCH --output=trimmomatic-%j.log</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>#SBATCH --error=trimmomatic-%j.err</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>#SBATCH -N 1</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>#SBATCH --mem=20GB</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>#SBATCH --ntasks-per-node=8</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>#SBATCH -t 6-00:00:00</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>#SBATCH -p cicese</span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Ruta a TRIMMOMATIC</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>TRIMMOMATIC<span class="ot">=</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>bin<span class="sc">/</span>Trimmomatic<span class="fl">-0.36</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Ruta al archivo con los adaptadores</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>trueseq<span class="ot">=</span><span class="st">"$TRIMMOMATIC/adapters/TruSeq3-PE-2.fa"</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a># Ruta a TRIMMOMATIC</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>TRIMMOMATIC=/LUSTRE/bioinformatica_data/genomica_funcional/bin/Trimmomatic-0.36</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>#Ruta al archivo con los adaptadores</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>trueseq="$TRIMMOMATIC/adapters/TruSeq3-PE-2.fa"</span>
 <span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">$</span>{SLURM_SUBMIT_DIR}</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIMMOMATIC<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>secuencias<span class="sc">/</span>SRR7096024_1.fastq ..<span class="sc">/</span>secuencias<span class="sc">/</span>SRR7096024_2.fastq <span class="sc">-</span>baseout trimmed_SRR7096024.fastq \</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span><span class="er">$</span>trueseq<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">15</span> MINLEN<span class="sc">:</span><span class="dv">36</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIMMOMATIC<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>secuencias<span class="sc">/</span>SRR10858532_1.fastq ..<span class="sc">/</span>secuencias<span class="sc">/</span>SRR10858532_2.fastq <span class="sc">-</span>baseout trimmed_SRR10858532.fastq \</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span><span class="er">$</span>trueseq<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">15</span> MINLEN<span class="sc">:</span><span class="dv">36</span></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIMMOMATIC<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>secuencias<span class="sc">/</span>rv06m_S8_L001_subset_1.fastq ..<span class="sc">/</span>secuencias<span class="sc">/</span>rv06m_S8_L001_subset_2.fastq <span class="sc">-</span>baseout trimmed_rv06m_S8_L001.fastq \</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span><span class="er">$</span>trueseq<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">15</span> MINLEN<span class="sc">:</span><span class="dv">36</span></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>cd ${SLURM_SUBMIT_DIR}</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../secuencias/SRR7096024_1.fastq ../secuencias/SRR7096024_2.fastq -baseout trimmed_SRR7096024.fastq \</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../secuencias/SRR10858532_1.fastq ../secuencias/SRR10858532_2.fastq -baseout trimmed_SRR10858532.fastq \</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../secuencias/rv06m_S8_L001_subset_1.fastq ../secuencias/rv06m_S8_L001_subset_2.fastq -baseout trimmed_rv06m_S8_L001.fastq \</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36</span>
 <span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>exit <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>exit 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
 <li>Correr el script <code>trimmomatic.slrm</code></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sbatch <span class="fl">2.</span>trimmomatic.slrm</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sbatch 2.trimmomatic.slrm</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>squeue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="5" type="1">
 <li>Generar dos carpetas para colocar las lecturas <em>Paired</em> y las <em>Unpaired</em>. Posteriormente, mueve todas las lecturas a sus respectivas carpetas usando el comando <code>mv</code></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mkdir TRIMM_U TRIMM_P</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mkdir TRIMM_U TRIMM_P</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>mv <span class="sc">*</span>P.fastq TRIMM_P<span class="sc">/</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>mv <span class="sc">*</span>U.fastq TRIMM_U<span class="sc">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>mv *P.fastq TRIMM_P/</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>mv *U.fastq TRIMM_U/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="6" type="1">
 <li>Ahora evalua la calidad de estas lecturas limpias con FastQC dentro de la carpeta <code>FASTQC_TEST/FASTQC_POST</code>. Para esto, puedes generar un nuevo archivo slrm para usar FastQC</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p cicese</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastqc</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=fastqc-%j.log</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=fastqc-%j.err</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -N 1</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 6-00:00:00</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>#SBATCH -p cicese</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>#SBATCH --job-name=fastqc</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>#SBATCH --output=fastqc-%j.log</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>#SBATCH --error=fastqc-%j.err</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>#SBATCH -N 1</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>#SBATCH --ntasks-per-node=8</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>#SBATCH -t 6-00:00:00</span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Exportar la ruta de FastQC_v0.11.7</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>FastQC_v0.<span class="fl">11.7</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a># Exportar la ruta de FastQC_v0.11.7</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/FastQC_v0.11.7</span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>fastqc ..<span class="sc">/</span>trimmomatic<span class="sc">/</span>TRIMM_P<span class="sc">/</span><span class="er">*</span>.fastq <span class="sc">-</span>t <span class="dv">8</span> <span class="sc">-</span>o .<span class="sc">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>fastqc ../trimmomatic/TRIMM_P/*.fastq -t 8 -o ./</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="7" type="1">
 <li><p>Finalmente, transfiere los reportes nuevos a tu computadora para revisarlos</p></li>
@@ -471,31 +477,31 @@ firefox SRR10858532_2_fastqc.html</code></pre>
 <p>Generar el script al cual llamaremos <code>trimmomatic_rig.slrm</code></p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>nano run_trimmomatic_rig.slrm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>nano run_trimmomatic_rig.slrm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>El slrm debe contener lo siguiente:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/sh</span></span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>#!/bin/sh</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">###Directivas</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>###Directivas</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p cicese</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=trimmomatic</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=trimmomatic-%j.log</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=trimmomatic-%j.err</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -N 1</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 06-00:00:00</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>#SBATCH -p cicese</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>#SBATCH --job-name=trimmomatic</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>#SBATCH --output=trimmomatic-%j.log</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>#SBATCH --error=trimmomatic-%j.err</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>#SBATCH -N 1</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>#SBATCH --ntasks-per-node=8</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>#SBATCH -t 06-00:00:00</span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>TRIM<span class="ot">=</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>bin<span class="sc">/</span>Trimmomatic<span class="fl">-0.36</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>TRIM=/LUSTRE/bioinformatica_data/genomica_funcional/bin/Trimmomatic-0.36</span>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">$</span>{SLURM_SUBMIT_DIR}</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>cd ${SLURM_SUBMIT_DIR}</span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIM<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>SRR7096024_1.fastq ..<span class="sc">/</span>SRR7096024_2.fastq <span class="sc">-</span>baseout trimmed_rig_SRR7096024.fastq \</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span>TruSeq3<span class="sc">-</span>PE<span class="fl">-2.</span>fa<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">20</span> MINLEN<span class="sc">:</span><span class="dv">36</span> HEADCROP<span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>java -jar $TRIM/trimmomatic-0.36.jar PE ../SRR7096024_1.fastq ../SRR7096024_2.fastq -baseout trimmed_rig_SRR7096024.fastq \</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:20 MINLEN:36 HEADCROP:5</span>
 <span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>exit <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>exit 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Transfiere los archivos a tu computadora para visualizarlos. Discute los principales cambios</p>
 <ol start="9" type="1">
@@ -509,8 +515,8 @@ firefox SRR10858532_2_fastqc.html</code></pre>
 <p>A partir de este punto empezaremos a análizar las lecturas que se utilizarán en el resto del curso.</p>
 <p>Para utilizarlas, genera un enlace simbolico de la carpeta donde estan las lecturas crudas</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cd transcriptomica</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ln <span class="sc">-</span>s <span class="sc">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>Tripp<span class="sc">/</span>Curso_2021<span class="sc">/</span>RAW_READS .<span class="sc">/</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cd transcriptomica</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ln -s /LUSTRE/bioinformatica_data/genomica_funcional/Tripp/Curso_2021/RAW_READS ./</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>La carpeta <code>RAW_READS</code> contiene un set de 16 archivos <code>.fastq</code> con secuencias o lecturas crudas provenientes de una secuenciación en un equipo Illumina HISEQ-4000 en formato pair-end de gónada de ostiones <em>Crassostrea virginica</em> indiferenciados expuestos a tres diferentes concentraciones de hidrocarburos. Este subconjunto de muestras en su totalidad está compuesto por 8 millones de lecturas. Los tratamientos son los siguientes:</p>
@@ -527,29 +533,31 @@ firefox SRR10858532_2_fastqc.html</code></pre>
 <p><img src="https://i.imgur.com/7JkC0Ww.jpg" class="img-fluid"></p>
 <p>Verificar el formato del archivo <code>.fastq.gz</code> y obtener el número de secuencias de cada archivo.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cd RAW_READS</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>zcat Ctrl_rep1_500k_R1.fastq.gz <span class="sc">|</span> head</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>zcat Ctrl_rep1_500k_R1.fastq.gz <span class="sc">|</span> grep <span class="st">"^@M03978"</span> <span class="sc">|</span> wc <span class="sc">-</span>l</span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cd RAW_READS</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>zcat Ctrl_rep1_500k_R1.fastq.gz | head</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>zcat Ctrl_rep1_500k_R1.fastq.gz | grep "^@M03978" | wc -l</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimirá en pantalla el número de coincidencias (Lecturas) por archivo.</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>find . <span class="sc">-</span>type f <span class="sc">-</span>name <span class="st">"*.fastq.gz"</span> <span class="sc">|</span> xargs zgrep <span class="sc">-</span>c <span class="st">"^@M03978"</span>               </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a># Imprimirá en pantalla el número de coincidencias (Lecturas) por archivo.</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>find . -type f -name "*.fastq.gz" | xargs zgrep -c "^@M03978"               </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <section id="análisis-de-calidad-de-las-lecturas-con-fastqc-y-multiqc" class="level2">
 <h2 class="anchored" data-anchor-id="análisis-de-calidad-de-las-lecturas-con-fastqc-y-multiqc">2.1 Análisis de calidad de las lecturas con <a href="https://dnacore.missouri.edu/PDF/FastQC_Manual.pdf">FastQC</a> y <a href="https://multiqc.info/">MultiQC</a></h2>
 <section id="fastqc" class="level3">
 <h3 class="anchored" data-anchor-id="fastqc">FASTQC</h3>
-<p>En la carpeta de <code>transcriptomica</code>, crear carpeta <code>FASTQC</code> y con las subcarpetas <code>FASTQC_PRE</code> y <code>FASTQC_POST</code>. Acceder a carpeta <code>FASTQC_PRE</code> ::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cd ..</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">-</span>p FASTQC<span class="sc">/</span>{FASTQC_PRE,FASTQC_POST}</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cd FASTQC<span class="sc">/</span>FASTQC_PRE<span class="sc">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>::: Realizar análisis de calidad de las secuencias con el programa <code>FastQC</code>. Se obtendrán N archivos <code>.html</code> y <code>fastqc.zip</code> . Sintaxis <code>fastqc [-t # ] [path to file] [-o output dir]</code></p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<p>En la carpeta de <code>transcriptomica</code>, crear carpeta <code>FASTQC</code> y con las subcarpetas <code>FASTQC_PRE</code> y <code>FASTQC_POST</code>. Acceder a carpeta <code>FASTQC_PRE</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cd ..</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mkdir -p FASTQC/{FASTQC_PRE,FASTQC_POST}</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cd FASTQC/FASTQC_PRE/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Realizar análisis de calidad de las secuencias con el programa <code>FastQC</code>. Se obtendrán N archivos <code>.html</code> y <code>fastqc.zip</code> . Sintaxis <code>fastqc [-t # ] [path to file] [-o output dir]</code></p>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -558,92 +566,99 @@ Warning
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fastqc <span class="sc">-</span>t <span class="dv">8</span> ..<span class="sc">/</span>..<span class="sc">/</span>RAW_READS<span class="sc">/</span><span class="er">*</span>.fastq.gz <span class="sc">-</span>o .<span class="sc">/</span>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fastqc -t 8 ../../RAW_READS/*.fastq.gz -o ./    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ls      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ls      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A continuación, vamos a importar los archivos <code>.html</code> a nuestra PC. Para ello sigan las instrucciones siguientes:</p>
-<p><strong>Paso 1.</strong> Abrir una nueva terminal para <strong>Paso 2.</strong> Acceder a nuestra carpeta de <code>transcrptomica</code> ::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> cd Documentos<span class="sc">/</span>curso2022<span class="sc">/</span>transrciptomica</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>::: <strong>Paso 3.</strong> Crear en <code>transcriptomica</code> un directorio con el nombre <code>FASTQC</code> y dentro de él, dos que se llamen <code>FASTQC_PRE</code> y <code>FASTQC_POST</code>. ::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> mkdir <span class="sc">-</span>p FASTQC<span class="sc">/</span>{FASTQC_PRE,FASTQC_POST}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>::: <strong>Paso 4.</strong> Acceder al directorio <code>FASTQC_PRE</code> ::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> cd FASTQC_PRE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>::: <strong>Paso 5.</strong> Copiar dentro de este directorio todos los archivos <code>.html</code> que generamos en el cluster. ::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> scp curso01<span class="sc">@</span>omica<span class="sc">:</span><span class="er">/</span>home<span class="sc">/</span>curso01<span class="sc">/</span>curso2022<span class="sc">/</span>trascriptomica<span class="sc">/</span>FASTQC<span class="sc">/</span>FASTQC_PRE<span class="sc">/</span><span class="er">*</span>.html .<span class="sc">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>::: <strong>Paso 6.</strong> Revisión individual de archivos <code>.html</code> en navegador <code>firefox</code> o en el navegador que tengan instalado, para verificar la calidad de las lecturas de secuenciación. ::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> firefox Ctrl_rep1_500k_R1_fastqc.html </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>:::</p>
-<div class="callout-info callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<p><strong>Paso 1.</strong> Abrir una nueva terminal para <strong>Paso 2.</strong> Acceder a nuestra carpeta de <code>transcrptomica</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>$ cd Documentos/curso2022/transrciptomica</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-caption-container flex-fill">
-Info
+<p><strong>Paso 3.</strong> Crear en <code>transcriptomica</code> un directorio con el nombre <code>FASTQC</code> y dentro de él, dos que se llamen <code>FASTQC_PRE</code> y <code>FASTQC_POST</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>$ mkdir -p FASTQC/{FASTQC_PRE,FASTQC_POST}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><strong>Paso 4.</strong> Acceder al directorio <code>FASTQC_PRE</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>$ cd FASTQC_PRE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-body-container callout-body">
+<p><strong>Paso 5.</strong> Copiar dentro de este directorio todos los archivos <code>.html</code> que generamos en el cluster.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>$ scp curso01@omica:/home/curso01/curso2022/trascriptomica/FASTQC/FASTQC_PRE/*.html ./</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Paso 6.</strong> Revisión individual de archivos <code>.html</code> en navegador <code>firefox</code> o en el navegador que tengan instalado, para verificar la calidad de las lecturas de secuenciación.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>$ firefox Ctrl_rep1_500k_R1_fastqc.html </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-info">
 <p>:bulb: Si estas trabajando con Ubuntu app, puedes buscar directamente los archivos en la carpeta, pero si deseas abrir chrome directamente de la terminal ejecuta la siguiente linea:</p>
 <p><br>
 export chrome=“/mnt/c/Program&nbsp;Files&nbsp;(x86)/Google/Chrome/Application/chrome.exe”</p>
-</div>
 </div>
 </section>
 <section id="multiqc" class="level3">
 <h3 class="anchored" data-anchor-id="multiqc">MULTIQC</h3>
 <p>Si se quiere hacer una comparación entre todos los valores de calidad de las secuencias, se puede utilizar el programa <code>MultiQC</code> que utiliza los archivos generados por <code>FastQC</code>. Se requiere un ambiente para el programa que está basado en <code>python 2.7</code></p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Para poder utilizar MultiQC es necesario cargar el modulo de python 2.7 y posteriormente activar el ambiente donde esta MultiQC</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Para cargar el ambiente conda</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> module load python<span class="fl">-2.7</span><span class="sc">-</span>anaconda       </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Activar ambiente</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> source activate multiqc_py2<span class="fl">.7</span>                 </span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Para desactivar ambiente:</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> source deactivate multiqc_py2<span class="fl">.7</span>                   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a># Para cargar el ambiente conda</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>$ module load python-2.7-anaconda       </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a># Activar ambiente</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>$ source activate multiqc_py2.7                 </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a># Para desactivar ambiente:</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>$ source deactivate multiqc_py2.7                   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-<p>Dentro de la carpeta de <code>FASTQ_PRE</code> crear una carpeta llamada <code>MULTIQC</code>. Entramos a esta carpeta y corremos MultiQC activando el ambiente <code>multiqc_py2.7</code>. Se generaran las carpetas <code>multiqc_data</code>, <code>multiqc_plots</code> y <code>multiqc_reports.html</code>. Revisar archivo <code>.html</code>. Al finalizar desactivar el ambiente <code>multiqc_py2.7</code>. ::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> mkdir MULTIQC</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> cd MULTIQC<span class="sc">/</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="er">$</span> multiqc ..<span class="sc">/</span><span class="er">*</span>.zip <span class="sc">-</span>o .<span class="sc">/</span> <span class="sc">--</span>data<span class="sc">-</span>format tsv <span class="sc">--</span>export <span class="sc">--</span>title <span class="st">"Analisis pre trimming"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>::: ::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> source deactivate multiqc_py2<span class="fl">.7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>::: Revisar el archivo <code>.html</code> obtenido con <code>MultiQC</code> dentro de la carpeta <code>PRE</code> y descargarlo a su computadora personal siguiendo los pasos descritos anteriormente</p>
+<p>Dentro de la carpeta de <code>FASTQ_PRE</code> crear una carpeta llamada <code>MULTIQC</code>. Entramos a esta carpeta y corremos MultiQC activando el ambiente <code>multiqc_py2.7</code>. Se generaran las carpetas <code>multiqc_data</code>, <code>multiqc_plots</code> y <code>multiqc_reports.html</code>. Revisar archivo <code>.html</code>. Al finalizar desactivar el ambiente <code>multiqc_py2.7</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>cd Documentos<span class="sc">/</span>curso2022<span class="sc">/</span>transrciptomica<span class="sc">/</span>FASTQC_PRE</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>mkdir Multiqc</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>cd Multiqc</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>scp curso01<span class="sc">@</span>omica<span class="sc">:</span><span class="er">/</span>home<span class="sc">/</span>curso01<span class="sc">/</span>curso2022<span class="sc">/</span>trascriptomica<span class="sc">/</span>FASTQC<span class="sc">/</span>FASTQC_PRE<span class="sc">/</span>Multiqc<span class="sc">/</span>multiqc_report.html .<span class="sc">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>$ mkdir MULTIQC</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>$ cd MULTIQC/</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>$ multiqc ../*.zip -o ./ --data-format tsv --export --title "Analisis pre trimming"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>3.</strong> Revisar el archivo <code>.hmtl</code> obtenido con el programa <code>MultiQC</code> ::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>firefox multiqc_report.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>::: <strong>4.</strong> Cerrar esta terminal en cuanto se termine de revisar el archivo <code>.html</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>$ source deactivate multiqc_py2.7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Revisar el archivo <code>.html</code> obtenido con <code>MultiQC</code> dentro de la carpeta <code>PRE</code> y descargarlo a su computadora personal siguiendo los pasos descritos anteriormente</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>cd Documentos/curso2022/transrciptomica/FASTQC_PRE</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>mkdir Multiqc</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>cd Multiqc</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>scp curso01@omica:/home/curso01/curso2022/trascriptomica/FASTQC/FASTQC_PRE/Multiqc/multiqc_report.html ./</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>3.</strong> Revisar el archivo <code>.hmtl</code> obtenido con el programa <code>MultiQC</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>firefox multiqc_report.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>4.</strong> Cerrar esta terminal en cuanto se termine de revisar el archivo <code>.html</code></p>
 <hr>
 </section>
 </section>
 <section id="limpieza-y-eliminación-de-lecturas-de-mala-calidad-con-trimmomatic" class="level2">
 <h2 class="anchored" data-anchor-id="limpieza-y-eliminación-de-lecturas-de-mala-calidad-con-trimmomatic">2.2. Limpieza y eliminación de lecturas de mala calidad con <a href="http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf">Trimmomatic</a></h2>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -654,91 +669,91 @@ Warning
 <p>En este paso se usará el programa <code>Trimmomatic</code>, para eliminar las secuencias de mala calidad, así como índices o adaptadores de secuenciación que pudieran haber quedado.</p>
 <p>Crear la carpeta <code>TRIMMOMATIC</code> en la carpeta <code>transcriptomica</code> y acceder a ella.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cd ..<span class="sc">/</span>..<span class="sc">/</span></span>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cd ../../</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>mkdir TRIMMOMATIC</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>cd TRIMMOMATIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Generar el script al cual llamaremos <code>trimmomatic.slrm</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>nano trimmomatic.slrm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>nano trimmomatic.slrm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>El slrm debe contener lo siguiente:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="do">#########################################################</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">#TRIMOMMATIC</span></span>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>#########################################################</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>#TRIMOMMATIC</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Directivas</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=qtrim</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=trimmomatic-%j.log</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=trimmomatic-%j.err</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -N 1</span></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=20GB</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 6-00:00:00</span></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p cicese</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>## Directivas</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>#SBATCH --job-name=qtrim</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>#SBATCH --output=trimmomatic-%j.log</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>#SBATCH --error=trimmomatic-%j.err</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>#SBATCH -N 1</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>#SBATCH --mem=20GB</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>#SBATCH --ntasks-per-node=8</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>#SBATCH -t 6-00:00:00</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>#SBATCH -p cicese</span>
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Ruta a TRIMMOMATIC</span></span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>TRIMMOMATIC<span class="ot">=</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>bin<span class="sc">/</span>Trimmomatic<span class="fl">-0.36</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a># Ruta a TRIMMOMATIC</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>TRIMMOMATIC=/LUSTRE/bioinformatica_data/genomica_funcional/bin/Trimmomatic-0.36</span>
 <span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Ruta al archivo con los adaptadores</span></span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>trueseq<span class="ot">=</span><span class="st">"$TRIMMOMATIC/adapters/TruSeq3-PE-2.fa"</span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>#Ruta al archivo con los adaptadores</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>trueseq="$TRIMMOMATIC/adapters/TruSeq3-PE-2.fa"</span>
 <span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">$</span>{SLURM_SUBMIT_DIR}</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>cd ${SLURM_SUBMIT_DIR}</span>
 <span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIMMOMATIC<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>Ctrl_rep1_500k_R1.fastq.gz ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>Ctrl_rep1_500k_R2.fastq.gz <span class="sc">-</span>baseout Ctrl_rep1.fastq.gz \</span>
-<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span><span class="er">$</span>trueseq<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">15</span> MINLEN<span class="sc">:</span><span class="dv">36</span></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../RAW_READS/Ctrl_rep1_500k_R1.fastq.gz ../RAW_READS/Ctrl_rep1_500k_R2.fastq.gz -baseout Ctrl_rep1.fastq.gz \</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36</span>
 <span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIMMOMATIC<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>Ctrl_rep2_500k_R1.fastq.gz ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>Ctrl_rep2_500k_R2.fastq.gz <span class="sc">-</span>baseout Ctrl_rep2.fastq.gz \</span>
-<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span><span class="er">$</span>trueseq<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">15</span> MINLEN<span class="sc">:</span><span class="dv">36</span></span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../RAW_READS/Ctrl_rep2_500k_R1.fastq.gz ../RAW_READS/Ctrl_rep2_500k_R2.fastq.gz -baseout Ctrl_rep2.fastq.gz \</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36</span>
 <span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIMMOMATIC<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T1_rep1_500k_R1.fastq.gz ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T1_rep1_500k_R2.fastq.gz <span class="sc">-</span>baseout T1_rep1.fastq.gz \</span>
-<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span><span class="er">$</span>trueseq<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">15</span> MINLEN<span class="sc">:</span><span class="dv">36</span></span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../RAW_READS/T1_rep1_500k_R1.fastq.gz ../RAW_READS/T1_rep1_500k_R2.fastq.gz -baseout T1_rep1.fastq.gz \</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36</span>
 <span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIMMOMATIC<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T1_rep2_500k_R1.fastq.gz ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T1_rep2_500k_R2.fastq.gz <span class="sc">-</span>baseout T1_rep2.fastq.gz \</span>
-<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span><span class="er">$</span>trueseq<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">15</span> MINLEN<span class="sc">:</span><span class="dv">36</span></span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../RAW_READS/T1_rep2_500k_R1.fastq.gz ../RAW_READS/T1_rep2_500k_R2.fastq.gz -baseout T1_rep2.fastq.gz \</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36</span>
 <span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIMMOMATIC<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T2_rep1_500k_R1.fastq.gz ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T2_rep1_500k_R2.fastq.gz <span class="sc">-</span>baseout T2_rep1.fastq.gz \</span>
-<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span><span class="er">$</span>trueseq<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">15</span> MINLEN<span class="sc">:</span><span class="dv">36</span></span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../RAW_READS/T2_rep1_500k_R1.fastq.gz ../RAW_READS/T2_rep1_500k_R2.fastq.gz -baseout T2_rep1.fastq.gz \</span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36</span>
 <span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIMMOMATIC<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T2_rep2_500k_R1.fastq.gz ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T2_rep2_500k_R2.fastq.gz <span class="sc">-</span>baseout T2_rep2.fastq.gz \</span>
-<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span><span class="er">$</span>trueseq<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">15</span> MINLEN<span class="sc">:</span><span class="dv">36</span></span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../RAW_READS/T2_rep2_500k_R1.fastq.gz ../RAW_READS/T2_rep2_500k_R2.fastq.gz -baseout T2_rep2.fastq.gz \</span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36</span>
 <span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIMMOMATIC<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T3_rep1_500k_R1.fastq.gz ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T3_rep1_500k_R2.fastq.gz <span class="sc">-</span>baseout T3_rep1.fastq.gz \</span>
-<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span><span class="er">$</span>trueseq<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">15</span> MINLEN<span class="sc">:</span><span class="dv">36</span></span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../RAW_READS/T3_rep1_500k_R1.fastq.gz ../RAW_READS/T3_rep1_500k_R2.fastq.gz -baseout T3_rep1.fastq.gz \</span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36</span>
 <span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a>java <span class="sc">-</span>jar <span class="sc">$</span>TRIMMOMATIC<span class="sc">/</span>trimmomatic<span class="dv">-0</span>.<span class="fl">36.</span>jar PE ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T3_rep2_500k_R1.fastq.gz ..<span class="sc">/</span>RAW_READS<span class="sc">/</span>T3_rep2_500k_R2.fastq.gz <span class="sc">-</span>baseout T3_rep2.fastq.gz \</span>
-<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP<span class="sc">:</span><span class="er">$</span>trueseq<span class="sc">:</span><span class="dv">2</span><span class="sc">:</span><span class="dv">30</span><span class="sc">:</span><span class="dv">10</span><span class="sc">:</span><span class="dv">8</span><span class="sc">:</span>true LEADING<span class="sc">:</span><span class="dv">5</span> TRAILING<span class="sc">:</span><span class="dv">5</span> SLIDINGWINDOW<span class="sc">:</span><span class="dv">4</span><span class="sc">:</span><span class="dv">15</span> MINLEN<span class="sc">:</span><span class="dv">36</span></span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a>java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../RAW_READS/T3_rep2_500k_R1.fastq.gz ../RAW_READS/T3_rep2_500k_R2.fastq.gz -baseout T3_rep2.fastq.gz \</span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36</span>
 <span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a>exit <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a>exit 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Correr el script <code>trimmomatic.slrm</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sbatch trimmomatic.slrm</span>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sbatch trimmomatic.slrm</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>squeue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Crear carpetas <code>TRIM_P</code> y <code>TRIM_U</code> y mover los archivos que correspondan a cada carpeta.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ls </span>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ls </span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>mkdir TRIM_P TRIM_U</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>mv <span class="sc">*</span>U.fastq.gz TRIM_U<span class="sc">/</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>mv <span class="sc">*</span>P.fastq.gz TRIM_P<span class="sc">/</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>mv *U.fastq.gz TRIM_U/</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>mv *P.fastq.gz TRIM_P/</span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>ls </span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>ls TRIM_P<span class="sc">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>ls TRIM_P/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ahora se recomienda revisar las secuencias pareadas con <code>FastQC</code> y <code>MultiQC</code> como se realizó en los pasos anteriores. Para ello deben moverse a la carpeta <code>FASTQC_POST</code> para correr el script.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>cd ..<span class="sc">/</span>FASTQC<span class="sc">/</span>FASTQC_POST<span class="sc">/</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fastqc <span class="sc">-</span>t <span class="dv">8</span> ..<span class="sc">/</span>..<span class="sc">/</span>TRIMMOMATIC<span class="sc">/</span>TRIM_P<span class="sc">/</span><span class="er">*</span>.fastq.gz <span class="sc">-</span>o .<span class="sc">/</span>               </span>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>cd ../FASTQC/FASTQC_POST/</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fastqc -t 8 ../../TRIMMOMATIC/TRIM_P/*.fastq.gz -o ./               </span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>ls </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Correr el script de <code>MultiQC</code> en la carpeta respectiva y checar archivo <code>.html</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>cd ..<span class="sc">/</span>..<span class="sc">/</span>MULTIQC<span class="sc">/</span>POST</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>source activate multiqc_py2<span class="fl">.7</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>multiqc ..<span class="sc">/</span>..<span class="sc">/</span>FASTQC<span class="sc">/</span>FASTQC_POST<span class="sc">/</span><span class="er">*</span>.zip <span class="sc">-</span>o .<span class="sc">/</span> <span class="sc">--</span>data<span class="sc">-</span>format json <span class="sc">--</span>export</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>cd ../../MULTIQC/POST</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>source activate multiqc_py2.7</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>multiqc ../../FASTQC/FASTQC_POST/*.zip -o ./ --data-format json --export</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>source deactivate multiqc_py2<span class="fl">.7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -749,37 +764,37 @@ Warning
 <p>En caso de haber problemas con las rutas de los programas, se puede generar un bash_profile con las rutas de todos los programas:</p>
 <p>Pegar en el <code>.bash_profile</code> los paths de los programas que serán utilizados durante el curso.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>nano .bash_profile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>nano .bash_profile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Pegar los siguientes <code>path</code> de los programas que serán utilizados durante el análisis transcriptómico.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Software for transcriptomic analysis</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>FastQC_v0.<span class="fl">11.7</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>bin<span class="sc">/</span>Trimmomatic<span class="fl">-0.36</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>trinityrnaseq<span class="dv">-2</span>.<span class="fl">4.0</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>trinityrnaseq<span class="dv">-2</span>.<span class="fl">4.0</span><span class="sc">/</span>util</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>trinityrnaseq<span class="dv">-2</span>.<span class="fl">4.0</span><span class="sc">/</span>Analysis<span class="sc">/</span>DifferentialExpression</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>trinityrnaseq<span class="dv">-2</span>.<span class="fl">4.0</span><span class="sc">/</span>trinity<span class="sc">-</span>plugins<span class="sc">/</span>parafly<span class="sc">-</span>code<span class="sc">/</span>bin</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>trinityrnaseq<span class="dv">-2</span>.<span class="fl">4.0</span><span class="sc">/</span>trinity<span class="sc">-</span>plugins<span class="sc">/</span>parafly<span class="sc">/</span>bin</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>export R_LIBRARY_PATH<span class="ot">=</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>R<span class="dv">-3</span>.<span class="fl">3.1</span><span class="sc">/</span>lib64<span class="sc">/</span>R<span class="sc">/</span>library</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>bin<span class="sc">/</span>ncbi<span class="sc">-</span>blast<span class="dv">-2</span>.<span class="fl">4.0</span><span class="sc">+</span><span class="er">/</span>bin</span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>TransDecoder<span class="dv">-3</span>.<span class="fl">0.1</span></span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>RNA<span class="sc">/</span>ricardo<span class="sc">/</span>bioinformatics<span class="sc">/</span>transdecoder</span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>bin<span class="sc">/</span>signalp<span class="fl">-4.1</span></span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>bin<span class="sc">/</span>tmhmm<span class="fl">-2.0</span>c<span class="sc">/</span>bin</span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>bin<span class="sc">/</span>Trinotate<span class="sc">/</span>util<span class="sc">/</span>rnammer_support</span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>bin<span class="sc">/</span>rnammer</span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>bin<span class="sc">/</span>hmmer<span class="fl">-3.1</span>b2<span class="sc">-</span>linux<span class="sc">-</span>intel<span class="sc">-</span>x86_64<span class="sc">/</span>binaries</span>
-<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>Trinotate<span class="sc">/</span>PerlLib</span>
-<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>Trinotate<span class="sc">/</span>auto</span>
-<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>samtools<span class="fl">-1.7</span><span class="sc">/</span>bin</span>
-<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>apps<span class="sc">/</span>bioinformatica<span class="sc">/</span>bowtie2</span>
-<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>bin<span class="sc">/</span>RSEM</span>
-<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">$</span>PATH<span class="sc">:</span><span class="er">/</span>LUSTRE<span class="sc">/</span>bioinformatica_data<span class="sc">/</span>genomica_funcional<span class="sc">/</span>Laura<span class="sc">/</span>bin<span class="sc">/</span>transrate<span class="dv">-1</span>.<span class="fl">0.3</span><span class="sc">-</span>linux<span class="sc">-</span>x86_64<span class="sc">/</span>transrate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a># Software for transcriptomic analysis</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/FastQC_v0.11.7</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/bin/Trimmomatic-0.36</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/trinityrnaseq-2.4.0</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/trinityrnaseq-2.4.0/util</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/trinityrnaseq-2.4.0/Analysis/DifferentialExpression</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/trinityrnaseq-2.4.0/trinity-plugins/parafly-code/bin</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/trinityrnaseq-2.4.0/trinity-plugins/parafly/bin</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>export R_LIBRARY_PATH=/LUSTRE/apps/R-3.3.1/lib64/R/library</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/bin/ncbi-blast-2.4.0+/bin</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/TransDecoder-3.0.1</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/bioinformatica_data/RNA/ricardo/bioinformatics/transdecoder</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/bin/signalp-4.1</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/bin/tmhmm-2.0c/bin</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/bin/Trinotate/util/rnammer_support</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/bin/rnammer</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/bin/hmmer-3.1b2-linux-intel-x86_64/binaries</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/Trinotate/PerlLib</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/Trinotate/auto</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/samtools-1.7/bin</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/apps/bioinformatica/bowtie2</span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/bin/RSEM</span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/Laura/bin/transrate-1.0.3-linux-x86_64/transrate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Actualizar el archivo .bash_profile</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>source .bash_profile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>source .bash_profile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 
@@ -815,12 +830,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
     }
-  });
-  clipboard.on('success', function(e) {
+    return false;
+  }
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -829,17 +847,73 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -849,43 +923,308 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

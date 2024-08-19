@@ -12,7 +12,7 @@ execute:
 
 Moverse a la carpeta `curso2022` y crear carpeta de trabajo `Transcriptomica` y acceder.
 
-```{r}
+```{default}
 cd curso2020
 mkdir Transcriptomica 
 cd Transcriptomica
@@ -26,7 +26,7 @@ Antes de análizar las secuencias de nuestro estudio, vamos a ver unos ejemplos 
 
 1. Creamos una carpeta parental llamada `FASTQC_TEST` y dentro de esta, generamos las carpetas `secuencias`, `FASTQC_PRE` y `FASTQC_POST`. 
 
-```{r}    
+```{default}    
 mkdir -p fastqc_test/{secuencias,fastqc_pre,fastqc_post}
 ```
 
@@ -38,7 +38,7 @@ Recuerda la sintaxis `ln -s ORIGEN DESTINO`
 :::
 
 
-```{r}
+```{default}
 cd fastqc_test/secuencias
 
  ln -s /LUSTRE/bioinformatica_data/genomica_funcional/Tripp/Curso_2022/FASTQC_test/secuencias/*.fastq ./
@@ -52,7 +52,7 @@ Podemos utilizar la función `grep` para buscar un caracter en común de todas l
 
 Por ejemplo: las lectutas SRR7096024_1.fastq, podemos utilizar el ID @SRR7096024_1
 
-```{r}
+```{default}
 cat SRR7096024_1.fastq | grep "^@SRR70" | wc -l
 ```
 :::
@@ -90,7 +90,7 @@ b) Utilizando el script `accesa-nodo` el cual te asignara un nodo durante el tie
 
 3. Posteriormente ejecutamos FASTQC. Para esto nos vamos a colocar en la carpeta `fastqc_pre` y generamos el siguiente slrm
 
-```{r}
+```{default}
 #!/bin/bash
 #SBATCH -p cicese
 #SBATCH --job-name=fastqc
@@ -108,7 +108,7 @@ fastqc ../secuencias/*.fastq -t 8 -o ./
 ```
 4. Descargamos los reportes HTML generados a **nuestra computadora** en la carpeta de trabajo para revisarlo. Para esto, abrimos una nueva ventana de la terminal y vamos a generar una carpeta llamada `FASTQC_TEST`
 
-```{r}
+```{default}
 $LAPTOP-NNNNN:$mkdir -p FASTQC_TEST/{FASTQC_PRE,FASTQC_POST}
 
 cd FASTQC_TEST/FASTQC_PRE
@@ -146,18 +146,18 @@ Ahora utilizaremos el Programa [Trimmomatic](http://www.usadellab.org/cms/upload
 
 
 Crear la carpeta `TRIMMOMATIC` en la carpeta `Transcriptomica` y acceder a ella.
-```{r}
+```{default}
 cd ..
 mkdir trimmomatic
 cd trimmomatic
 ```
 
 2. Generar el script al cual llamaremos `2.trimmomatic.slrm`
-```{r}
+```{default}
 nano 2.trimmomatic.slrm
 ```
 El slrm debe contener lo siguiente:
-```{r}
+```{default}
 
 #!/bin/bash
 #########################################################
@@ -197,14 +197,14 @@ ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MIN
 exit 0
 ```
 4. Correr el script `trimmomatic.slrm` 
-```{r}
+```{default}
 sbatch 2.trimmomatic.slrm
 squeue
 ```
 
 5. Generar dos carpetas para colocar las lecturas _Paired_ y las _Unpaired_. Posteriormente, mueve todas las lecturas a sus respectivas carpetas usando el comando `mv`
 
-```{r}
+```{default}
 mkdir TRIMM_U TRIMM_P
 
 mv *P.fastq TRIMM_P/
@@ -213,7 +213,7 @@ mv *U.fastq TRIMM_U/
 
 6. Ahora evalua la calidad de estas lecturas limpias con FastQC dentro de la carpeta `FASTQC_TEST/FASTQC_POST`. Para esto, puedes generar un nuevo archivo slrm para usar FastQC
 
-```{r}
+```{default}
 #!/bin/bash
 #SBATCH -p cicese
 #SBATCH --job-name=fastqc
@@ -236,11 +236,11 @@ fastqc ../trimmomatic/TRIMM_P/*.fastq -t 8 -o ./
 8. Ahora vamos a repetir  los pasos del 3 al 7 pero con la misma muestra pero usando parametros mas riguroso:
 
     Generar el script al cual llamaremos `trimmomatic_rig.slrm`
-```{r}
+```{default}
 nano run_trimmomatic_rig.slrm
 ```
 El slrm debe contener lo siguiente:
-```{r}
+```{default}
 #!/bin/sh
 
 ###Directivas
@@ -278,7 +278,7 @@ A partir de este punto empezaremos a análizar las lecturas que se utilizarán e
 
 Para utilizarlas, genera un enlace simbolico de la carpeta donde estan las lecturas crudas
 
-```{r}
+```{default}
 cd transcriptomica
 ln -s /LUSTRE/bioinformatica_data/genomica_funcional/Tripp/Curso_2021/RAW_READS ./
 ls
@@ -300,7 +300,7 @@ La carpeta `RAW_READS` contiene un set de 16 archivos `.fastq` con secuencias o 
 
 Verificar el formato del archivo `.fastq.gz` y obtener el número de secuencias de cada archivo.
 
-```{r}
+```{default}
 cd RAW_READS
 zcat Ctrl_rep1_500k_R1.fastq.gz | head
 zcat Ctrl_rep1_500k_R1.fastq.gz | grep "^@M03978" | wc -l
@@ -315,7 +315,7 @@ find . -type f -name "*.fastq.gz" | xargs zgrep -c "^@M03978"
 ### FASTQC
 
 En la carpeta de `transcriptomica`, crear carpeta `FASTQC` y con las subcarpetas `FASTQC_PRE` y `FASTQC_POST`. Acceder a carpeta `FASTQC_PRE`
-```{r}
+```{default}
 cd ..
 mkdir -p FASTQC/{FASTQC_PRE,FASTQC_POST}
 cd FASTQC/FASTQC_PRE/
@@ -328,10 +328,10 @@ Realizar análisis de calidad de las secuencias con el programa `FastQC`. Se obt
 :::
 
 
-```{r}
+```{default}
 fastqc -t 8 ../../RAW_READS/*.fastq.gz -o ./ 	
 ```
-```{r}
+```{default}
 ls  	
 ```
 
@@ -339,23 +339,23 @@ A continuación, vamos a importar los archivos `.html` a nuestra PC. Para ello s
 
 **Paso 1.** Abrir una nueva terminal para
 **Paso 2.** Acceder a nuestra carpeta de `transcrptomica`
-```{r}
+```{default}
 $ cd Documentos/curso2022/transrciptomica
 ```
 **Paso 3.** Crear en `transcriptomica` un directorio con el nombre `FASTQC` y dentro de él, dos que se llamen `FASTQC_PRE` y `FASTQC_POST`.
-```{r}
+```{default}
 $ mkdir -p FASTQC/{FASTQC_PRE,FASTQC_POST}
 ```
 **Paso 4.** Acceder al directorio `FASTQC_PRE`
-```{r}
+```{default}
 $ cd FASTQC_PRE
 ```
 **Paso 5.** Copiar dentro de este directorio todos los archivos `.html` que generamos en el cluster.
-```{r}
+```{default}
 $ scp curso01@omica:/home/curso01/curso2022/trascriptomica/FASTQC/FASTQC_PRE/*.html ./
 ```
 **Paso 6.** Revisión individual de archivos `.html` en navegador `firefox` o en el navegador que tengan instalado, para verificar la calidad de las lecturas de secuenciación. 
-```{r}
+```{default}
 $ firefox Ctrl_rep1_500k_R1_fastqc.html 
 ```
 
@@ -378,7 +378,7 @@ Para poder utilizar MultiQC es necesario cargar el modulo de python 2.7 y poster
 
 
 
-```{r}
+```{default}
 
 # Para cargar el ambiente conda
 $ module load python-2.7-anaconda 		
@@ -392,18 +392,18 @@ $ source deactivate multiqc_py2.7
 :::
 
 Dentro de la carpeta de `FASTQ_PRE` crear una carpeta llamada `MULTIQC`. Entramos a esta carpeta y corremos MultiQC activando el ambiente `multiqc_py2.7`. Se generaran las carpetas `multiqc_data`, `multiqc_plots` y `multiqc_reports.html`. Revisar archivo `.html`. Al finalizar desactivar el ambiente `multiqc_py2.7`.
-```{r}	
+```{default}	
 $ mkdir MULTIQC
 $ cd MULTIQC/
 $ multiqc ../*.zip -o ./ --data-format tsv --export --title "Analisis pre trimming"
 ```
-```{r}
+```{default}
 $ source deactivate multiqc_py2.7
 ```
 Revisar el archivo `.html` obtenido con `MultiQC` dentro de la carpeta `PRE` y descargarlo a su computadora personal siguiendo los pasos descritos anteriormente
 
 
-```{r}
+```{default}
 
 cd Documentos/curso2022/transrciptomica/FASTQC_PRE
 mkdir Multiqc
@@ -412,7 +412,7 @@ scp curso01@omica:/home/curso01/curso2022/trascriptomica/FASTQC/FASTQC_PRE/Multi
    
 ```
 **3.** Revisar el archivo `.hmtl` obtenido con el programa `MultiQC`
-```{r}
+```{default}
 firefox multiqc_report.html
 ```
 **4.** Cerrar esta terminal en cuanto se termine de revisar el archivo `.html`
@@ -427,18 +427,18 @@ Como utilizaremos trimmomatic con un archivo *slurm* en este punto debes salir d
 En este paso se usará el programa `Trimmomatic`, para eliminar las secuencias de mala calidad, así como índices o adaptadores de secuenciación que pudieran haber quedado.
 
 Crear la carpeta `TRIMMOMATIC` en la carpeta `transcriptomica` y acceder a ella.
-```{r}
+```{default}
 cd ../../
 mkdir TRIMMOMATIC
 cd TRIMMOMATIC
 ```
 
 Generar el script al cual llamaremos `trimmomatic.slrm`
-```{r}
+```{default}
 nano trimmomatic.slrm
 ```
 El slrm debe contener lo siguiente:
-```{r}
+```{default}
 #!/bin/bash
 #########################################################
 #TRIMOMMATIC
@@ -490,12 +490,12 @@ ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MIN
 exit 0
 ```
 Correr el script `trimmomatic.slrm` 
-```{r}
+```{default}
 sbatch trimmomatic.slrm
 squeue
 ```
 Crear carpetas `TRIM_P` y `TRIM_U` y mover los archivos que correspondan a cada carpeta.
-```{r}
+```{default}
 ls 
 mkdir TRIM_P TRIM_U
 mv *U.fastq.gz TRIM_U/
@@ -504,13 +504,13 @@ ls
 ls TRIM_P/
 ```
 Ahora se recomienda revisar las secuencias pareadas con `FastQC` y `MultiQC` como se realizó en los pasos anteriores. Para ello deben moverse a la carpeta `FASTQC_POST` para correr el script.
-```{r}
+```{default}
 cd ../FASTQC/FASTQC_POST/
 fastqc -t 8 ../../TRIMMOMATIC/TRIM_P/*.fastq.gz -o ./  				
 ls 
 ```
 Correr el script de `MultiQC` en la carpeta respectiva y checar archivo `.html`
-```{r}
+```{default}
 cd ../../MULTIQC/POST
 source activate multiqc_py2.7
 multiqc ../../FASTQC/FASTQC_POST/*.zip -o ./ --data-format json --export
@@ -530,11 +530,11 @@ En caso de haber problemas con las rutas de los programas, se puede generar un b
 
 
 Pegar en el `.bash_profile` los paths de los programas que serán utilizados durante el curso.
-```{r}
+```{default}
 nano .bash_profile
 ```
 Pegar los siguientes `path` de los programas que serán utilizados durante el análisis transcriptómico. 
-```{r}
+```{default}
 # Software for transcriptomic analysis
 export PATH=$PATH:/LUSTRE/apps/bioinformatica/FastQC_v0.11.7
 export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/bin/Trimmomatic-0.36
@@ -560,7 +560,7 @@ export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/bin/RSEM
 export PATH=$PATH:/LUSTRE/bioinformatica_data/genomica_funcional/Laura/bin/transrate-1.0.3-linux-x86_64/transrate
 ```
 Actualizar el archivo .bash_profile
-```{r}
+```{default}
 source .bash_profile
 ```
 ---

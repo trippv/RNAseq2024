@@ -15,8 +15,14 @@ website:
         text: Recursos de apoyo
       - text: "Lecciones"
         menu:
-          - 1_control_calidad.qmd
-          - apoyo.qmd
+          - 1_Rbasico.qmd
+          - 1_Rproyectos.qmd
+          - 1_Rimportar.qmd
+          - 2_unix.qmd
+
+
+
+
 
         
     right:
@@ -28,8 +34,10 @@ website:
     search: true
     background: light
     contents:
-      - 1_control_calidad.qmd
-      - apoyo.qmd
+        - 1_Rbasico.qmd
+        - 1_Rproyectos.qmd
+        - 1_Rimportar.qmd
+        - 2_unix.qmd
   page-navigation: true
 
 

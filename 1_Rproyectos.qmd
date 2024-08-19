@@ -1,0 +1,111 @@
+---
+title: "Proyectos de Rstudio"
+---
+
+## Directorios de trabajo
+
+El directorio de trabajo es la ubicación por defecto donde R estará buscando archivos y donde pondra los archivos que guardes.
+
+Para verificar la ruta de tu directorio de trabajo simplemente puedes ver en la parte superior del panel de `Consola`.
+
+También puedes usar la función `getwd()` el cual arroja la ruta del directorio de trabajo
+
+```{r}
+getwd()
+```
+
+Si quieres especificar una ruta como directorio de trabajo, entonces tienes que usar la función `setwd()`. Por ejemplo
+
+```{r}
+#| eval: false
+
+setwd("Nueva/Ruta/de/trabajo")
+```
+
+::: callout-tip
+#Establecer directorio de trabajo
+
+Otra manera sencilla de establecer un directorio de trabajo es navegando en el panel de `Archivos` y una vez que te ubiques en la carpeta deseada y selecciona *More \>\> Establecer como directorio de trabajo*
+
+![](img/archivos.PNG){fig-align="center" width="516"}
+:::
+
+## Rutas relativas y absolutas
+
+Como ya hemos visto, cuando trabajamos con archivos en R, necesitamos especificar su ubicación en el sistma de archivos. Esto se puede hacer usando rutas absolutas o rutas relativas.
+
+### Rutas absolutas
+
+Las rutas absolutas es la ruta completa desde la raíz hasta el archivo y siempre será la misma, sin importar dónde se ejecute el código. Por ejemplo:
+
+-   En Windows: `C:/Users/Usuario/Documents/proyecto/datos.csv`
+
+-   En macOS/Linux: `/home/usuario/proyecto/datos.csv`
+
+### Rutas relativas
+
+Una ruta relativa especifica la ubicación del archivo en relación con el directorio de trabajo actual. Por ejemplo, si tu directorio de trabajo actual es `C:/Users/Usuario/Documents`, entonces la ruta relativa a datos.csv en el subdirectorio proyecto sería:
+
+```{r}
+#| eval: false
+
+datos <- read.csv("proyecto/datos.csv")
+```
+
+## Proyectos en Rstudio
+
+Como vimos en el apartado anterior, es posible establecer un directorio de trabajo al inicio de un código y posteriormente usar rutas relativas con respecto a ese directorio de trabajo.
+
+De esta manera, independientemente de si estás dando tus primeros pasos en R o si ya eres un experto, es frecuente que la primera línea de tu código sea algo como esto:
+
+```{r}
+#| eval: false
+setwd("C:\Users\miguel\ruta\que\solo\yo\tengo")
+```
+
+Evidentemente, si quieres compartir tu código con otra persona, esta ruta no funcionará ya que ese directorio no existe en su computadora.
+
+Los proyectos de RStudio resuelven el problema de las rutas 'frágiles' al hacer que las rutas de archivo sean **relativas**. El archivo de proyecto de RStudio es un archivo que se encuentra en el directorio raíz, con la extensión .Rproj. Cuando tu sesión de RStudio está siendo ejecutada a través del archivo de proyecto (.Rproj), el directorio de trabajo actual apunta a la carpeta raíz donde se guarda ese archivo .Rproj.
+
+Este proyecto facilita importar y exportar archivos ya que todos están *a la mano* a partir de rutas relativas a la carpeta raíz.
+
+::: callout-tip
+Otra gran ventaja de los proyectos de Rstudio, es que puedes compartirlo con otra persona manteniendo la estructura de las rutas relativas, de manera que no importa en donde se guarde el proyecto o si esta utilizando otro sistema operativo, las rutas relativas permanecen funcionales siempre y cuando abra la sesión utilizando el proyecto (.Rproj).
+:::
+
+Un ejemplo de como podemos estructurar un proyecto es el siguiente:
+
+![](https://i1.wp.com/raw.githubusercontent.com/martinctc/blog/master/images/RPROJECT_2000dpi.png?zoom=1.25&w=578&ssl=1){fig-align="center"}
+
+-   **Datos:** Esta es la carpeta en la que se guardan los archivos que necesito leer en R para realizar mi análisis o visualización. Estos pueden ser CSV, TXT, TSV, etc. La idea principal de tener esta carpeta es que estos archivos crudos en ningún momento debería sobrescribir o editar para garantizar la reproducibilidad.
+
+-   **Script:** Aquí es donde puedes guardar los scripts de R y/o archivos RMarkdown o Quarto.
+
+-   **Salida:** En esta carpeta puedes guardar todas tus salidas, incluyendo gráficos, HTML y tablas, etc. Tener esta carpeta de Salida ayuda a otros a identificar qué archivos son resultados del código, en contraste con los archivos fuente que se utilizaron para producir el análisis.
+
+# Como generar un proyecto nuevo
+
+Para crear un proyecto nuevo sigue estos passos:
+
+1.  Abre Rstudio y selecciona `Archivo` -\> `Nuevo Proyecto`
+
+![](img/new_proj1.png){fig-align="center" width="253"}
+
+2.  Selecciona `Nueva Carpeta` si estas empezando el proyecto desde cero o `carpeta existente` si deseas crear un proyecto dentro de alguna carpeta que ya tengas
+
+![](img/new_proj3.png){fig-align="center" width="394"}
+
+3.  Da un nombre a tu proyecto y ¡listo! ya puedes empezar a trabajar.
+
+El proyecto R que has creado estará en una carpeta que contiene un archivo *`.Rproj`*. Este archivo es un acceso directo y probablemente la forma más directa de abrir tu proyecto. También puedes abrir un proyecto seleccionando "Open Project" en el menú File. Alternativamente, en el extremo superior derecho de RStudio verás un icono de R projects y un menú desplegable de proyectos disponibles.
+
+![](img/explorer.png){fig-align="center" width="300"}
+
+::: callout-warning
+## Ejercicio
+
+Ahora prueba creando un proyecto dentro de una carpeta local en tu computadora y genera una estructura de carpetas como la indicada anteriormente
+
+Descarga el archivo csv de [pokemon](https://raw.githubusercontent.com/trippv/Miguel_Tripp/master/datasets_Pokemon.csv) y guardalo dentro de la carpeta de `datos`
+:::
+

@@ -92,16 +92,12 @@ z
 
 ```
 
-
-
-:::callout-warning
+::: callout-warning
 # Ejercicio
 
-1. Cambia el valor de la variable `x` a 5. ¿Que pasa con `z`?
-2. Que tengo que hacer para actualizar el objeto `z`
+1.  Cambia el valor de la variable `x` a 5. ¿Que pasa con `z`?
+2.  Que tengo que hacer para actualizar el objeto `z`
 :::
-
-
 
 Las variables no solo puede contener números, sino caracteres, listas o incluso graficas
 
@@ -111,24 +107,17 @@ caracter
 
 ```
 
-
-:::callout-tip
+::: callout-tip
 # Consejos para nombrar variables
 
 Es posible asignar casi cualquier nombre a un objeto aunque existen algunas reglas y recomendaciones que hay que considerar:
 
-* Evita iniciar con un número (`2x` incorrecto ero `x2` es valido).
-* Evita usar nombres de funciones (`ifelse`, `for`, `c`, etc.).
-* Usa guiones bajos para separar palabras. (snake_case).
-* Evita nombres de una sola letra.
-* Procura usar nombres claros y descriptivos. El nombre debe ser lo suficientemente claro para que alguien más (o tú mismo en el futuro) pueda entender su propósito sin necesidad de comentarios adicionales.
-
-
+-   Evita iniciar con un número (`2x` incorrecto ero `x2` es valido).
+-   Evita usar nombres de funciones (`ifelse`, `for`, `c`, etc.).
+-   Usa guiones bajos para separar palabras. (snake_case).
+-   Evita nombres de una sola letra.
+-   Procura usar nombres claros y descriptivos. El nombre debe ser lo suficientemente claro para que alguien más (o tú mismo en el futuro) pueda entender su propósito sin necesidad de comentarios adicionales.
 :::
-
-
-
-
 
 ::: callout-warning
 # Ejercicio:
@@ -143,9 +132,6 @@ Es posible asignar casi cualquier nombre a un objeto aunque existen algunas regl
 
 -   `mi-variable <-`
 :::
-
-
-
 
 ## Tipos y estructura de datos (Classes)
 
@@ -181,16 +167,10 @@ class(caracter)
 ::: callout-note
 # ¿Funciones? 🤔
 
-
 R utiliza **funciones** para realizar operaciones, por ejemplo `class()`. Para utilizar una función deben especificarse determiandos *argumentos*, los cuales se escriben dentro del parentesis.
 
-
 Una ventaja de utilizar Rstudio, es que al abrir una función, automaticamente te desplegará las opciones de argumentos. Por ejemplo, escribe en la terminal `round()`. Tras completarse la función, te desplegara la información `round(x, digits = 0)` donde x es el objecto (número o vector) y digits es el número de decimales.
-
-
 :::
-
-
 
 ## Vectores
 
@@ -204,8 +184,7 @@ numeros <- c(1, 2, 3)
 numeros
 ```
 
-
-También podemos crear un nuevo vector a partir de otros objetos en el ambiente, como por ejemplo, los objetos `x`, `y` y `z` que ya tenemos. 
+También podemos crear un nuevo vector a partir de otros objetos en el ambiente, como por ejemplo, los objetos `x`, `y` y `z` que ya tenemos.
 
 ```{r}
 
@@ -213,17 +192,15 @@ variables <- c(x, y, z)
 variables
 ```
 
-
-
-Los vectores tambien puende contener elementos de otros tipos como **caracteres**, los cuales tienen que ir dentro de comillas `" "`. 
+Los vectores tambien puende contener elementos de otros tipos como **caracteres**, los cuales tienen que ir dentro de comillas `" "`.
 
 ```{r}
 nombres <- c("Juan", "Pepe", "Sofia")
 ```
 
-
-:::callout-warning
+::: callout-warning
 # 
+
 ¿Que pasa si intentamos unir el vector de caracteres (`nombres`) con numeros (`variables`)
 
 ```{r}
@@ -231,11 +208,8 @@ nombre_variable <- c(nombres, variables)
 nombre_variable
 ```
 
-
 Como las cadenas de texto son el tipo de dato más flexible, siempre que creamos un vector que incluye un dato de este tipo, el resultado será un vector de texto.
-
 :::
-
 
 Podemos crear vectores de secuencias numéricas usando `:`. De un lado de los dos puntos escribimos el número de inicio de la secuencia y del otro el final.
 
@@ -255,17 +229,13 @@ Por ejemplo, podemos sumar 2 a cada uno de los elementos del vector `numeros`
 numeros + 2
 ```
 
-
-
 También podemos realizar operaciones relacionales (VERDADERO, FALSO) con nuestro vector. Por ejemplo, evaluar cual de nuestro elementos es mayor a 4
 
 ```{r}
 numeros > 2
 ```
 
-
 ## Trabajando con vectores
-
 
 **Ejercicio:**
 
@@ -309,11 +279,10 @@ Operaciones basicas con vectores
 | sum()    | suma                         |
 | which()  | proporciona los indices TRUE |
 
-
-:::callout-warning
+::: callout-warning
 # Ejercicio
 
-1.   ¿Cual fue el valor mínimo ?
+1.  ¿Cual fue el valor mínimo ?
 2.  ¿Cuantos organismos murieron esa semana?
 :::
 
@@ -332,7 +301,6 @@ mortalidad[1]
 
 ```
 
-
 También podemos extraer mas valores usando la función `c()` dentro de los corchetes. Por ejemplo, para extraer el primer, tercer y cuarto valor de `mortalidad`
 
 ```{r}
@@ -345,8 +313,6 @@ o usar un intervalo de valores con el operador `:`
 mortalidad[1:4]
 ```
 
-
-
 Podemos usar números negativos para mostrar todos los valores *excepto* el segundo
 
 ```{r all but, echo=TRUE}
@@ -354,7 +320,6 @@ Podemos usar números negativos para mostrar todos los valores *excepto* el segu
 mortalidad[-2]
 
 ```
-
 
 o si por el contrario queremos eliminar varios elementos usamos`c(-)`
 
@@ -364,7 +329,7 @@ mortalidad[-c(1,2:4)]
 
 ### Indice lógico
 
-Otra forma de extraer datos de un vector es usando expresiones lógicas como indice. Por ejemplo, para extraer los días con una mortalidad mayor a 5 
+Otra forma de extraer datos de un vector es usando expresiones lógicas como indice. Por ejemplo, para extraer los días con una mortalidad mayor a 5
 
 ```{r indices 2, echo=TRUE}
 #Mostrar solo los dias donde la mortalidad fue > 5
@@ -372,7 +337,7 @@ mortalidad[mortalidad > 5]
 
 ```
 
-De esta forma R extraerá solamente los valores `TRUE` 
+De esta forma R extraerá solamente los valores `TRUE`
 
 De la misma manera podemos utilizar otros operadores para incrementar la complejidad de la expresión. Por ejemplo, podemos pedirle los valores que sean mayor o igual `>=` a una cierta cantidad, que sea exactamente igual `==` o que sea diferente `!=` a una cantidad.
 
@@ -380,22 +345,19 @@ De la misma manera podemos utilizar otros operadores para incrementar la complej
 mortalidad[mortalidad == 4] #valores iguales a 4
 ```
 
-
 ```{r}
 mortalidad[mortalidad != 4] #valores diferentes a 4
 ```
 
-
-:::callout-tip
+::: callout-tip
 # ¡Ojo!
-En R, `=`y `==` tienen usos distintos y no son intercambiables. 
+
+En R, `=`y `==` tienen usos distintos y no son intercambiables.
 
 `=` se utiliza para asignar un valor a una variable, mientras que `==` se utiliza para comparar dos valores y determinar si son iguales `TRUE` o no `FALSE`
-
 :::
 
-
-:::callout-warning
+::: callout-warning
 **Ejercicio**
 
 Identificar:
@@ -405,21 +367,16 @@ Identificar:
 -   ¿Que días tuvieron una mortalidad menor al promedio?
 :::
 
-
 ### Reemplazar elementos
 
 Para reemplazar un elemento en un vector podemos utiliza los indices, con `[ ]` en combinación con el operador de asignación `<-`. Por ejemplo, si quieres cambiar el valor del día lunes (primer elemento) de `4` a `8`
-
-
 
 ```{r}
 mortalidad[1] <- 8
 mortalidad
 ```
 
-
-
-:::callout-tip
+::: callout-tip
 ### vectores con nombre
 
 Cuando tu vector tiene nombres asignados a cada elemento (`names`) tal como lo hicimos con nuestro vector de mortalidad, puedes extraer o seleccionar un elemento usando su nombre. Por ejemplo, si queremos regresar el valor del lunes a `4`
@@ -427,13 +384,11 @@ Cuando tu vector tiene nombres asignados a cada elemento (`names`) tal como lo h
 ```{r}
 mortalidad["Lun"] <- 4
 ```
-
 :::
 
 ## Factores
 
 Los factores son un tipo especial de vector utilizado para almacenar datos **categoricos**. Cada categoría se refiere a un nivel del factor de manera que a cada nivel se le asgina un valor entero (integer).
-
 
 ```{r}
 categorias <- c("alto", "medio", "bajo", "alto", "bajo", "alto", "bajo")
@@ -442,12 +397,6 @@ categorias <- factor(categorias)
 
 categorias
 ```
-
-
-
-
-
-
 
 # Data.Frames
 
@@ -464,21 +413,16 @@ head(dplyr::starwars) |>
   kableExtra::kable()
 ```
 
-
-
 Podemos utilizar los vectores que ya tenemos (`numeros` y `nombres`) para hacer un data.frame de estos vectores
 
-
 ```{r}
-mi_df <- data.frame(numeros = numeros,
-                    nombres = nombres)
+mi_df <- data.frame(numeros,
+                    nombres)
 
 mi_df
 ```
 
-
-
-:::callout-warning
+::: callout-warning
 # Ejercicio
 
 Crea un nuevo data.frame con la siguiente información
@@ -491,22 +435,16 @@ Peso <- c(57, 69, 83, 75, 70, 83, 53)
 Sexo <- as.factor(c("M", "M", "H", "H", "M", "H", "M"))
 ```
 
-
-
-
 ```{r}
 
 mi_df <- data.frame(Nombre, Edad, Altura, Peso, Sexo)
 
 ```
-
 :::
-
 
 ## Acceder a elementos de un data.frame
 
-Para acceder a los elementos de un data.frame podemos utilizar el simbolo `$` o utilizando indices `[F, C]` donde el primer elemento antes de la coma, son las filas y el segundo elemento las columnas. 
-
+Para acceder a los elementos de un data.frame podemos utilizar el simbolo `$` o utilizando indices `[F, C]` donde el primer elemento antes de la coma, son las filas y el segundo elemento las columnas.
 
 Por ejemplo, para acceder al vector de los nombres
 
@@ -520,16 +458,15 @@ o usando los indices
 mi_df[ , 1]
 ```
 
-:::callout-tip
-#
+::: callout-tip
+# 
+
 Para acceder a todas las filas de una determinada columna, dejamos ese espacio en blanco antes de la coma. Por el contrario si queremos seleccionar la primera fila de todas las columnas utilizariamos:
 
 ```{r}
 mi_df[1, ]
 ```
-
 :::
-
 
 o podemos usar el nombre de la columna dentro del indice
 
@@ -537,10 +474,7 @@ o podemos usar el nombre de la columna dentro del indice
 mi_df[, "Nombre"]
 ```
 
-
-
-
-#  Matrices y arreglos
+# Matrices y arreglos
 
 Las matrices y arrays pueden ser descritas como vectores multidimensionales. Al igual que un vector, únicamente pueden contener datos de un sólo tipo, pero además de largo, tienen más dimensiones.
 
@@ -548,13 +482,12 @@ En un sentido estricto, las matrices son una caso especial de un array, que se d
 
 ### Creación de matrices
 
-Para crear una matriz se usa la función `matrix()`, la cual usa los argumentos `nrow` y `ncol`. Con ellos se especifica el número de renglones y columnas que tendrá nuestra matriz. 
+Para crear una matriz se usa la función `matrix()`, la cual usa los argumentos `nrow` y `ncol`. Con ellos se especifica el número de renglones y columnas que tendrá nuestra matriz.
 
 ```{r matriz, echo = TRUE}
 #matriz sin especificar renglones ni columnas
 matrix(1:12)
 ```
-
 
 Ahora usamos la misma serie de números pero definiendo 3 filas y 4 columnas
 
@@ -568,21 +501,20 @@ Ahora usando la misma serie de números pero con 4 filas y 3 columnas
 matrix(1:12, nrow = 4, ncol = 3)
 ```
 
+::: callout-warning
+# 
 
-:::callout-warning
-#
-  *   ¿Que pasa si definimos un menor número de filas y columnas que el número de elementos?   
-  
-  *   ¿Que pasa si usamos un número mayor de filas y columnas que el número total de elementos
+-   ¿Que pasa si definimos un menor número de filas y columnas que el número de elementos?
+
+-   ¿Que pasa si usamos un número mayor de filas y columnas que el número total de elementos
 :::
-
 
 ### Convertir matrices a data frames y viceversa
 
-Para convertir una matriz a data frame, se usa la función `as.data.frame()` mientras que para el caso contrario se usa `as.matrix()`. 
-Es importante tomar en cuenta la naturaleza de cada estructura: las matrices solo aceptan un solo tipo de dato
+Para convertir una matriz a data frame, se usa la función `as.data.frame()` mientras que para el caso contrario se usa `as.matrix()`. Es importante tomar en cuenta la naturaleza de cada estructura: las matrices solo aceptan un solo tipo de dato
 
 Por ejeplo, tenemos la matriz:
+
 ```{r, include =TRUE, echo=TRUE}
 matriz <- matrix(1:12, 3,4)
 matriz
@@ -595,24 +527,13 @@ matriz_df <- as.data.frame(matriz)
 matriz_df
 ```
 
-
-
-
 ## Arreglos
+
 son similares a las matrices pero pueden contener 2 o mas dimensiones
 
 ```{r}
 arreglo <- array(1:24, dim = c(2,3,4))
 arreglo
 ```
-
-
-
-
-
-
-
-
-
 
 ![](https://i.pinimg.com/564x/c8/9a/21/c89a214708211c988c0cca2bb46798b3.jpg)
