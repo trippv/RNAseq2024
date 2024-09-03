@@ -108,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -240,12 +240,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#importar-usando-ventanas" id="toc-importar-usando-ventanas" class="nav-link" data-scroll-target="#importar-usando-ventanas">Importar usando ventanas</a></li>
   <li><a href="#importar-desde-la-línea-de-comando" id="toc-importar-desde-la-línea-de-comando" class="nav-link" data-scroll-target="#importar-desde-la-línea-de-comando">Importar desde la línea de comando</a></li>
+  <li><a href="#importar-archivos-desde-un-url" id="toc-importar-archivos-desde-un-url" class="nav-link" data-scroll-target="#importar-archivos-desde-un-url">Importar archivos desde un URL</a></li>
   </ul></li>
+  <li><a href="#exploración-de-datos" id="toc-exploración-de-datos" class="nav-link" data-scroll-target="#exploración-de-datos">Exploración de datos</a></li>
+  <li><a href="#generar-un-subconjunto-de-datos" id="toc-generar-un-subconjunto-de-datos" class="nav-link" data-scroll-target="#generar-un-subconjunto-de-datos">Generar un subconjunto de datos</a>
+  <ul class="collapse">
+  <li><a href="#subconjunto-con-indices" id="toc-subconjunto-con-indices" class="nav-link" data-scroll-target="#subconjunto-con-indices">Subconjunto con indices</a></li>
+  <li><a href="#subconjunto-usando-la-función-subset" id="toc-subconjunto-usando-la-función-subset" class="nav-link" data-scroll-target="#subconjunto-usando-la-función-subset">Subconjunto usando la función <code>subset()</code></a></li>
+  </ul></li>
+  <li><a href="#exportar-tablas" id="toc-exportar-tablas" class="nav-link" data-scroll-target="#exportar-tablas">Exportar tablas</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content page-columns page-full column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -277,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Archivo de texto simple (txt)</li>
 </ul>
 </section>
-<section id="funciones-base-para-importar-archivos" class="level2">
+<section id="funciones-base-para-importar-archivos" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="funciones-base-para-importar-archivos">Funciones base para importar archivos</h2>
 <section id="importar-usando-ventanas" class="level3">
 <h3 class="anchored" data-anchor-id="importar-usando-ventanas">Importar usando ventanas</h3>
@@ -321,9 +329,256 @@ Ejercicio
 <p>Utilizando la función <code>read.table</code> o <code>read.csv</code>abre el archivo <code>dataset_Pomemon.csv</code> que descargaste previamente en la carpeta de <code>datos</code></p>
 </div>
 </div>
-
-
 </section>
+<section id="importar-archivos-desde-un-url" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="importar-archivos-desde-un-url">Importar archivos desde un URL</h3>
+<p>También es posible importar set de datos que se encuentren en línea usando la dirección url. El proceso es el mismo y se puede utilizar tanto <code>read.table</code> como <code>read.csv</code>, solamente en lugar de indicar la ruta del archivo en un directorio local, se indica el url.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ejercicio
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importa a tu ambiente el archivo <code>DET_test.txt</code> disponible en el siguiente enlace:</p>
+<p><code>https://raw.githubusercontent.com/trippv/RNAseq2024/master/data/DET_test.txt</code></p>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>deg <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">"https://raw.githubusercontent.com/trippv/RNAseq2024/master/data/DET_test.txt"</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Puedes asignar la dirección url a un objeto y después usar ese objeto dentro de la función <code>read.table</code>. Por ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"www.muchosDatos.com"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">file =</span> url, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div></div></section>
+</section>
+<section id="exploración-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="exploración-de-datos">Exploración de datos</h2>
+<p>Si queremos echar un vistazo rápido al contenido de nuestra tabla podemos utilizar algunas funciones base como <code>summary()</code> que nos despliega un resumen de cada columna de nuestra tabla</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(deg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  transcript            logFC               logCPM              LR          
+ Length:66968       Min.   :-12.77959   Min.   :-1.8730   Min.   :  0.0000  
+ Class :character   1st Qu.: -0.75187   1st Qu.:-0.1186   1st Qu.:  0.4067  
+ Mode  :character   Median :  0.05418   Median : 1.4014   Median :  1.8677  
+                    Mean   :  0.13555   Mean   : 1.9249   Mean   :  5.0564  
+                    3rd Qu.:  0.89139   3rd Qu.: 3.4577   3rd Qu.:  5.8335  
+                    Max.   : 13.92717   Max.   :15.5331   Max.   :226.2396  
+     PValue             FDR           contrast          expression       
+ Min.   :0.00000   Min.   :0.0000   Length:66968       Length:66968      
+ 1st Qu.:0.01572   1st Qu.:0.0628   Class :character   Class :character  
+ Median :0.17174   Median :0.3436   Mode  :character   Mode  :character  
+ Mean   :0.29213   Mean   :0.3957                                        
+ 3rd Qu.:0.52364   3rd Qu.:0.6983                                        
+ Max.   :1.00000   Max.   :1.0000                                        </code></pre>
+</div>
+</div>
+<p>La función <code>table()</code> se utiliza para crear una tabla de frecuencias de los datos en un vector o conjunto de vectores. Genera una tabla con la frecuencia con la que aparecen las combinaciones de valores únicos en los vectores suministrados. Es útil para resumir datos categóricos o discretos y para visualizar distribuciones de frecuencia.</p>
+<p>Por ejemplo, si queremos saber cuantos de nuestros genes se sobre expresaron o reprimieron, podemos utilizar la función <code>tabel()</code> en la columna <code>expression</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(deg<span class="sc">$</span>expression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ down    up 
+51855 15113 </code></pre>
+</div>
+</div>
+</section>
+<section id="generar-un-subconjunto-de-datos" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="generar-un-subconjunto-de-datos">Generar un subconjunto de datos</h2>
+<p>A menudo queremos generar un subconjunto de datos que contengan los valores de un tratamiento determinado o que cumplan con una condición determinada.</p>
+<p>Para realizar esto, podemos utilizar dos métodos diferentes:</p>
+<ol type="1">
+<li><p>Utilizando indices, tal como lo hicimos en la <a href="1_Rbasico.html#indice-posicional">sección 1</a>.</p></li>
+<li><p>Utilizando la función <code>subset()</code></p></li>
+</ol>
+<section id="subconjunto-con-indices" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="subconjunto-con-indices">Subconjunto con indices</h3>
+<p>En la <a href="1_Rbasico.html#indice-posicional">sección 1</a> vimos como podemos filtrar datos que cumplan con una determinada condición en una matriz o data frame utilizando los indices <code>[]</code>.</p>
+<p>Por ejemplo, si queremos filtrar aquellos transcritos con un valor P &lt; 0.001, podemos utilizar:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>deg<span class="sc">$</span>FDR <span class="sc">&lt;</span> <span class="fl">0.001</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Entonces, si queremos filtrar la tabla <code>deg</code> que cumplan con esta condición, entonces tenemos que especificar lo siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sub_deg <span class="ot">&lt;-</span> deg[deg<span class="sc">$</span>PValue <span class="sc">&lt;</span> <span class="fl">0.001</span>, ] </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sub_deg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 transcript     logFC   logCPM       LR   PValue      FDR
+1 TRINITY_DN58348_c94_g1_i1 11.420646 8.774037 226.2396 3.94e-51 6.60e-47
+2  TRINITY_DN41876_c1_g1_i1 13.927167 4.360619 205.7162 1.18e-46 9.89e-43
+3  TRINITY_DN49189_c0_g1_i1 -8.953827 7.614606 179.7208 5.58e-41 3.11e-37
+4  TRINITY_DN63782_c0_g2_i1 -8.082504 5.763163 154.3743 1.92e-35 8.03e-32
+5 TRINITY_DN65222_c12_g2_i4  8.489764 4.367937 152.6882 4.48e-35 1.50e-31
+6  TRINITY_DN54408_c0_g1_i2  7.765242 8.034710 148.5546 3.59e-34 1.00e-30
+   contrast expression
+1 T1_vs_CTL         up
+2 T1_vs_CTL         up
+3 T1_vs_CTL       down
+4 T1_vs_CTL       down
+5 T1_vs_CTL         up
+6 T1_vs_CTL         up</code></pre>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Recuerda que cuando usamos indices, estos indican <code>[filas, columnas]</code> separadas por una coma. Por lo que si solamente queremos filtrar las filas con una determinada condición, dejamos el espacio de las columnas en blanco para indica que queremos seleccionar todas las columnas de la tabla</p>
+</div>
+</div>
+</div></div><p>Si queremos filtrar nuestra tabla utilizando dos condiciones, por ejemplo transcritos que se sobre-expresaron (<code>up</code>) solamente en la condición <code>T1_vs_CTL</code> entonces utilizamos el operado <code>&amp;</code>.</p>
+<p>El operado <code>&amp;</code>Es el operador lógico que indica “y”. Solo se seleccionarán las filas que cumplan ambas condiciones.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sub_deg <span class="ot">&lt;-</span> deg[deg<span class="sc">$</span>contrast <span class="sc">==</span> <span class="st">"T1_vs_CTL"</span> <span class="sc">&amp;</span> deg<span class="sc">$</span>expression <span class="sc">==</span> <span class="st">"up"</span>, ]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sub_deg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 transcript     logFC   logCPM       LR   PValue      FDR
+1 TRINITY_DN58348_c94_g1_i1 11.420646 8.774037 226.2396 3.94e-51 6.60e-47
+2  TRINITY_DN41876_c1_g1_i1 13.927167 4.360619 205.7162 1.18e-46 9.89e-43
+5 TRINITY_DN65222_c12_g2_i4  8.489764 4.367937 152.6882 4.48e-35 1.50e-31
+6  TRINITY_DN54408_c0_g1_i2  7.765242 8.034710 148.5546 3.59e-34 1.00e-30
+7  TRINITY_DN43718_c0_g1_i1  7.732693 4.834847 141.6420 1.16e-32 2.79e-29
+8  TRINITY_DN51077_c0_g1_i2  7.497678 8.851058 139.2879 3.81e-32 7.97e-29
+   contrast expression
+1 T1_vs_CTL         up
+2 T1_vs_CTL         up
+5 T1_vs_CTL         up
+6 T1_vs_CTL         up
+7 T1_vs_CTL         up
+8 T1_vs_CTL         up</code></pre>
+</div>
+</div>
+</section>
+<section id="subconjunto-usando-la-función-subset" class="level3">
+<h3 class="anchored" data-anchor-id="subconjunto-usando-la-función-subset">Subconjunto usando la función <code>subset()</code></h3>
+<p>De igual manera podemos utilizar la función <code>subset()</code> para generar un subconjunto de datos a partir de determinada condición.</p>
+<p>Por ejemplo, para filtrar los transcritos con un valor de FDR &lt; 0.001 haremos lo siguiente</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sub_deg <span class="ot">&lt;-</span> <span class="fu">subset</span>(deg, FDR <span class="sc">&lt;</span> <span class="fl">0.001</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sub_deg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 transcript     logFC   logCPM       LR   PValue      FDR
+1 TRINITY_DN58348_c94_g1_i1 11.420646 8.774037 226.2396 3.94e-51 6.60e-47
+2  TRINITY_DN41876_c1_g1_i1 13.927167 4.360619 205.7162 1.18e-46 9.89e-43
+3  TRINITY_DN49189_c0_g1_i1 -8.953827 7.614606 179.7208 5.58e-41 3.11e-37
+4  TRINITY_DN63782_c0_g2_i1 -8.082504 5.763163 154.3743 1.92e-35 8.03e-32
+5 TRINITY_DN65222_c12_g2_i4  8.489764 4.367937 152.6882 4.48e-35 1.50e-31
+6  TRINITY_DN54408_c0_g1_i2  7.765242 8.034710 148.5546 3.59e-34 1.00e-30
+   contrast expression
+1 T1_vs_CTL         up
+2 T1_vs_CTL         up
+3 T1_vs_CTL       down
+4 T1_vs_CTL       down
+5 T1_vs_CTL         up
+6 T1_vs_CTL         up</code></pre>
+</div>
+</div>
+<p>Y de igual manera podemos utilizar el operador <code>&amp;</code> para filtrar con dos condiciones:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sub_deg <span class="ot">&lt;-</span> <span class="fu">subset</span>(deg, contrast <span class="sc">==</span> <span class="st">"T1_vs_CTL"</span> <span class="sc">&amp;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                    expression <span class="sc">==</span> <span class="st">"up"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sub_deg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 transcript     logFC   logCPM       LR   PValue      FDR
+1 TRINITY_DN58348_c94_g1_i1 11.420646 8.774037 226.2396 3.94e-51 6.60e-47
+2  TRINITY_DN41876_c1_g1_i1 13.927167 4.360619 205.7162 1.18e-46 9.89e-43
+5 TRINITY_DN65222_c12_g2_i4  8.489764 4.367937 152.6882 4.48e-35 1.50e-31
+6  TRINITY_DN54408_c0_g1_i2  7.765242 8.034710 148.5546 3.59e-34 1.00e-30
+7  TRINITY_DN43718_c0_g1_i1  7.732693 4.834847 141.6420 1.16e-32 2.79e-29
+8  TRINITY_DN51077_c0_g1_i2  7.497678 8.851058 139.2879 3.81e-32 7.97e-29
+   contrast expression
+1 T1_vs_CTL         up
+2 T1_vs_CTL         up
+5 T1_vs_CTL         up
+6 T1_vs_CTL         up
+7 T1_vs_CTL         up
+8 T1_vs_CTL         up</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="exportar-tablas" class="level2">
+<h2 class="anchored" data-anchor-id="exportar-tablas">Exportar tablas</h2>
+<p>Dentro de nuestro análisis es común que tengamos que guardar nuestro conjunto de datos, ya sea que hayamos realizado algún tipo de análisis o que hayamos generado un subconjunto de datos que queremos guardar.</p>
+<p>Para exportar nuestros datos, vamos a utilizar la función <code>write.table</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(<span class="at">x =</span> sub_deg, <span class="co">#objeto que queremos guardar</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">file =</span> <span class="st">"resultados/sub_deg.csv"</span>, <span class="co">#ruta</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">","</span>, <span class="co">#tipo de separador</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="co">#¿usar rownames?</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ejercicio
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Utilizando lo que hemos aprendido hasta este momento, genera las siguientes tablas y guardalas en tu carpeta de resultados:</p>
+<ul>
+<li><p>Tabla con los resultados de transcritos expresados diferencialmente con un valor de FDR &lt; 0.05 del contraste <code>T2_vs_CTL</code>.</p></li>
+<li><p>Tabla con transcritos sobre-expresados con un valor de log fold-change &gt; 5 y un valor de FDR &lt; 0.01.</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>e<span class="fl">.1</span> <span class="ot">&lt;-</span> deg[deg<span class="sc">$</span>contrast <span class="sc">==</span> <span class="st">"T2_vs_CTL"</span> <span class="sc">&amp;</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>             deg<span class="sc">$</span>FDR <span class="sc">&lt;</span> <span class="fl">0.05</span>, ]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>e<span class="fl">.2</span> <span class="ot">&lt;-</span> deg[deg<span class="sc">$</span>logFC <span class="sc">&gt;</span> <span class="dv">5</span> <span class="sc">&amp;</span> deg<span class="sc">$</span>FDR <span class="sc">&lt;</span> <span class="fl">0.01</span>, ]</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># exportar tablas</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="do">## e1</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(e<span class="fl">.1</span>, </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"resultados/ejercicio_E1.csv"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">","</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="do">## e2</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(e<span class="fl">.2</span>, </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">"resultados/ejercicio_E2.csv"</span>,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

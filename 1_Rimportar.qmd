@@ -56,4 +56,196 @@ Utilizando la función `read.table` o `read.csv`abre el archivo `dataset_Pomemon
 :::
 
 
+### Importar archivos desde un URL
+
+También es posible importar set de datos que se encuentren en línea usando la dirección url. El proceso es el mismo y se puede utilizar tanto `read.table` como `read.csv`, solamente en lugar de indicar la ruta del archivo en un directorio local, se indica el url.
+
+
+:::callout-caution
+# Ejercicio
+
+Importa a tu ambiente el archivo `DET_test.txt` disponible en el siguiente enlace:
+
+`https://raw.githubusercontent.com/trippv/RNAseq2024/master/data/DET_test.txt`
+
+
+
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+deg <- read.table(file = "https://raw.githubusercontent.com/trippv/RNAseq2024/master/data/DET_test.txt",
+                  sep = "\t", header = TRUE)
+```
+:::
+
+::: column-margin
+::: callout-tip
+
+Puedes asignar la dirección url a un objeto y después usar ese objeto dentro de la función `read.table`. Por ejemplo:
+
+```{r}
+#| eval: false
+
+url <- "www.muchosDatos.com"
+df <- read.table(file = url, header = TRUE, sep = ",")
+
+```
+
+:::
+:::
+
+
+## Exploración de datos
+
+Si queremos echar un vistazo rápido al contenido de nuestra tabla podemos utilizar algunas funciones base como `summary()` que nos despliega un resumen de cada columna de nuestra tabla
+
+```{r}
+summary(deg)
+```
+
+La función `table()` se utiliza para crear una tabla de frecuencias de los datos en un vector o conjunto de vectores. Genera una tabla con la frecuencia con la que aparecen las combinaciones de valores únicos en los vectores suministrados. Es útil para resumir datos categóricos o discretos y para visualizar distribuciones de frecuencia.
+
+
+Por ejemplo, si queremos saber cuantos de nuestros genes se sobre expresaron o reprimieron, podemos utilizar la función `tabel()` en la columna `expression`
+
+```{r}
+table(deg$expression)
+```
+
+
+
+## Generar un subconjunto de datos
+
+A menudo queremos generar un subconjunto de datos que contengan los valores de un tratamiento determinado o que cumplan con una condición determinada. 
+
+Para realizar esto, podemos utilizar dos métodos diferentes:
+
+  1.    Utilizando indices, tal como lo hicimos en la [sección 1](1_Rbasico.html#indice-posicional).
+  
+  2.    Utilizando la función `subset()`
+
+
+### Subconjunto con indices
+
+En la [sección 1](1_Rbasico.html#indice-posicional) vimos como podemos filtrar datos que cumplan con una determinada condición en una matriz o data frame utilizando los indices `[]`. 
+
+Por ejemplo, si queremos filtrar aquellos transcritos con un valor P < 0.001, podemos utilizar:
+
+```{r}
+#| eval: false
+
+deg$FDR < 0.001
+```
+
+Entonces, si queremos filtrar la tabla `deg` que cumplan con esta condición, entonces tenemos que especificar lo siguiente:
+
+```{r}
+sub_deg <- deg[deg$PValue < 0.001, ] 
+head(sub_deg)
+```
+
+
+
+::: column-margin
+::: callout-tip
+Recuerda que cuando usamos indices, estos indican `[filas, columnas]` separadas por una coma. Por lo que si solamente queremos filtrar las filas con una determinada condición, dejamos el espacio de las columnas en blanco para indica que queremos seleccionar todas las columnas de la tabla
+:::
+:::
+
+
+
+Si queremos filtrar nuestra tabla utilizando dos condiciones, por ejemplo transcritos que se sobre-expresaron (`up`) solamente en la condición `T1_vs_CTL` entonces utilizamos el operado `&`.
+
+
+El operado `&`Es el operador lógico que indica "y". Solo se seleccionarán las filas que cumplan ambas condiciones.
+
+
+
+```{r}
+
+sub_deg <- deg[deg$contrast == "T1_vs_CTL" & deg$expression == "up", ]
+head(sub_deg)
+```
+
+
+### Subconjunto usando la función `subset()`
+
+De igual manera podemos utilizar la función `subset()` para generar un subconjunto de datos a partir de determinada condición. 
+
+
+Por ejemplo, para filtrar los transcritos con un valor de FDR < 0.001 haremos lo siguiente
+
+```{r}
+sub_deg <- subset(deg, FDR < 0.001)
+head(sub_deg)
+```
+
+Y de igual manera podemos utilizar el operador `&` para filtrar con dos condiciones:
+
+```{r}
+sub_deg <- subset(deg, contrast == "T1_vs_CTL" & 
+                    expression == "up")
+head(sub_deg)
+```
+
+
+
+
+
+## Exportar tablas
+
+Dentro de nuestro análisis es común que tengamos que guardar nuestro conjunto de datos, ya sea que hayamos realizado algún tipo de análisis o que hayamos generado un subconjunto de datos que queremos guardar.
+
+Para exportar nuestros datos, vamos a utilizar la función `write.table`
+
+```{r}
+write.table(x = sub_deg, #objeto que queremos guardar
+            file = "resultados/sub_deg.csv", #ruta
+            sep = ",", #tipo de separador
+            row.names = FALSE, #¿usar rownames?
+            )
+```
+
+
+
+
+:::callout-caution
+# Ejercicio
+
+Utilizando lo que hemos aprendido hasta este momento, genera las siguientes tablas y guardalas en tu carpeta de resultados:
+
+
+*   Tabla con los resultados de transcritos expresados diferencialmente con un valor de FDR < 0.05 del contraste `T2_vs_CTL`. 
+
+*   Tabla con transcritos sobre-expresados con un valor de log fold-change > 5 y un valor de FDR < 0.01.
+
+
+
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+
+e.1 <- deg[deg$contrast == "T2_vs_CTL" & 
+             deg$FDR < 0.05, ]
+
+e.2 <- deg[deg$logFC > 5 & deg$FDR < 0.01, ]
+
+# exportar tablas
+## e1
+write.table(e.1, 
+            "resultados/ejercicio_E1.csv",
+            sep = ",")
+## e2
+write.table(e.2, 
+            "resultados/ejercicio_E2.csv",
+            sep = ",")
+
+```
+:::
 
