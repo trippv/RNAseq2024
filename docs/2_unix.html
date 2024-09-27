@@ -20,51 +20,16 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./1_Rproyectos.html" rel="prev">
+<link href="./1_Rimportar.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -149,6 +114,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./1_Rproyectos.html">
+ <span class="dropdown-text">Proyectos de Rstudio</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./1_Rimportar.html">
  <span class="dropdown-text">Importar y exportar datos</span></a>
   </li>  
         <li>
@@ -204,6 +173,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./1_Rproyectos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proyectos de Rstudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1_Rimportar.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Importar y exportar datos</span></a>
   </div>
 </li>
@@ -356,10 +331,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Por lo general los usuarios pueden hacer cualquier cosa dentro de su home, pero no pueden borrar o modificar cosas que esten afuera.</p></li>
 </ul>
 <p>Ahora vamos a darle ordenes a la terminal: Primero, ¿Cómo saber que shell estoy usando? ¡Recuerden no teclear el <strong>$</strong>!</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>$ echo $SHELL o echo $0</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>/bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="{default}"><code>$ echo $SHELL o echo $0
+/bin/bash</code></pre>
 <p>¿Cómo seleccionamos una shell en particular?</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>$ bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="{default}"><code>$ bash</code></pre>
 </section>
 </section>
 <section id="comandos-básicos" class="level1">
@@ -376,13 +351,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="comandos-que-dan-información-del-sistema" class="level2">
 <h2 class="anchored" data-anchor-id="comandos-que-dan-información-del-sistema">2.1 Comandos que dan información del sistema:</h2>
 <p><strong>arch:</strong> Muestra la arquitectura de la máquina.</p>
-<pre><code>$ arch
+<pre class="{default}"><code>$ arch
 x86_64</code></pre>
 <p><strong>uname:</strong> Muestra la información del nucleo.</p>
-<pre><code>$ uname
+<pre class="{default}"><code>$ uname
 Linux</code></pre>
 <p><strong>top:</strong> Muestra los procesos que están siendo ejecutados. Para salir teclear q.</p>
-<pre><code>$ top
+<pre class="{default}"><code>$ top
 Tareas: 291 total,   1 ejecutar,  290 hibernar,    0 detener,    0 zombie
 %Cpu(s):  1.2 usuario,  0.5 sist,  0.0 adecuado, 97.8 inact,  0.4 en espera,  0.0 hardw int,  0.0 softw int,  0.0 robar tiempo
 KiB Mem : 16320116 total,  7871832 free,  5008656 used,  3439628 buff/cache
@@ -395,7 +370,7 @@ KiB Swap:  4081660 total,  4081660 free,        0 used. 10551424 avail Mem
  4323 pavel     20   0 3528284 641308 132312 S   0.7  3.9   3:17.20 Web Content                                                                
  9685 pavel     20   0   44540   3816   3088 R   0.7  0.0   0:00.04 top   </code></pre>
 <p><strong>history:</strong> Con el podemos ver el historial de los comandos ingresados.</p>
-<pre><code>$ history
+<pre class="{default}"><code>$ history
 1955  ls
  1956  wc -l Glandula_oviducalPOSvsLO_GO.all_genes_gene_level.txt_down_upgenes.txt_add_annotation.txt Glandula_oviducalPOSvsLO_GO.down_genes_gene_level.txt
  1957  cd ..
@@ -408,7 +383,7 @@ KiB Swap:  4081660 total,  4081660 free,        0 used. 10551424 avail Mem
  1964  ls
  1965  ./2.get_gene_names.pl Lobulo_OpticoPREvsGO_GOV.all_genes_gene_level.txt_just_upgenes.txt</code></pre>
 <p><strong>man:</strong> Muestra el manual de uso de un comando. Para salir teclear q.</p>
-<pre><code>$ man cat
+<pre class="{default}"><code>$ man cat
 CAT(1)                                                         User Commands                                                         CAT(1)
 
 NAME
@@ -428,30 +403,29 @@ DESCRIPTION
        -b, --number-nonblank
               number nonempty output lines, overrides -n</code></pre>
 <p>¿Cómo podemos búscar comandos relacionados con cierta función pero que desconocemos su nombre?. Por ejemplo si quisieramos encontrar el comando que nos da la fecha, ¿Cómo le hacemos?</p>
-<pre><code>$ man -k "palabra clave"
+<pre class="{default}"><code>$ man -k "palabra clave"
 $ man -k "date"
 ../..
 
 date (1)             - print or set the system date and time
 
 ../..</code></pre>
-<pre><code>$ apropos "palabra clave"
+<pre class="{default}"><code>$ apropos "palabra clave"
 $ apropos date
 ../..
 date (1)             - print or set the system date and time
-../..
-</code></pre>
+../..</code></pre>
 <p><strong>exit:</strong> Cierra la terminal en uso.</p>
-<pre><code>$ exit</code></pre>
+<pre class="{default}"><code>$ exit</code></pre>
 <p>Ahora, ¿Cómo podemos acceder a todas las opciones que te da un comando?</p>
-<pre><code>uname --help
+<pre class="{default}"><code>uname --help
 Modo de empleo: uname [OPCIÓN]...
 Muestra cierta información del sistema. Sin ninguna OPCIÓN, igual que -s.
 
   -a, --all            muestra toda la información, en el siguiente orden,
                          excepto que se omite -p y -i si son desconocidos:
   -s, --kernel-name    muestra el nombre del núcleo
-  -n, --nodename       muestra el nombre de `host' del nodo de red
+  -n, --nodename       muestra el nombre de host del nodo de red
   -r, --kernel-release muestra la versión del núcleo
   -v, --kernel-version     print the kernel version
   -m, --machine            print the machine hardware name
@@ -464,58 +438,58 @@ Muestra cierta información del sistema. Sin ninguna OPCIÓN, igual que -s.
 ayuda en línea sobre GNU coreutils: &lt;http://www.gnu.org/software/coreutils/&gt;
 Informe de errores de traducción en uname a &lt;http://translationproject.org/team/es.html&gt;
 Full documentation at: &lt;http://www.gnu.org/software/coreutils/uname&gt;
-or available locally via: info '(coreutils) uname invocation'</code></pre>
+or available locally via: info (coreutils) uname invocation</code></pre>
 <p>En otros comandos se puede obtener lo mismo usando la bandera: <strong>-h</strong>, como mencioné anteriormente.</p>
 </section>
 <section id="comandos-para-manipular-archivos-y-directorios." class="level2">
 <h2 class="anchored" data-anchor-id="comandos-para-manipular-archivos-y-directorios.">2.2 Comandos para manipular archivos y directorios.</h2>
 <p>Para saber en qué lugar-path se encuentran al abrir la terminal:</p>
 <p><strong>pwd:</strong> de print work directory, te da la ruta actúal donde te encuentras.</p>
-<pre><code>$pwd
+<pre class="{default}"><code>$pwd
 /home/pavel</code></pre>
 <p><strong>cd:</strong> de change directory, te permite cambiar de directorios. <strong>/</strong> accedemos a la raíz del sistema; <strong>~</strong> accedemos al directorio por defecto home/usuario; <strong>../</strong> accedemos al directorio padre, es decir, retrocedemos de nivel. <strong>cd -</strong> regresamos a donde estabamos.</p>
 <p>Para prácticar vamos a crear dos directorios con el siguiente comando:</p>
 <p><strong>mkdir:</strong> Permite crear directorios.</p>
-<pre><code>$ cd #para posicionarnos en /home/user; donde user es su nombre de usuario, en mi caso "pavel"
+<pre class="{default}"><code>$ cd #para posicionarnos en /home/user; donde user es su nombre de usuario, en mi caso "pavel"
 $ mkdir proyecto #creamos el directorio.</code></pre>
 <p>Ahora con el comando <strong>cd</strong> nos movemos a ese directorio:</p>
-<pre><code>$ cd proyecto</code></pre>
+<pre class="{default}"><code>$ cd proyecto</code></pre>
 <p>Si ingresan el comando <strong>pwd</strong> podrán ver que ahora su posición ha cambiado. Ahora creen en “proyecto” un directorio llamado <strong>genoma</strong>, y se regresan a su home/usuario</p>
 <p><img src="https://i.imgur.com/qhI3fEn.png" class="img-fluid"></p>
 <p>Usando {} como expasión de llaves:</p>
-<pre><code>$ mkdir -p proyecto/{secuencias/rnaseq,blast}</code></pre>
+<pre class="{default}"><code>$ mkdir -p proyecto/{secuencias/rnaseq,blast}</code></pre>
 <p><strong>ls:</strong> Muestra el contenido de un directorio. <strong>-la</strong> lista el directorio en formato lista y además muestra todos los archivos ocultos; <strong>-h</strong> muestra los tamaños del fichero en formato legible; <strong>-t</strong> acomoda la lista por fecha.</p>
-<pre><code>$ ls -ls
+<pre class="{default}"><code>$ ls -ls
 $ ls -la
 $ ls -lth</code></pre>
 <p><img src="https://i.imgur.com/GJHJtig.jpg" class="img-fluid"></p>
 <p>Permisos:</p>
 <p><img src="https://i.imgur.com/52YVAIH.png" class="img-fluid"></p>
 <p><strong>chmod:</strong> Comando para cambiar permisos.</p>
-<pre><code>$ chmod u+x file
+<pre class="{default}"><code>$ chmod u+x file
 $ chmod uga+x file
 $ chmod uga-x file</code></pre>
 <p><strong>touch [filename]</strong>: crea archivos vacíos con el nombre especificado.</p>
 <p>vayamonos a <strong>cd ~</strong> o solo <strong>cd</strong></p>
-<pre><code>$ touch seq.fq</code></pre>
+<pre class="{default}"><code>$ touch seq.fq</code></pre>
 <p>Usando las llaves podemos generar una seríe de archivos como:</p>
-<pre><code>$ touch seq.fq{1..10}
+<pre class="{default}"><code>$ touch seq.fq{1..10}
 seq.fq1  seq.fq10  seq.fq2  seq.fq3  seq.fq4  seq.fq5  seq.fq6  seq.fq7  seq.fq8  seq.fq9</code></pre>
 <p><strong>cp [origen] [destino]:</strong> copia archivos de un directorio a otro. También podemos hacer una copia de un archivo y renombrarlo.</p>
-<pre><code>$ cp seq.fq1 copia_seq.fq1
+<pre class="{default}"><code>$ cp seq.fq1 copia_seq.fq1
 $ cp seq.* /proyecto/genoma
 $ rm seq.*</code></pre>
 <p>¿Cómo copiar de un directorio a nuestra posición actúal?</p>
-<pre><code>$ cp /proyecto/genoma/seq.* .</code></pre>
+<pre class="{default}"><code>$ cp /proyecto/genoma/seq.* .</code></pre>
 <p>¿Qué pasó?</p>
 <p>-Comodines <strong>*</strong> (wildcards)</p>
 <p><strong>mv [origen] [destino]:</strong> sirve para mover archivos o para renombrar archivos y directorios.</p>
 <p>para renombrar archivos:</p>
-<pre><code>$ mv seq.fq1 seq.fq300</code></pre>
+<pre class="{default}"><code>$ mv seq.fq1 seq.fq300</code></pre>
 <p>para mover:</p>
-<pre><code>$ mv seq.fq10 proyecto/genoma/</code></pre>
+<pre class="{default}"><code>$ mv seq.fq10 proyecto/genoma/</code></pre>
 <p><strong>rm [file]:</strong> Sirve para borrar archivos. <strong>-rf</strong> borra los archivos de forma recursiva sin preguntar y no vuelven núnca más. <strong>rmdir</strong> elimina directorios.</p>
-<pre><code>$ rm seq.fq3
+<pre class="{default}"><code>$ rm seq.fq3
 $ rm seq.* #borra todo lo que inicia con seq. seguido de cualquier cosa, usar con cuidado.
 $ mkdir prueba 
 $ rm -rf prueba</code></pre>
@@ -524,21 +498,21 @@ $ rm -rf prueba</code></pre>
 <h2 class="anchored" data-anchor-id="comandos-para-descargar-comprimir-y-descomprimir-archivos.">2.3 Comandos para descargar, comprimir y descomprimir archivos.</h2>
 <p><strong>wget:</strong> Se usa para descargar archivos del internet via TTP, HTTPS, FTP, o FTPS. <strong>wget [OPTIONS]… [ URLS ]</strong></p>
 <p>vamos a descargar el genoma del virus de la influenza:</p>
-<pre><code>$ wget  ftp://ftp.ncbi.nlm.nih.gov/genomes/INFLUENZA/influenza.faa.gz</code></pre>
+<pre class="{default}"><code>wget  ftp://ftp.ncbi.nlm.nih.gov/genomes/INFLUENZA/influenza.faa.gz</code></pre>
 <p>Otro comando similar es <strong>curl:</strong> Este es más poderoso que wget y acepta más protocolos.</p>
 <p>Para descargar el mismo archivo usariamos el siguiente comando:</p>
-<pre><code>curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/INFLUENZA/influenza.faa.gz</code></pre>
+<pre class="{default}"><code>curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/INFLUENZA/influenza.faa.gz</code></pre>
 <p><strong>gzip:</strong> por GNU zip, esta es una herramienta para comprimir archivos usando la línea de comandos de GNU. Los archivos que son comprimidos usando esta herramienta usualmente contienen la extensión .gz. Para descomprimir usamos <strong>gunzip</strong>.</p>
 <p>Vamos a descomprimir el archivo que recien descargamos.</p>
-<pre><code>$ cd proyecto # nos vamos a la carpeta proyecto
+<pre class="{default}"><code>$ cd proyecto # nos vamos a la carpeta proyecto
 $ gunzip influenza.faa.gz # descomprir en la carpta proyecto el archivo</code></pre>
 <p><strong>bzip2:</strong> Es similar a <strong>gzip</strong>, pero están construidos bajo diferentes algoritmos.</p>
-<pre><code>bzip2 influenza.faa
+<pre class="{default}"><code>bzip2 influenza.faa
 bunzip2 influenza.faa.gz</code></pre>
 <p>Los que quieran saber más sobre el rendiemiento de ambas: https://www.rootusers.com/gzip-vs-bzip2-vs-xz-performance-comparison/</p>
 <p><strong>tar:</strong> tar es un programa usado para crear y manipular archivos. tar une varios archivos en uno solo, preservando sus nombres y demás permisos. Resulta muy adecuado cuando se desea almacenar muchos archivos relacionados para que sean transferidos por la red, asi como cuando se hacen respaldos de discos completos y resulta muy práctico para su transporte en diferentes sistemas.</p>
 <p>Para generar un archivo tar de varios usamos el siguiente comando:</p>
-<pre><code>$ touch adn.txt arn.txt
+<pre class="{default}"><code>$ touch adn.txt arn.txt
 $ tar -cvf prueba.tar adn.txt arn.txt
 $ tar -xf prueba.tar
 $ tar -cvzf prueba.tar.gz adn.txt arn.txt #empaquetar y comprimir
@@ -550,43 +524,43 @@ $ tar -xjf prueba_2.tar.bz2</code></pre>
 <section id="comandos-para-visualizar-archivos." class="level2">
 <h2 class="anchored" data-anchor-id="comandos-para-visualizar-archivos.">2.4 Comandos para visualizar archivos.</h2>
 <p><strong>more:</strong> Permite visualizar archivos desde el inicio. Muestra texto en una terminal. Para avanzar presionar <strong>ENTER</strong>. Para salir de la visualización presionar <strong>q</strong>. Para visulizar archivos gzip, usamos <strong>zmore</strong>.</p>
-<pre><code>$ zmore influenza.faa.gz</code></pre>
+<pre class="{default}"><code>$ zmore influenza.faa.gz</code></pre>
 <p><strong>less:</strong> Permite de igual forma que more visualizar archivos. A diferencia de more se puede retroceder y avanzar con las flechas. Para salir, presionar <strong>q</strong>.</p>
-<pre><code>$ zless influenza.faa.gz</code></pre>
+<pre class="{default}"><code>$ zless influenza.faa.gz</code></pre>
 <p>Ahora vamos a bajarnos el siguiente archivo file.txt en: https://drive.google.com/drive/u/1/folders/14Z7wmv4suhC-DLvDo9tUTNkF8WtVPRSD</p>
 <p><strong>head:</strong> Muestra en la terminal las primeras líneas de un archivo. Para especificar el número de lineas a mostras usar la opción -n.</p>
-<pre><code>$ head -n 20 file.txt</code></pre>
+<pre class="{default}"><code>$ head -n 20 file.txt</code></pre>
 <p><strong>tail:</strong> igual que head pero muestras las líneas al final del documento.</p>
-<pre><code>$ tail -n20 file.txt</code></pre>
+<pre class="{default}"><code>$ tail -n20 file.txt</code></pre>
 <p><strong>wc:</strong> Muestra el número de líneas, caracteres o palabras que contiene un archivo. Opciones <strong>-l</strong> para líneas, <strong>-m</strong> para caracteres y <strong>-w</strong> para palabras.</p>
-<pre><code>$ wc -lmw file.txt
+<pre class="{default}"><code>$ wc -lmw file.txt
 50  1838 82964 file.txt</code></pre>
 <p>Antes de continuar con los demás comandos vamos a introducir el concepto de entrada y salida estandar.</p>
 <p><img src="https://i.imgur.com/G7XQRkO.png" class="img-fluid"></p>
 <p><strong>cat:</strong> El comando cat en bash significa “concatenar”. Este comando es usado para mostrar, crear, y agregar archivos.</p>
-<pre><code>$ cat file.txt  #toma la entrada estandar y muestra la salida estandar en pantalla.</code></pre>
+<pre class="{default}"><code>$ cat file.txt  #toma la entrada estandar y muestra la salida estandar en pantalla.</code></pre>
 <p>usando el <strong>&gt;</strong> y <strong>&gt;&gt;</strong> podemos redirigir la salida estandar, es decir, en lugar que nos mande la salida a la pantalla que la mande a un archivo. Esto para cualquier comando.</p>
-<pre><code>$ cat file.txt &gt; replica_file.txt</code></pre>
+<pre class="{default}"><code>$ cat file.txt &gt; replica_file.txt</code></pre>
 <p>Con este comando, siempre se sobreescribe el archivo. Si quisieramos agregar nueva información al final del archivo usamos el doble mayor <strong>&gt;&gt;</strong></p>
-<pre><code>$ cat file.txt &gt;&gt; replica_file.txt</code></pre>
+<pre class="{default}"><code>$ cat file.txt &gt;&gt; replica_file.txt</code></pre>
 <p>Para concatenar archivos:</p>
-<pre><code>$ cat file.txt replica_file.txt &gt; conca_ejem.txt</code></pre>
+<pre class="{default}"><code>$ cat file.txt replica_file.txt &gt; conca_ejem.txt</code></pre>
 <p><strong>cut:</strong> Extrae información de un archivo. Siempre se debe especificar una opción. -f (campo) más común y el tipo de delimitador -d (por defecto tabulador)</p>
-<pre><code>$ cut -f1 file.txt &gt; first_col.txt
+<pre class="{default}"><code>$ cut -f1 file.txt &gt; first_col.txt
 #gene_id
 TRINITY_DN10676_c0_g1
 TRINITY_DN20389_c0_g1
 TRINITY_DN20515_c0_g1</code></pre>
 <p><strong>sort:</strong> Organiza las líneas en un archivo de texto para que se ordenen de forma numérica o alfabéticamente.</p>
-<pre><code>$ sort first_col.txt &gt; first_col_sort.txt</code></pre>
+<pre class="{default}"><code>$ sort first_col.txt &gt; first_col_sort.txt</code></pre>
 <p><strong>uniq:</strong> Elimina líneas repetidas dentro de un archivo. Sólo funciona con líneas repetidas adyacentes. Primero se deben ordenar las líneas dentro del archivo usando <strong>sort</strong>.</p>
-<pre><code>$ uniq first_col_sort.txt &gt; first_col_sort_uniq.txt</code></pre>
+<pre class="{default}"><code>$ uniq first_col_sort.txt &gt; first_col_sort_uniq.txt</code></pre>
 <p>¿Cómo podemos hacer todo esto en una sola línea de comando?, aqui es donde entender la entrada y salida estandar se vuelven útiles.</p>
 <p><strong>|</strong> Este operador conocido como <strong>pipe</strong> te permite usar la salida estandar de un comando como entrada estandar de otro.</p>
-<pre><code>$ cut -f1 file.txt | sort | uniq &gt; first_col_sort_uniq_pipe.txt</code></pre>
+<pre class="{default}"><code>$ cut -f1 file.txt | sort | uniq &gt; first_col_sort_uniq_pipe.txt</code></pre>
 <p><strong>Nota:</strong> Podemos extraer múltiples columnas haciendo <strong>cut</strong> -f 1,4,8 archivo</p>
 <p><strong>grep:</strong> Este comando nos permite buscar una palabra o un patrón que definamos dentro de un archivo de texto. Por ejemplo, si quisieramos buscar este identificador TRINITY_DN32673_c0_g1 en nuestro archivo de anotación.</p>
-<pre><code>$ grep -i "TRINITY_DN32673_c0_g1" file.txt #nos muestra toda la linea de la coincidencia.
+<pre class="{default}"><code>$ grep -i "TRINITY_DN32673_c0_g1" file.txt #nos muestra toda la linea de la coincidencia.
 
 $ grep -io "TRINITY_DN32673_c0_g1" file.txt #nos muestra solo la concidencia exacta.
 
@@ -595,19 +569,19 @@ $ grep -ic "^&gt;" influenza.faa #contar número de secuencias. </code></pre>
 <p>La variante de grep que te permite buscar patrones es <strong>egrep</strong>. En este curso no entraremos a detalle. A los que les interese primero deben buscar sobre expresiones regulares. Les recomiendo este libro —&gt; https://doc.lagout.org/operating%20system%20/linux/grep%20-%20Pocket%20Reference.pdf</p>
 <p><strong>sed:</strong> Este comando nos permite buscar con texto y/o patrones y reemplazar las coincidencias.</p>
 <p><strong>sed</strong> ‘s/buscar/reemplazar/g’ # La <strong>g</strong> aqui es por <strong>global</strong> y significa que haga el cambio en todas las coincidencias, no solo en la primera. Si quieren modificar en el mismo archivo usar la opción <strong>-i</strong>.</p>
-<pre><code>$ sed 's/TRINITY/trinity/g' file.txt &gt; file_sed.txt</code></pre>
+<pre class="{default}"><code>$ sed 's/TRINITY/trinity/g' file.txt &gt; file_sed.txt</code></pre>
 </section>
 <section id="enlace-simbólico." class="level2">
 <h2 class="anchored" data-anchor-id="enlace-simbólico.">2.5 Enlace simbólico.</h2>
 <p>Un enlace simbólico es un archivo que apunta a otro archivo (o a un directorio), estos son como los “accesos directos” en Windows. Su finalidad es la de no duplicar archivos para no usar más memoria, en especial aquellos que son de gran tamaño.</p>
 <p><strong>ln -s [Origen] [Destino] :</strong> Link (enlace) simbólico indica un acceso directo a una carpeta o archivo que se encuentra en un lugar distinto dentro de la estructura de directorios. Si el archivo ligado es renombrado, movido o borrado se rompe el acceso.</p>
-<pre><code>$ ln -s proyecto/genoma/ . #en este caso hicimos un link al directorio genoma.
+<pre class="{default}"><code>$ ln -s proyecto/genoma/ . #en este caso hicimos un link al directorio genoma.
 $ rm o unlink genoma #para eliminar el enlace simbolico.</code></pre>
 </section>
 <section id="comando-para-conexión-remota" class="level2">
 <h2 class="anchored" data-anchor-id="comando-para-conexión-remota">2.6 Comando para conexión remota</h2>
 <p><strong>ssh:</strong> Es un programa para iniciar sesión y ejecutar comandos en una maquina remota. Proporciona comunicaciones cifradas seguras a través de una red insegura.</p>
-<pre><code>$ ssh [user@]hostname</code></pre>
+<pre class="{default}"><code>$ ssh [user@]hostname</code></pre>
 <section id="conexión-a-la-red-local-de-cicese" class="level3">
 <h3 class="anchored" data-anchor-id="conexión-a-la-red-local-de-cicese">2.6.1 Conexión a la red local de cicese</h3>
 <p>Para conectarse a la red de CICESE a través de VPN deben seguir las instrucciones siguientes:</p>
@@ -617,11 +591,11 @@ $ rm o unlink genoma #para eliminar el enlace simbolico.</code></pre>
 <li>Contraseña original</li>
 </ul>
 <p><strong>Paso 1:</strong> Instalar vpn</p>
-<pre><code>$ sudo apt-get install vpnc</code></pre>
+<pre class="{default}"><code>$ sudo apt-get install vpnc</code></pre>
 <p><strong>Paso 2:</strong> Acceder a VPN de CICESE</p>
-<pre><code>$ sudo vpnc</code></pre>
+<pre class="{default}"><code>$ sudo vpnc</code></pre>
 <p><strong>Paso 3:</strong> Colocar la información requerida.</p>
-<pre><code>IPSeq gateway adress: 158.97.255.193
+<pre class="{default}"><code>IPSeq gateway adress: 158.97.255.193
 IPSeq ID: VPNCICESE
 IPSeq secret: c1c3s3VPN
 Username: &lt;usuario&gt;
@@ -633,9 +607,9 @@ Password: &lt;contraseña_original&gt;</code></pre>
 <li>Listo</li>
 </ol>
 <p>Ahora para conectarse solo escribirán:</p>
-<pre><code>$ sudo vpnc #les pedirá su contraseña de sesión por usar sudo</code></pre>
+<pre class="{default}"><code>$ sudo vpnc #les pedirá su contraseña de sesión por usar sudo</code></pre>
 <p>Si la conexión fue exitosa, verán en su pantalla algo como:</p>
-<pre><code>Connect Banner:
+<pre class="{default}"><code>Connect Banner:
 | Conexion VPN establecida - Bienvenido a la Red CICESE
 | 
 | Por favor lea las politicas de uso del servicio de VPN disponibles en:
@@ -651,7 +625,7 @@ Password: &lt;contraseña_original&gt;</code></pre>
 
 VPNC started in background (pid: 1362)...</code></pre>
 <p>Para desconectarse:</p>
-<pre><code>$ sudo vpnc-disconnect # recuerden pueden usar TAB para autocoplementar
+<pre class="{default}"><code>$ sudo vpnc-disconnect # recuerden pueden usar TAB para autocoplementar
 $ ps -aux | grep "vpnc" # en algunos casos
 $ kill IDjob # kill nos permite matar un proceso.</code></pre>
 </section>
@@ -662,7 +636,7 @@ $ kill IDjob # kill nos permite matar un proceso.</code></pre>
 <p>Directorio base de trabajo: /LUSTRE/bioinformatica_data/curso2022</p>
 <p>Recordando que deben trabajar en la zona de lustre y no en sus directorios personales para lo cual deben utilizar: cd curso2022 Esta instrucción posicionará a cada estudiante en la trayectoria de su respectivo subdirectorio: /LUSTRE/bioinformatica_data/curso2022/accounts/cursoNN</p>
 <p>Substituir el doble hash (##) por el número de cuenta asignado (ver tabla arriba).</p>
-<pre><code>$ ssh curso##@omica</code></pre>
+<pre class="{default}"><code>$ ssh curso##@omica</code></pre>
 <p><strong>Tip:</strong> Para hacer el acceso menos laborioso seguir los siguientes pasos:</p>
 <ol type="1">
 <li>Ir a /home/pavel/.ssh #sustituir pavel por su nombre de usuario.</li>
@@ -671,13 +645,13 @@ $ kill IDjob # kill nos permite matar un proceso.</code></pre>
 </ol>
 <p>Host cicese HostName omica User pgalindo #poner el suyo.</p>
 <p>Ahora para conectarse solo bastará:</p>
-<pre><code>$ssh cicese #Les pedirá su contraseña de usuario.</code></pre>
+<pre class="{default}"><code>$ssh cicese #Les pedirá su contraseña de usuario.</code></pre>
 <section id="copiar-archivos-de-manera-remota-servidoromica-pc.-bidireccional." class="level4">
 <h4 class="anchored" data-anchor-id="copiar-archivos-de-manera-remota-servidoromica-pc.-bidireccional.">2.6.2.1 Copiar archivos de manera remota, servidor(omica)-pc. Bidireccional.</h4>
 <p>Si quisieramos enviar un archivo a nuestro home en omica:</p>
-<pre class="defualt"><code>$ scp file_sed.txt curso01@omica:/home/curso01/</code></pre>
+<p><code>ekggibujd defualt $ scp file_sed.txt curso01@omica:/home/curso01/</code>ekggibujd</p>
 <p>Ahora, copiar de omica a nuestro pc:</p>
-<pre><code>$ rm file_sed.txt #primero borramos el archivo file_sed.txt en nuestro ordenador
+<pre class="{default}"><code>$ rm file_sed.txt #primero borramos el archivo file_sed.txt en nuestro ordenador
 $ scp curso01@omica:/home/curso01/file_sed.txt .</code></pre>
 </section>
 </section>
@@ -689,7 +663,7 @@ $ scp curso01@omica:/home/curso01/file_sed.txt .</code></pre>
 <section id="hacer-nuestros-propios-comandos" class="level2">
 <h2 class="anchored" data-anchor-id="hacer-nuestros-propios-comandos">2.8 Hacer nuestros propios comandos</h2>
 <p>Esta herramienta resulta muy útil para acortar la escritura de instrucciones largas, por ejemplo:</p>
-<pre><code>$ alias l='wc -l' # contar líneas de archivo
+<pre class="{default}"><code>$ alias l='wc -l' # contar líneas de archivo
 $ alias pulpo='cd /media/pavel/Pavel/librerias_ml/proyecto_omaya_embriones'
 $ alias sec='cd /home/pavel/proyecto/secuencias/; ls'</code></pre>
 <p>Para remover el alias teclear <strong>unalias</strong>. Para hacerlo permanente ir a home/user, abrir el archivo .bashrc y agregar la instrucción en la sección de alias. Al abrir una nueva terminal, este alias será permanente.</p>
@@ -697,7 +671,7 @@ $ alias sec='cd /home/pavel/proyecto/secuencias/; ls'</code></pre>
 <section id="editor-de-texto-en-la-terminal" class="level2">
 <h2 class="anchored" data-anchor-id="editor-de-texto-en-la-terminal">2.9 Editor de texto en la terminal</h2>
 <p><strong>nano:</strong> Es un editor de texto que es fácil de usar. Incluye todas las funcionalidades básicas que podrías esperar de un editor de textos regular.</p>
-<pre><code>$ nano prueba.txt</code></pre>
+<pre class="{default}"><code>$ nano prueba.txt</code></pre>
 <p>Una vez abierto pueden ingresar el texto que deseen. Para guardar Ctrl + O y pasa salir Ctrl + x.</p>
 <p><img src="https://i.imgur.com/4HGqvMh.png" class="img-fluid"></p>
 <p>Acá les dejo otros editores más amigables: <strong>Sublime Text</strong>:</p>
@@ -715,15 +689,15 @@ $ alias sec='cd /home/pavel/proyecto/secuencias/; ls'</code></pre>
 <section id="gnulinux" class="level2">
 <h2 class="anchored" data-anchor-id="gnulinux">4.1 GNU/Linux</h2>
 <p>Dependiento de la distribución de GNU-Linux que estemos usando vamos a emplear un comando para poder descargar, instalar y borrar software con sus respectivas dependencias. Generalmente el comando más común es: <strong>apt-get</strong></p>
-<pre><code>$ sudo apt-get update #este codigo actualiza los paquetes ya intalados. Se necesitan privilegios de super usuario.</code></pre>
-<pre><code>sudo apt-get install [Nombre del paquete] #Para instalar paquete
+<pre class="{default}"><code>$ sudo apt-get update #este codigo actualiza los paquetes ya intalados. Se necesitan privilegios de super usuario.</code></pre>
+<pre class="{default}"><code>sudo apt-get install [Nombre del paquete] #Para instalar paquete
 sudo apt remove [Nombre del paquete] # borrar paquete o paquetes.</code></pre>
 </section>
 <section id="macos" class="level2">
 <h2 class="anchored" data-anchor-id="macos">4.2 MacOS</h2>
 <p><strong>Homebrew:</strong> Homebrew instala todo aquello que necesitas pero que no viene por defecto instalado (más detalle en: https://brew.sh/index_es) <img src="https://i.imgur.com/svAAqLD.png" class="img-fluid"></p>
 <p>Una vez instalado pueden por ejemplo correr el siguiente comando para instalar wget:</p>
-<pre><code>$ brew install wget</code></pre>
+<pre class="{default}"><code>$ brew install wget</code></pre>
 </section>
 <section id="ambientes-virtuales" class="level2">
 <h2 class="anchored" data-anchor-id="ambientes-virtuales">4.3 Ambientes virtuales</h2>
@@ -747,13 +721,13 @@ sudo apt remove [Nombre del paquete] # borrar paquete o paquetes.</code></pre>
 <h2 class="anchored" data-anchor-id="sintaxis">5.1 Sintaxis</h2>
 <section id="ifelse" class="level3">
 <h3 class="anchored" data-anchor-id="ifelse">if/else:</h3>
-<pre><code>if [[ CONDICION ]]; then
+<pre class="{default}"><code>if [[ CONDICION ]]; then
     echo "la condición se cumplió"
 else
     echo "la condición no se cumplió"
 fi</code></pre>
 <p>Más de una condición:</p>
-<pre><code>if [[ CONDICION ]]; then
+<pre class="{default}"><code>if [[ CONDICION ]]; then
     echo "la condición se cumplió"
 elif [[ CONDICION 2 ]]; then
     echo "la condición 1 no se cumplió pero la 2 si"
@@ -763,18 +737,18 @@ fi</code></pre>
 </section>
 <section id="for" class="level3">
 <h3 class="anchored" data-anchor-id="for">for:</h3>
-<pre><code>for var in list
+<pre class="{default}"><code>for var in list
 do
   command1
 done</code></pre>
 <p>Otra variante:</p>
-<pre><code>for((i=1;i&lt;=10;i+=2)); do 
+<pre class="{default}"><code>for((i=1;i&lt;=10;i+=2)); do 
 echo "Welcome $i times"; 
 done</code></pre>
 </section>
 <section id="while" class="level3">
 <h3 class="anchored" data-anchor-id="while">while:</h3>
-<pre><code>while [condition]
+<pre class="{default}"><code>while [condition]
 do
    command-1
    command-2
@@ -789,12 +763,12 @@ done</code></pre>
 <h1>6.- Variable de ambiente de importancia</h1>
 <p>Las variables del ambiente mantienen información de la sesión. Ellas se almacenan en el sistema del “shell” para ser usadas cuando se ejecutan los comandos.</p>
 <p>Para identificar las variables de ambiente en nuestro sistema, teclear lo siguiente:</p>
-<pre><code>$ printenv </code></pre>
+<pre class="{default}"><code>$ printenv </code></pre>
 <p>dentro de estas variables, vamos a identificar una llamada $PATH, podemos ver que hay en ella simplemente tecleando:</p>
-<pre><code>$ echo $PATH</code></pre>
+<pre class="{default}"><code>$ echo $PATH</code></pre>
 <p>Esta variable es importante porque almacena las rutas donde la shell busca archivos ejecutables, como los scripts que vamos a estar usando. Una de las rutas por defecto, dentro de la arqutectura de GNU/Linux es en /usr/local/bin.</p>
 <p>Para designar una nueva ruta como ejecutable tecleamos:</p>
-<pre><code>$ export PATH=$PATH:path</code></pre>
+<pre class="{default}"><code>$ export PATH=$PATH:path</code></pre>
 <p>Para hacerlo permanente agregar la instrucción en el archivo <strong>.bashrc</strong> que se encuentra oculpo en su home.</p>
 <section id="finalmente" class="level2">
 <h2 class="anchored" data-anchor-id="finalmente">Finalmente…</h2>
@@ -920,7 +894,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/trippv\.github\.io\/RNAseq2024\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1250,7 +1224,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="./1_Rproyectos.html" class="pagination-link" aria-label="Importar y exportar datos">
+      <a href="./1_Rimportar.html" class="pagination-link" aria-label="Importar y exportar datos">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Importar y exportar datos</span>
       </a>          
   </div>

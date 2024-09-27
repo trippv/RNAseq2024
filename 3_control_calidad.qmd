@@ -10,10 +10,10 @@ execute:
 
 
 
-Moverse a la carpeta `curso2022` y crear carpeta de trabajo `Transcriptomica` y acceder.
+Moverse a la carpeta `curso2024` y crear carpeta de trabajo `Transcriptomica` y acceder.
 
 ```{default}
-cd curso2020
+cd curso2024
 mkdir Transcriptomica 
 cd Transcriptomica
 ```
@@ -22,7 +22,14 @@ cd Transcriptomica
 
 ## Lecturas de prueba
 
-Antes de análizar las secuencias de nuestro estudio, vamos a ver unos ejemplos de cálidad de secuencias. Estas secuencias se obtuvieron de bases de datos publicas. **Ojo: Estas lecturas solo son una submuestra de las originales, por lo que son mucho mas pequeñas.** 
+Antes de análizar las secuencias de nuestro estudio, vamos a ver unos ejemplos de cálidad de secuencias. Estas secuencias se obtuvieron de bases de datos publicas. 
+
+:::callout-warning
+
+**Ojo: Estas lecturas solo son una submuestra de las originales, por lo que son mucho mas pequeñas.** 
+
+:::
+
 
 1. Creamos una carpeta parental llamada `FASTQC_TEST` y dentro de esta, generamos las carpetas `secuencias`, `FASTQC_PRE` y `FASTQC_POST`. 
 
@@ -33,79 +40,44 @@ mkdir -p fastqc_test/{secuencias,fastqc_pre,fastqc_post}
 
 2. Dentro de la carpeta `secuencias `vamos a crear un link simbólico de las secuencias que serán utilizadas. 
 
-:::callout-info
-Recuerda la sintaxis `ln -s ORIGEN DESTINO`
+
+::: callout-info
+Recuerda la sintaxis:
+
+ `ln -s ORIGEN DESTINO`
 :::
 
 
 ```{default}
 cd fastqc_test/secuencias
-
- ln -s /LUSTRE/bioinformatica_data/genomica_funcional/Tripp/Curso_2022/FASTQC_test/secuencias/*.fastq ./
+ln -s /home/mtripp/CURSO_RNASEQ2024/fastqc_test/secuencias/*.gz ./
 ls
 ```
 
 :::callout-warning
->**Pregunta:** ¿Como sabe cuantas lecturas tiene cada archivo?
+# ¿Como saber cuantas lecturas tiene cada archivo?
 
 Podemos utilizar la función `grep` para buscar un caracter en común de todas las lecturas y hacer pipe para contar el número de lineas que tienen ese caracter
 
 Por ejemplo: las lectutas SRR7096024_1.fastq, podemos utilizar el ID @SRR7096024_1
 
 ```{default}
-cat SRR7096024_1.fastq | grep "^@SRR70" | wc -l
+zcat SRR7096024_1.fastq.gz | grep "^@SRR70" | wc -l
 ```
 :::
 
- ---
  
- :::info
-**Manejador de tareas SLURM**
-
-Dentro del curso, muchos de los procesos que se correrar son muy demantantes en cuanto a poder computacional, por lo que para evitar que el cluster colapse, se utiliza un manejador de tareas el cual nos asigna los recursos necesarios cuando haya disponibilidad.
-
-En el curso utilizaremos el manejador de tareas de dos formas:
-
-a) Utilizando archivos ejecutables (slrm)
-Estos archivos continenen todas las instrucciones para poder correr un programa tal como el nombre de la cola, la cantidad de memoria y numero de nucleos que se requiere asi como los nombres del output. Un ejemplo del formato de estos archivos es:
-
-
-``` {r}
-#!/bin/bash 
-#SBATCH -p cicese
-#SBATCH --job-name=fastqc
-#SBATCH --output=fastqc-%j.log
-#SBATCH --error=fastqc-%j.err
-#SBATCH -N 1
-#SBATCH --ntasks-per-node=8
-#SBATCH -t 6-00:00:00
-
-#Resto de las instrucciones
-```
-b) Utilizando el script `accesa-nodo` el cual te asignara un nodo durante el tiempo que estemos trabajando. **Es importante que cada que termines la sesión te desconectes del nodo (exit) ya que seguiras ocupando espacio aún si no estas haciendo nada**
-
-:::
- ---
- 
-
-3. Posteriormente ejecutamos FASTQC. Para esto nos vamos a colocar en la carpeta `fastqc_pre` y generamos el siguiente slrm
+3. Posteriormente ejecutamos `FASTQC`. Para esto nos vamos a colocar en la carpeta `fastqc_pre` y generamos el siguiente script
 
 ```{default}
 #!/bin/bash
-#SBATCH -p cicese
-#SBATCH --job-name=fastqc
-#SBATCH --output=fastqc-%j.log
-#SBATCH --error=fastqc-%j.err
-#SBATCH -N 1
-#SBATCH --ntasks-per-node=8
-#SBATCH -t 6-00:00:00
 
+lecturas=/home/mtripp/CURSO_RNASEQ2024/fastqc_test/secuencias
 
-# Exportar la ruta de FastQC_v0.11.7
-export PATH=$PATH:/LUSTRE/apps/bioinformatica/FastQC_v0.11.7
-
-fastqc ../secuencias/*.fastq -t 8 -o ./
+fastqc $lecturas/*.fastq.gz -t 8 -o ./
 ```
+
+
 4. Descargamos los reportes HTML generados a **nuestra computadora** en la carpeta de trabajo para revisarlo. Para esto, abrimos una nueva ventana de la terminal y vamos a generar una carpeta llamada `FASTQC_TEST`
 
 ```{default}
@@ -114,20 +86,27 @@ $LAPTOP-NNNNN:$mkdir -p FASTQC_TEST/{FASTQC_PRE,FASTQC_POST}
 cd FASTQC_TEST/FASTQC_PRE
 ```
 
-:::callout-info
-Recuerda la sintaxis: $scp curso##@omica:ruta/de/la/carpeta/*.html ./
+:::{.callout-note}
+# Nota
+Recuerda la sintaxis: 
+```{default}
+scp curso##@omica:ruta/de/la/carpeta/*.html ./
+
+```
 :::
 
 5. Revisión individual de archivos .html en navegador firefox o en el navegador que tengan instalado, para verificar la calidad de las lecturas de secuenciación.
 
-```
+```{default}
 firefox SRR10858532_1_fastqc.html
 firefox SRR10858532_2_fastqc.html
 ```
-:::call-out-info
-:bulb: **NOTA:** Si estas utilizando ubuntu app, dentro de la carpeta de trabajo ejecuta 
 
-`$explorer.exe SRR10858532_1_fastqc.html`
+:::{.callout-note}
+#
+ Si estas utilizando ubuntu app, dentro de la carpeta de trabajo ejecuta: 
+
+`explorer.exe SRR10858532_1_fastqc.html`
 :::
 
 
@@ -141,68 +120,78 @@ ___
 Ahora utilizaremos el Programa [Trimmomatic](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf) para cortar y filtrar las lecturas con baja calidad asi como eliminar adaptadores que puderan haber permanecido en la lecturas
 
 
+Para correr `Trimmomatic` crearemos un código `bash` donde indicaremos los archivos que vamos a procesar. El procedimiento es el siguiente:
 
-1. Dentro de tu carpeta de fastqc_test en OMICA, crear la carpeta Trimmomatic en la carpeta Transcriptomica y acceder a ella.
 
+1. Crear la carpeta `trimmomatic` en la carpeta dentro de la carpeta de `fastqc_test` y acceder a ella.
 
-Crear la carpeta `TRIMMOMATIC` en la carpeta `Transcriptomica` y acceder a ella.
 ```{default}
 cd ..
 mkdir trimmomatic
 cd trimmomatic
 ```
 
-2. Generar el script al cual llamaremos `2.trimmomatic.slrm`
-```{default}
-nano 2.trimmomatic.slrm
-```
-El slrm debe contener lo siguiente:
-```{default}
 
+2. Generar el script al cual llamaremos `2.trimmomatic.sh`
+```{default}
+nano 2.trimmomatic.sh
+```
+
+:::{.callout-caution}
+# Importante
+
+No se te olvide que tienes que tener activado el ambiente de conda de `trinity`
+
+```{default}
+conda activate trinity
+```
+
+:::
+
+El archivo bash debe contener lo siguiente:
+
+```{default}
 #!/bin/bash
-#########################################################
-#TRIMOMMATIC
 
-## Directivas
-#SBATCH --job-name=qtrim
-#SBATCH --output=trimmomatic-%j.log
-#SBATCH --error=trimmomatic-%j.err
-#SBATCH -N 1
-#SBATCH --mem=20GB
-#SBATCH --ntasks-per-node=8
-#SBATCH -t 6-00:00:00
-#SBATCH -p cicese
+# ruta aal archivo fasta con las secuencias de los adaptadores
+trueseq="/home/mtripp/CURSO_RNASEQ2024/trimmomatic/adapters/TruSeq3-PE.fa" 
+
+# Define los archivos donde se guardarán los mensajes y errores del proceso.
+LOG_FILE="trimmomatic.log"  # Aquí se guarda el registro de lo que hace el programa
+ERR_FILE="trimmomatic.err"  # Aquí se guardan los errores si ocurre algún problema
 
 
-# Ruta a TRIMMOMATIC
-TRIMMOMATIC=/LUSTRE/bioinformatica_data/genomica_funcional/bin/Trimmomatic-0.36
+trimmomatic PE -threads 4 ../secuencias/SRR7096024_1.fastq.gz ../secuencias/SRR7096024_2.fastq.gz \
+ -baseout trimmed_SRR7096024.fastq.gz \
+ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36 \
+1>> $LOG_FILE 2>> $ERR_FILE
 
-#Ruta al archivo con los adaptadores
-trueseq="$TRIMMOMATIC/adapters/TruSeq3-PE-2.fa"
+trimmomatic PE -threads 4 ../secuencias/SRR10858532_1.fastq.gz ../secuencias/SRR10858532_2.fastq.gz \
+ -baseout trimmed_SRR10858532.fastq.gz \
+ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36 \
+   1>> $LOG_FILE 2>> $ERR_FILE
 
+trimmomatic PE -threads 4 ../secuencias/rv06m_S8_L001_1.fastq.gz ../secuencias/rv06m_S8_L001_2.fastq.gz \
+-baseout trimmed_rv06m_S8_L001.fastq.gz \
+ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36 \
+  1>> $LOG_FILE 2>> $ERR_FILE
 
-
-cd ${SLURM_SUBMIT_DIR}
-
-java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../secuencias/SRR7096024_1.fastq ../secuencias/SRR7096024_2.fastq -baseout trimmed_SRR7096024.fastq \
-ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36
-
-java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../secuencias/SRR10858532_1.fastq ../secuencias/SRR10858532_2.fastq -baseout trimmed_SRR10858532.fastq \
-ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36
-
-java -jar $TRIMMOMATIC/trimmomatic-0.36.jar PE ../secuencias/rv06m_S8_L001_subset_1.fastq ../secuencias/rv06m_S8_L001_subset_2.fastq -baseout trimmed_rv06m_S8_L001.fastq \
-ILLUMINACLIP:$trueseq:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:36
-
-
-exit 0
 ```
-4. Correr el script `trimmomatic.slrm` 
+
+2. Cambia los permisos de ejecución del código con el siguiente comando:
+
 ```{default}
-sbatch 2.trimmomatic.slrm
-squeue
+chmod +x 2.trimmomatic.sh
 ```
 
-5. Generar dos carpetas para colocar las lecturas _Paired_ y las _Unpaired_. Posteriormente, mueve todas las lecturas a sus respectivas carpetas usando el comando `mv`
+
+3. FInalmente ejecuta el código
+
+```{default}
+./2.trimmomatic.sh
+```
+
+4. Generar dos carpetas para colocar las lecturas _Paired_ y las _Unpaired_. Posteriormente, mueve todas las lecturas a sus respectivas carpetas usando el comando `mv`
 
 ```{default}
 mkdir TRIMM_U TRIMM_P
@@ -239,6 +228,9 @@ fastqc ../trimmomatic/TRIMM_P/*.fastq -t 8 -o ./
 ```{default}
 nano run_trimmomatic_rig.slrm
 ```
+
+
+
 El slrm debe contener lo siguiente:
 ```{default}
 #!/bin/sh
@@ -269,14 +261,14 @@ Transfiere los archivos a tu computadora para visualizarlos. Discute los princip
 
 9. Finalmente, corre los pasos del 3 al 7 incluyendo todas las muestras. 
 
----
+
 
 # 2. Análisis de RNAseq
 
 
-A partir de este punto empezaremos a análizar las lecturas que se utilizarán en el resto del curso.
+A partir de este punto empezaremos a analizar las lecturas que se utilizarán en el resto del curso.
 
-Para utilizarlas, genera un enlace simbolico de la carpeta donde estan las lecturas crudas
+Para utilizarlas, genera un enlace simbólico de la carpeta donde están las lecturas crudas
 
 ```{default}
 cd transcriptomica
@@ -315,6 +307,7 @@ find . -type f -name "*.fastq.gz" | xargs zgrep -c "^@M03978"
 ### FASTQC
 
 En la carpeta de `transcriptomica`, crear carpeta `FASTQC` y con las subcarpetas `FASTQC_PRE` y `FASTQC_POST`. Acceder a carpeta `FASTQC_PRE`
+
 ```{default}
 cd ..
 mkdir -p FASTQC/{FASTQC_PRE,FASTQC_POST}

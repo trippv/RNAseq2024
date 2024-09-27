@@ -1,0 +1,63 @@
+---
+title: "Uso de librerias y funciones"
+author: "Tripp-Valdez MA"
+---
+
+## Uso de paquetes en R
+
+Un paquete, o libreria, es un conjunto de funciones, datos y documentación que esta diseñado para realizar tareas especificas, extendiendo las capacidades del lenguaje R.
+
+Estos paquetes son fundamentales para realizas tareas que van desde la manipulación y visualización de datos, hasta modelos estadisticos complejos.
+
+::: callout-note
+# ¿Quien crea los paquetes? 🤷‍♂️
+
+Cualquier persona puede crear un paquete que realiza una o varias tareas en especifico. 
+
+:::
+
+Existen paquetes, como por ejemplo `tidyverse` que son desarrollados por un conjunto de colaboradores pertenecientes a empresas o grupos de investigación los cuales estan en contante manteniemiento y estan disponibles desde repositorios publicos como CRAN. Pero también hay paquetes que son desarrollados por individuos y que pueden ser desacargados desde repositorios personales como github. 
+
+
+## Instalación y carga de paquetes
+
+Los paquetes se instalan una vez y se pueden utilizar en cualquier sesión de R. La función `install.package()` se usa para instalar paquetes desde CRAN (el repositorio de paquetes de R) u otras fuentes. 
+
+Por ejemplo, para instalar un paquetes como `ggplot2` hacemos lo siguiente:
+
+```{r}
+#| eval: false
+
+install.packages("ggplot2")
+```
+
+
+:::column-margin
+::: callout-note
+# CRAN
+
+CRAN es una red de servidores distribuidos globalmente que almacena y distribuye paquetes de software para R. Estos paquetes son colecciones de funciones, datos y documentación que se pueden instalar y usar dentro del entorno de R para realizar tareas específicas. 
+
+:::
+:::
+
+Una vez instalado el paquete, este se debe de cargar en cada sesión de R usando la función `library()` o `requiere()`
+
+
+```{r}
+#| eval: false
+
+library(ggplot2)
+```
+
+Hecho esto, las funciones y/o bases de datos contenidas en el paquete se cargaran en tu entorno actual.
+
+Es importante tener en mente que cada que inicies una nueva sesión en R, debes cargar el paquete con `lirbary()` de lo contrario, las funciones no estaran disponibles. 
+
+
+Los paquetes que hemos importado en nuestra sesión actual aparecen al llamar `sessionInfo()`
+
+```{r}
+sessionInfo()
+```
+

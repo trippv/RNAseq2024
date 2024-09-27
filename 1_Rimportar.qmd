@@ -156,6 +156,8 @@ Recuerda que cuando usamos indices, estos indican `[filas, columnas]` separadas 
 :::
 
 
+### Operadores `&` y `|`
+
 
 Si queremos filtrar nuestra tabla utilizando dos condiciones, por ejemplo transcritos que se sobre-expresaron (`up`) solamente en la condición `T1_vs_CTL` entonces utilizamos el operado `&`.
 
@@ -169,6 +171,18 @@ El operado `&`Es el operador lógico que indica "y". Solo se seleccionarán las 
 sub_deg <- deg[deg$contrast == "T1_vs_CTL" & deg$expression == "up", ]
 head(sub_deg)
 ```
+
+
+Por otro lado el operador `|` en R es un operador lógico que se utiliza para evaluar una de dos o más condiciones. Cuando aplicas `|` entre dos condiciones, el resultado será TRUE si cualquiera de las condiciones es verdadera. Si ambas condiciones son falsas, el resultado será FALSE.
+
+
+Entonces, si queremos filtrar los transcriotos que tengan un valor de log fold-change mayor a 5 o menor a -5 hacemos lo siguiente
+
+```{r}
+sub_deg <- deg[deg$logFC > 5 | deg$logFC < -5, ]
+head(sub_deg)
+```
+
 
 
 ### Subconjunto usando la función `subset()`

@@ -360,7 +360,7 @@ $ rm -rf prueba
 vamos a descargar el genoma del virus de la influenza:
 
 ```{default}         
-$ wget  ftp://ftp.ncbi.nlm.nih.gov/genomes/INFLUENZA/influenza.faa.gz
+wget  ftp://ftp.ncbi.nlm.nih.gov/genomes/INFLUENZA/influenza.faa.gz
 ```
 
 Otro comando similar es **curl:** Este es más poderoso que wget y acepta más protocolos.
