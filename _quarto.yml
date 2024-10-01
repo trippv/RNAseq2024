@@ -4,7 +4,11 @@ project:
 
 website:
   title: "RNAseq2024"
+  site-url: https://trippv.github.io/RNAseq2024/
   navbar:
+    pinned: true
+    background: '#81AF8E'
+    foreground: dark
     logo: img/logo.png
     left:
       - href: index.qmd
@@ -19,11 +23,6 @@ website:
           - 1_Rproyectos.qmd
           - 1_Rimportar.qmd
           - 2_unix.qmd
-
-
-
-
-
         
     right:
       - icon: github
