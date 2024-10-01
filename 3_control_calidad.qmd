@@ -233,23 +233,6 @@ nano run_trimmomatic_rig.slrm
 
 El slrm debe contener lo siguiente:
 ```{default}
-#!/bin/sh
-
-###Directivas
-
-#SBATCH -p cicese
-#SBATCH --job-name=trimmomatic
-#SBATCH --output=trimmomatic-%j.log
-#SBATCH --error=trimmomatic-%j.err
-#SBATCH -N 1
-#SBATCH --ntasks-per-node=8
-#SBATCH -t 06-00:00:00
-
-
-TRIM=/LUSTRE/bioinformatica_data/genomica_funcional/bin/Trimmomatic-0.36
-
-cd ${SLURM_SUBMIT_DIR}
-
 java -jar $TRIM/trimmomatic-0.36.jar PE ../SRR7096024_1.fastq ../SRR7096024_2.fastq -baseout trimmed_rig_SRR7096024.fastq \
 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:8:true LEADING:5 TRAILING:5 SLIDINGWINDOW:4:20 MINLEN:36 HEADCROP:5
 
@@ -268,7 +251,6 @@ Transfiere los archivos a tu computadora para visualizarlos. Discute los princip
 
 A partir de este punto empezaremos a analizar las lecturas que se utilizarán en el resto del curso.
 
-Para utilizarlas, genera un enlace simbólico de la carpeta donde están las lecturas crudas
 
 ```{default}
 cd transcriptomica
